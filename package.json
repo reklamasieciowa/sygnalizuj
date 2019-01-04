@@ -1,0 +1,24 @@
+{
+  "name": "sygnalizuj",
+  "version": "1.0.0",
+  "description": "sygnalizuj.com",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reklamasieciowa/sygnalizuj.git"
+  },
+  "author": "Media Effective Group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reklamasieciowa/sygnalizuj/issues"
+  },
+  "homepage": "https://github.com/reklamasieciowa/sygnalizuj#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2"
+  }
+}

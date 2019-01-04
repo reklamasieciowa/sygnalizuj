@@ -1,0 +1,30 @@
+#header-main {
+
+	height: 600px;
+
+	@include media-breakpoint-down(sm) {
+		height: 600px;
+	}
+
+	.view {
+	  height: 600px;
+
+	  @include media-breakpoint-down(sm) {
+			height: 600px;
+	  }
+	}
+}
+
+.top-nav-collapse {
+  background-color: #f8bbd0 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@include media-breakpoint-down(lg) {
+  .navbar:not(.top-nav-collapse) {
+    background: #f8bbd0 !important;
+  }
+}
