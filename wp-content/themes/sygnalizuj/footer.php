@@ -84,6 +84,12 @@
 
 <script>
   new WOW().init();
+
+// Material Select Initialization
+$(document).ready(function() {
+ $('.mdb-select').materialSelect();
+});
+
 </script>
 
 </body>

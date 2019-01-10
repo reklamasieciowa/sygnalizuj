@@ -10,7 +10,7 @@
 get_header();
 ?>
 <!-- Full Page Intro -->
-  <div class="view page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/architecture.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  <div class="view home-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/architecture.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <!-- Mask & flexbox options-->
     <div class="mask rgba-gradient-blue d-flex justify-content-center align-items-center">
       <!-- Content -->

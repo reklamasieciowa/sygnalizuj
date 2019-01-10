@@ -1,7 +1,7 @@
 @import "custom-variables";
 
 .view {
-  &.page-intro {
+    &.home-intro {
     height: 450px;
 
     span {
@@ -11,6 +11,19 @@
 
     @include media-breakpoint-down(sm) {
       height: 600px;
+    }
+  }
+
+  &.page-intro {
+    height: 200px;
+
+    span {
+      display: block;
+      width: 100%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      height: 200px;
     }
   }
   
@@ -47,6 +60,14 @@
         transform: translateY(-50%);
       }
     }
+  }
+}
+
+.md-tabs {
+  .nav-item {
+      @include media-breakpoint-down(sm) {
+        flex-basis: 100%;
+      }
   }
 }
 
@@ -88,4 +109,11 @@ strong {
 
 .wow {
   visibility: hidden;
+}
+
+.wpcf7 {
+  [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: relative;
+    opacity: 1;
+  }
 }
