@@ -10,10 +10,11 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<?php if(!is_front_page()): ?>
 	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		<?php the_title( '<h1 class="h2-responsive entry-title mb-4">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
-
+	<?php endif; ?>
 	<?php sygnalizuj_post_thumbnail(); ?>
 
 	<div class="entry-content">

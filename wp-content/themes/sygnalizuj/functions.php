@@ -45,7 +45,9 @@ if ( ! function_exists( 'sygnalizuj_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Top menu', 'sygnalizuj' ),
-			'menu-2' => esc_html__( 'Footer menu', 'sygnalizuj' ),
+			'menu-2' => esc_html__( 'Footer menu 1', 'sygnalizuj' ),
+			'menu-3' => esc_html__( 'Footer menu 2', 'sygnalizuj' ),
+			'menu-4' => esc_html__( 'Footer menu 3', 'sygnalizuj' ),
 		) );
 
 		/*
@@ -106,7 +108,7 @@ add_action( 'after_setup_theme', 'sygnalizuj_content_width', 0 );
  */
 function sygnalizuj_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'sygnalizuj' ),
+		'name'          => esc_html__( 'Sidebar1', 'sygnalizuj' ),
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'sygnalizuj' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
@@ -114,6 +116,48 @@ function sygnalizuj_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'Footer1', 'sygnalizuj' ),
+		'id'            => 'footer-1',
+		'description'   => esc_html__( 'Footer column 1.', 'sygnalizuj' ),
+		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'after_title'   => '</h5>',
+	) );
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'Footer2', 'sygnalizuj' ),
+		'id'            => 'footer-2',
+		'description'   => esc_html__( 'Footer column 2.', 'sygnalizuj' ),
+		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'after_title'   => '</h5>',
+	) );
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'Footer3', 'sygnalizuj' ),
+		'id'            => 'footer-3',
+		'description'   => esc_html__( 'Footer column 3.', 'sygnalizuj' ),
+		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'after_title'   => '</h5>',
+	) );
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'FooterBottom', 'sygnalizuj' ),
+		'id'            => 'footer-4',
+		'description'   => esc_html__( 'Footer bottom.', 'sygnalizuj' ),
+		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'after_title'   => '</h5>',
+	) );
+
+
 }
 add_action( 'widgets_init', 'sygnalizuj_widgets_init' );
 

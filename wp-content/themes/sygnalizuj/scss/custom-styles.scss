@@ -1,30 +1,91 @@
-#header-main {
+@import "custom-variables";
 
-	height: 600px;
+.view {
+  &.page-intro {
+    height: 450px;
 
-	@include media-breakpoint-down(sm) {
-		height: 600px;
-	}
+    span {
+      display: block;
+      width: 100%;
+    }
 
-	.view {
-	  height: 600px;
-
-	  @include media-breakpoint-down(sm) {
-			height: 600px;
-	  }
-	}
+    @include media-breakpoint-down(sm) {
+      height: 600px;
+    }
+  }
+  
 }
 
+
 .top-nav-collapse {
-  background-color: #f8bbd0 !important;
+  background-color: #01579b!important;
 }
 
 .navbar:not(.top-nav-collapse) {
-  background: transparent !important;
+  background: #01579b!important;
+}
+
+.home .navbar:not(.top-nav-collapse) {
+  // background: transparent !important;
+  background: #01579b!important;
 }
 
 @include media-breakpoint-down(lg) {
   .navbar:not(.top-nav-collapse) {
-    background: #f8bbd0 !important;
+    background: #01579b!important;
   }
+}
+
+.card-wrapper {
+  .face {
+
+    &.front {
+      height: 100%;
+
+      .card-body {
+        margin-top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.footer-info {
+  &.widget_nav_menu {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+        li {
+          padding-bottom: .7rem;
+
+          a {
+            &:hover {
+              color: $red;
+            }
+          }
+
+          &.current-menu-item {
+            a {
+              color: $red;
+            }
+          }
+        }
+    }
+  }
+}
+
+hr {
+  &.wp-block-separator {
+    margin: 4rem 0;
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+.wow {
+  visibility: hidden;
 }
