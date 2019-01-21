@@ -1,8 +1,8 @@
 <?php
 /**
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        solo
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
  */
 
 use Awf\Text\Text;
@@ -22,19 +22,6 @@ $timezone = ($timezone == 'UTC') ? 'GMT' : $timezone;
  * Remember to update wpcli/Command/Sysconfig.php in the WordPress application whenever this file changes.
  */
 ?>
-<div class="akeeba-form-group">
-	<label for="darkmode">
-		<?php echo Text::_('SOLO_CONFIG_DISPLAY_DARKMODE_LABEL'); ?>
-	</label>
-	<div class="akeeba-toggle">
-		<?php echo FEFSelect::booleanList('darkmode', array('forToggle' => 1), $config->get('darkmode', 0)) ?>
-	</div>
-	<p class="akeeba-help-text">
-		<?php echo Text::_('SOLO_CONFIG_DISPLAY_DARKMODE_DESCRIPTION') ?>
-	</p>
-</div>
-
-
 <div class="akeeba-form-group">
     <label for="useencryption">
 		<?php echo Text::_('COM_AKEEBA_CONFIG_SECURITY_USEENCRYPTION_LABEL'); ?>

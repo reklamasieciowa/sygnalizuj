@@ -37,7 +37,7 @@ get_header();
             <hr>
             <div class="text-center mt-5">
               <a class="btn btn-danger btn-lg wow fadeInUp" role="button" data-wow-delay="0.7s">Prześlij zgłoszenie <i class="fas fa-paper-plane fa-lg ml-2"></i></a>
-              <a href="http://localhost/www/sygnalizuj/rekomendacja/" class="btn btn-success btn-lg wow fadeInUp" role="button" data-wow-delay="0.9s">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
+              <a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja/" class="btn btn-success btn-lg wow fadeInUp" role="button" data-wow-delay="0.9s">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
             </div>
           </div>
           <!--Grid column-->

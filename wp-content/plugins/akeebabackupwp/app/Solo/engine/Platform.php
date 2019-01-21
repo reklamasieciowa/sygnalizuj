@@ -1,11 +1,13 @@
 <?php
 /**
  * Akeeba Engine
- * The PHP-only site backup engine
+ * The modular PHP5 site backup engine
  *
- * @copyright Copyright (c)2006-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @copyright Copyright (c)2006-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
  * @license   GNU GPL version 3 or, at your option, any later version
  * @package   akeebaengine
+ * @since     3.4
+ *
  */
 
 namespace Akeeba\Engine;
@@ -21,8 +23,6 @@ use Akeeba\Engine\Platform\PlatformInterface;
  *
  * @property string $tableNameProfiles The name of the table where backup profiles are stored
  * @property string $tableNameStats The name of the table where backup records are stored
- *
- * @since    3.4
  */
 class Platform
 {

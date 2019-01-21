@@ -5,7 +5,7 @@ Tags: backup, restore, migrate, move
 Requires at least: 3.8.0
 Tested up to: 4.5
 Requires PHP: 5.4
-Stable tag: 3.3.3
+Stable tag: 3.3.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -179,10 +179,6 @@ link on our site to request more information for your specific needs.
 7. Want to automate your backups? Akeeba Backup will give you step by step instructions, specific to your site.
 
 == Changelog ==
-
-= 3.3.3 =
-* Official support for ClassicPress 1.x
-* Dark Mode (optional; activate it through System Configuration)
 
 = 3.3.2 =
 * [HIGH] Restoration of WordPress sites: database error during data replacement

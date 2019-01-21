@@ -1,9 +1,4 @@
 <?php die(); ?>
-Akeeba Backup for WordPress 3.3.3
-================================================================================
-+ Official support for ClassicPress 1.x
-+ Dark Mode (optional; activate it through System Configuration)
-
 Akeeba Backup for WordPress 3.3.2
 ================================================================================
 # [HIGH] Restoration of WordPress sites: database error during data replacement

@@ -1,15 +1,13 @@
 <?php
 /**
- * @package    akeebabackupwp
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        akeebabackupwp
+ * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
  */
 
 defined('WPINC') or die;
 
 $mediaquery = md5(@filemtime(__DIR__ . '/../../../../akeebabackupwp.php'));
-$darkMode = $this->getContainer()->appConfig->get('darkmode', 0);
-
 ?>
 
 <html>
@@ -148,10 +146,6 @@ $darkMode = $this->getContainer()->appConfig->get('darkmode', 0);
 	?>
 	<link rel="stylesheet" type="text/css"
 		  href="<?php echo Uri::base(); ?>/media/css/fef-wp.min.css?<?php echo $mediaquery ?>"/>
-	<?php if ($darkMode): ?>
-	<link rel="stylesheet" type="text/css"
-		  href="<?php echo Uri::base(); ?>/media/css/dark.min.css?<?php echo $mediaquery ?>"/>
-	<?php endif; ?>
 	<?php if (defined('AKEEBADEBUG') && AKEEBADEBUG && @file_exists(dirname(AkeebaBackupWP::$absoluteFileName) . '/app/media/css/theme.css')): ?>
 		<link rel="stylesheet" type="text/css"
 			  href="<?php echo \Awf\Uri\Uri::base(); ?>/media/css/theme.css?<?php echo $mediaquery ?>"/>

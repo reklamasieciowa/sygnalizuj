@@ -1,26 +1,13 @@
-/*
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
- */
-
 html,
 body {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
 }
 
-/* region Footer */
 /* Set the fixed height of the footer here */
 #akeeba-footer {
     background-color: #EFEFEF;
-    color: #514F50;
     padding: 0.6em 1em 3em;
-}
-
-.akeeba-renderer-fef--dark #akeeba-footer {
-    background-color: #514F50;
-    color: #EFEFEF;
 }
 
 #akeeba-footer p {
@@ -30,9 +17,11 @@ body {
 #akeeba-footer p:last-child {
     margin-bottom: 0;
 }
-/* endregion */
 
-/* region Login page */
+div.toolbar {
+    margin-top: 1em;
+}
+
 /** Sign in page **/
 form#loginForm {
     position: relative;
@@ -44,16 +33,8 @@ form#loginForm {
 
     max-width: 30em;
 }
-/* endregion */
 
-/* region Control Panel page */
-/** Fix changelog scrolling in modal window **/
-#DialogBody{
-    overflow: scroll;
-}
-/* endregion */
-
-/** region Configuration page */
+/** Configuration page */
 @media (min-width: 480px)
 {
     .akeeba-form-control {
@@ -88,25 +69,31 @@ form#loginForm {
     color: black;
 }
 
-/* endregion */
-
-/* region Update page */
+/**
+ * Update page
+ */
 table.liveupdate-infotable {
     margin-bottom: 1em;
 }
-/* endregion */
 
-/* region (S)FTP folder browser */
+/** (S)FTP folder browser **/
 .folderBrowserWrapper {
     height: 300px;
     overflow: scroll;
 }
-/* endregion */
 
-/* region Backup progress */
+/** Fix changelog scrolling in modal window **/
+#DialogBody{
+    overflow: scroll;
+}
+
+/**
+ * Backup progress
+ */
 #backup-steps div[class*=akeeba-label],
 #stepper-steps div[class*=akeeba-label] {
     display: block;
+    /*width: 100%;*/
     margin-top: 1px;
 }
 
@@ -119,13 +106,6 @@ div.backup-steps-container, div.stepper-steps-container {
     border-radius: 0.5em;
     border: thin solid #514F50;
 }
-
-.akeeba-renderer-fef--dark div.backup-steps-container,
-.akeeba-renderer-fef--dark div.stepper-steps-container {
-    background: #6b686a;
-    border: thin solid #888888;
-}
-
 
 #backup-step, #stepper-step {
     font-weight: bold;
@@ -147,23 +127,15 @@ div.backup-steps-container, div.stepper-steps-container {
     padding: 2px 0;
 }
 
-.akeeba-renderer-fef--dark #warnings-list div {
-    border-bottom: thin dotted #cccccc;
-}
-
 #error-panel-troubleshooting a {
     text-decoration: underline;
     font-weight: bold;
     color: blue;
 }
 
-.akeeba-renderer-fef--dark #error-panel-troubleshooting a {
-    color: white;
-}
-
-/* endregion */
-
-/* region Tooltip support */
+/*
+ * Tooltip support
+ */
 #tooltip {
     position: absolute;
     z-index: 3000;
@@ -171,10 +143,6 @@ div.backup-steps-container, div.stepper-steps-container {
     background-color: #f2f5f7;
     padding: 5px;
     font-size: small !important;
-}
-
-.akeeba-renderer-fef--dark #tooltip {
-    background-color: #514F50;
 }
 
 #tooltip h3, #tooltip div {
@@ -235,10 +203,6 @@ div.viewport-bottom .url {
     bottom: -20px;
 }
 
-/* endregion */
-
-/* region Popovers */
-
 .akeeba-popover {
     position: absolute;
     top: 0;
@@ -268,11 +232,6 @@ div.viewport-bottom .url {
     padding: 0 !important;
 }
 
-.akeeba-renderer-fef--dark .akeeba-popover {
-    background-color: #514F50;
-    border: 1px solid #999999 !important;
-}
-
 .akeeba-popover-title {
     margin: 0 !important;
     padding: 0.5em !important;
@@ -282,25 +241,14 @@ div.viewport-bottom .url {
     border-bottom: thin solid #d6d6d6;
 }
 
-.akeeba-renderer-fef--dark .akeeba-popover-title {
-    background: #666666;
-    color: #efefef;
-    border-bottom: thin solid #666666;
-}
-
 .akeeba-popover-content {
     padding: 1em !important;
     color: #514F50;
 }
 
-.akeeba-renderer-fef--dark .akeeba-popover-content {
-    color: #efefef;
-}
-
-    /* endregion */
-
-/* region Filesystem filters */
-
+/**
+ * Filesystem filters
+ */
 /**/
 /*span.ak-toggle-button:active { border: 1px solid gray; border-bottom: 1px solid silver; border-right: 1px solid silver; }*/
 /*span.ak-toggle-button { border: 1px solid silver; border-bottom: 1px solid gray; border-right: 1px solid gray; background-color: #f9f9f6 }*/
@@ -336,10 +284,6 @@ span.actionbutton {
 
 #ak_crumbs {
     color: #333;
-}
-
-.akeeba-renderer-fef--dark #ak_crumbs {
-    color: #EFEFEF;
 }
 
 #ak_crumbs span {
@@ -379,13 +323,6 @@ span.actionbutton {
     border-bottom: 1px solid #d0d0ff;
 }
 
-.akeeba-renderer-fef--dark .folder-container {
-    background-color: #5e5c5d;
-    color: #efefef;
-    border-bottom: 1px solid #666666;
-}
-
-
 .folder-container span.folder-padding {
     float: left;
     cursor: pointer;
@@ -417,10 +354,6 @@ span.actionbutton {
     color: #333399;
 }
 
-.akeeba-renderer-fef--dark span.folder-name:hover {
-    color: #ffffff;
-}
-
 .folder-container .btn-danger {
     cursor: not-allowed !important;
 }
@@ -432,12 +365,6 @@ span.actionbutton {
     color: #333333;
     font-weight: normal;
     border-bottom: 1px solid #d0d0ff;
-}
-
-.akeeba-renderer-fef--dark .file-container {
-    background-color: #5e5c5d;
-    color: #efefef;
-    border-bottom: 1px solid #666666;
 }
 
 .file-container span.file-icon-container {
@@ -512,9 +439,12 @@ span.actionbutton {
     padding: 0.6em 0;
 }
 
-/* endregion */
+/**/
 
-/* region Database tables filters */
+/**
+ * Database tables filters
+ */
+/**/
 #ak_databases_container {
     padding: 2px 0px 6px 0px;
 }
@@ -543,12 +473,6 @@ span.actionbutton {
     border-bottom: 1px solid #d0d0ff;
 }
 
-.akeeba-renderer-fef--dark .table-container {
-    background-color: #5e5c5d;
-    color: #efefef;
-    border-bottom: 1px solid #666666;
-}
-
 .table-container span.table-icon-container {
     float: left;
     /*cursor: pointer;*/
@@ -571,9 +495,12 @@ span.actionbutton {
     cursor: not-allowed !important;
 }
 
-/* endregion */
+/**/
 
-/* region Multiple databases definitions */
+/*
+ * Multiple databases definitions
+ */
+/**/
 /**
  * Use in akeeba-table tables when you are going to have <input> inside <td>. Otherwise the TDs with INPUTs will have
  * their content appear like it's pushed down by an invisible padding because of vertical-align: baseline.
@@ -586,13 +513,15 @@ table[class*=--dynamic-line-editor] td {
     margin: 0 2em;
 }
 
-/* endregion */
+/**/
 
-/* region Restoration */
+/**
+ * Restoration
+ */
+/**/
 #extprogress {
     border: thin solid gray;
     background-color: #f0f0f0;
-    color: #5e5c5d;
     border-radius: 5px;
     -moz-border-radius: 5px;
     padding: 5px;
@@ -609,32 +538,29 @@ table[class*=--dynamic-line-editor] td {
     border-bottom: thin solid #e0e0e0
 }
 
-/* endregion */
+/**/
 
-/* region Manage backups */
-.akeeba-buadmin-startdate {
+/**
+ * Manage backups
+ **/
+div.akeeba-buadmin-startdate {
     border-top: 1px solid #eee;
     color: #999;
     padding-top: 2px;
     margin-top: 2px
 }
 
-.akeeba-renderer-fef--dark .akeeba-buadmin-startdate {
-    border-top: 1px solid #858183;
-    color: #cccccc;
-}
-
-/* endregion */
-
-/* region System configuration */
+/**
+ * System configuration
+ */
 
 div.tab-content > div {
     padding-top: 1em;
 }
 
-/* endregion */
-
-/* region Modal dialogs */
+/**
+ * Modal dialogs using jsModal. Light version (should fit most, if not all, administrator themes)
+ */
 #akeeba-modal-overlay {
     background: #000;
     filter: alpha(opacity=60);
@@ -702,26 +628,12 @@ div.tab-content > div {
 }
 
 #akeeba-modal-container.modal-loading {
-    background: #fff url('../image/loading.gif') no-repeat center center;
+    background: #fff url('../icons/loading.gif') no-repeat center center;
 }
 
-.akeeba-renderer-fef--dark #akeeba-modal-container {
-    background: #514F50;
-    border: 1px solid #666666;
-}
-
-.akeeba-renderer-fef--dark #akeeba-modal-close {
-    background: #ccc url('../image/modal-close.png') no-repeat center center;
-    border-radius: 16px;
-}
-
-.akeeba-renderer-fef--dark #akeeba-modal-container.modal-loading {
-    background: #514F50 url('../image/loading_dark.gif') no-repeat center center;
-}
-
-/* endregion */
-
-/* region Simple CSS tooltips (akeeba-hasTooltip) */
+/**
+ * Simple CSS tooltips
+ */
 
 .akeeba-hasTooltip {
     position: relative;
@@ -804,9 +716,9 @@ div.tab-content > div {
     border-color: transparent transparent black transparent;
 }
 
-/* endregion */
-
-/* region Filter bar (above tables) */
+/**
+ * Filter bar (above tables)
+ */
 .akeeba-renderer-fef form[class*=akeeba-form] [class*=akeeba-filter-bar-container] [class*=akeeba-form-section]
 {
     margin-bottom: 0;
@@ -835,9 +747,9 @@ div.akeeba-filter-element button[class*=--icon-only] [class*=akion-] {
     vertical-align: baseline;
 }
 
-/* endregion */
-
-/* region Form styling fixes (to backport into FEF) */
+/**
+ * Form styling fixes (to backport into FEF)
+ */
 
 div.akeeba-hidden-fields-container {
     height: 0;
@@ -852,9 +764,9 @@ div.akeeba-hidden-fields-container {
     margin-bottom: 0;
 }
 
-/* endregion */
-
-/* region Breadcrumbs (to backport into FEF) */
+/**
+ * Breadcrumbs (to backport into FEF)
+ */
 ul.akeeba-breadcrumb {
     display: -webkit-box;
     display: flex;
@@ -874,10 +786,6 @@ ul.akeeba-breadcrumb li a {
     text-decoration: none;
 }
 
-.akeeba-renderer-fef--dark ul.akeeba-breadcrumb li a {
-    color: #efefef;
-}
-
 ul.akeeba-breadcrumb li a:hover {
     color: #40B5B8;
     text-decoration: none;
@@ -889,17 +797,10 @@ ul.akeeba-breadcrumb li span.divider {
     color: #918e90;
 }
 
-/* endregion */
-
-/* region WordPress specific styles */
+/**
+ * WordPress specific styles
+ */
 div.akeeba-wp
 {
     background-color: white;
 }
-
-div.akeeba-renderer-fef--dark.akeeba-wp
-{
-    background-color: #514F50;
-}
-
-/* endregion */

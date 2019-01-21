@@ -1,8 +1,8 @@
 <?php
 /**
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        solo
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
  */
 
 namespace Solo\Model;
@@ -137,14 +137,13 @@ class Stats extends Model
         {
             if(function_exists('get_bloginfo'))
             {
-	            $cmsType  = function_exists('classicpress_version') ? 3 : 2;
                 $wp_parts = explode('.', get_bloginfo('version'));
 
                 $cms_major = $wp_parts[0];
                 $cms_minor = $wp_parts[1];
                 $cms_revision = isset($wp_parts[2]) ? $wp_parts[2] : 0;
 
-				$stats->setValue('ct', $cmsType); // cms_type
+				$stats->setValue('ct', 2); // cms_type
                 $stats->setValue('cm', $cms_major); // cms_major
                 $stats->setValue('cn', $cms_minor); // cms_minor
                 $stats->setValue('cr', $cms_revision); // cms_revision

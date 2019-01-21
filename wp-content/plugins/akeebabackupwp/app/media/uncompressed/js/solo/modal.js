@@ -1,7 +1,7 @@
-/*
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+/**
+ * @package     Solo
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license     GNU GPL version 3 or later
  */
 
 // Object initialisation
@@ -355,7 +355,7 @@ if (typeof akeeba.Modal === 'undefined')
 
 		/** The following lines are required for WordPress compatibility **/
 		// Use Bootstrap styling (akeeba-bootstrap). Make sure the modal is aligned to the entire WordPress backend (akeeba-wp).
-		modalContainer.className = 'akeeba-renderer-fef akeeba-renderer-fef--dark akeeba-wp';
+		modalContainer.className = 'akeeba-renderer-fef akeeba-wp';
 		// Make sure the modal is ABOVE the WordPress sidebar
 		modalContainer.style.zIndex = '10000';
 		// Make sure the overlay is ABOVE the WordPress sidebar

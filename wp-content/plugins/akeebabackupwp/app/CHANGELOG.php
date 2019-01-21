@@ -1,9 +1,4 @@
 <?php die();?>
-Akeeba Solo 3.3.3
-================================================================================
-+ Official support for ClassicPress 1.x (works with the WordPress option)
-+ Dark Mode (optional; activate it through System Configuration)
-
 Akeeba Solo 3.3.2
 ================================================================================
 # [HIGH] Restoration of WordPress sites: database error during data replacement

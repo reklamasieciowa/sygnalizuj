@@ -1,8 +1,8 @@
 <?php
 /**
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package     Solo
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license     GNU GPL version 3 or later
  */
 
 use Awf\Text\Text;
@@ -211,7 +211,7 @@ endif; ?>
 							<?php echo $this->escape($record['description']) ?>
                         </a>
                         <br/>
-                        <div class="akeeba-buadmin-startdate"
+                        <div style="border-top: 1px solid #eee; color: #999; padding-top: 2px; margin-top: 2px"
                              title="<?php echo Text::_('COM_AKEEBA_BUADMIN_LABEL_START') ?>">
                             <small>
                                 <span class="akion-calendar"></span>

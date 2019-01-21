@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ @package    solo
-  ~ @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
-  ~ @license    GNU GPL version 3 or later
-  -->
-
 <schema>
     <!-- Metadata -->
     <meta>

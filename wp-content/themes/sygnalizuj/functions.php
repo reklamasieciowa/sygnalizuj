@@ -188,6 +188,43 @@ function sygnalizuj_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'sygnalizuj_scripts' );
 
+//Customize post nav
+function sygnalizuj_get_the_post_navigation( $args = array() ) {
+    $args = wp_parse_args( $args, array(
+        'prev_text'          => 'Poprzedni wpis: %title',
+        'next_text'          => 'Następny wpis: %title',
+        'in_same_term'       => false,
+        'excluded_terms'     => '',
+        'taxonomy'           => 'category',
+        'screen_reader_text' => __( 'Zobacz także' ),
+    ) );
+ 
+    $navigation = '';
+ 
+    $previous = get_previous_post_link(
+        '<div class="nav-previous">%link</div>',
+        $args['prev_text'],
+        $args['in_same_term'],
+        $args['excluded_terms'],
+        $args['taxonomy']
+    );
+ 
+    $next = get_next_post_link(
+        '<div class="nav-next">%link</div>',
+        $args['next_text'],
+        $args['in_same_term'],
+        $args['excluded_terms'],
+        $args['taxonomy']
+    );
+ 
+    // Only add markup if there's somewhere to navigate to.
+    if ( $previous || $next ) {
+        $navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'] );
+    }
+ 
+    return $navigation;
+}
+
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
 

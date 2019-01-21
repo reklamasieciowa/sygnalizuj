@@ -1,8 +1,10 @@
 <?php
 /**
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package AkeebaBackup
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license GNU General Public License version 3, or later
+ *
+ * @since 1.3
  */
 
 namespace Akeeba\Engine\Finalization;

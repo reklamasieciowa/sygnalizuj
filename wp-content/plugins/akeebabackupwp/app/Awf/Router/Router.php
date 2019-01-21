@@ -1,8 +1,8 @@
 <?php
 /**
- * @package    awf
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package     Awf
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license     GNU GPL version 3 or later
  */
 
 namespace Awf\Router;
@@ -296,10 +296,7 @@ class Router
 		// Set the query vars to the application
 		if (is_array($routeVars) && !empty($routeVars))
 		{
-			foreach ($routeVars as $k => $v)
-			{
-				$this->container->input->set($k, $v);
-			}
+			$this->container->input->setData($routeVars);
 		}
 	}
 

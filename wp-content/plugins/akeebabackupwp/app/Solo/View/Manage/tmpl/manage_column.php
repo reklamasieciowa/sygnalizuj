@@ -1,8 +1,10 @@
 <?php
 /**
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package   AkeebaBackup
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license   GNU General Public License version 3, or later
+ *
+ * @since     1.3
  */
 
 /** @var  array $record */
@@ -37,7 +39,7 @@ if ($showUploadRemote)
 ?>
 <div style="display: none">
     <div id="akeeba-buadmin-<?php echo $record['id'] ?>" tabindex="-1" role="dialog">
-        <div class="akeeba-renderer-fef <?php echo $this->getContainer()->appConfig->get('darkmode', 0) ? 'akeeba-renderer-fef--dark' : '' ?>">
+        <div class="akeeba-renderer-fef">
             <h4><?php echo Text::_('COM_AKEEBA_BUADMIN_LBL_BACKUPINFO') ?></h4>
 
             <p>
@@ -70,7 +72,7 @@ if ($showUploadRemote)
 
 	<?php if ($showDownload): ?>
     <div id="akeeba-buadmin-download-<?php echo $record['id'] ?>" tabindex="-2" role="dialog">
-        <div class="akeeba-renderer-fef <?php echo $this->getContainer()->appConfig->get('darkmode', 0) ? 'akeeba-renderer-fef--dark' : '' ?>">
+        <div class="akeeba-renderer-fef">
             <div class="akeeba-block--warning">
                 <h4>
 		            <?php echo Text::_('COM_AKEEBA_BUADMIN_LBL_DOWNLOAD_TITLE') ?>

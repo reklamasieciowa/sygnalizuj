@@ -117,6 +117,47 @@
   }
 }
 
+.single-thumbnail {
+    @include media-breakpoint-up(lg) {
+      width: 300px;
+    }
+}
+
+.post-navigation {
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    .nav-previous {
+
+    }
+
+    .nav-next {
+      margin-top: 5px;
+    }
+  }
+}
+
+.comments-area {
+
+  .comment {
+    margin-bottom: 15px;
+
+    .comment-metadata {
+      a {
+        color: rgba(0,0,0,.65);
+        font-size: .8rem;
+      }
+    }
+  }
+
+  .comment-reply-title {
+    font-size: 1.3rem;
+  }
+}
+
 hr {
   &.wp-block-separator {
     margin: 4rem 0;

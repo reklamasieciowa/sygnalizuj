@@ -1,17 +1,17 @@
 <?php
 /**
- * @package    awf
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package     Awf
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license     GNU GPL version 3 or later
+ *
+ * The Inflector class is an adaptation of the Akelos PHP Inflector which is a PHP
+ * port from a Ruby on Rails project.
  */
 
 namespace Awf\Inflector;
 
 /**
  * An Inflector to pluralize and singularize English nouns.
- *
- * The Inflector class is an adaptation of the Akelos PHP Inflector which is a PHP
- * port from a Ruby on Rails project.
  */
 abstract class Inflector
 {

@@ -1,14 +1,13 @@
 <?php
 /**
- * @package    akeebabackupwp
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        akeebabackupwp
+ * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
  */
 
 include __DIR__ . '/php/menu.php';
 
 $this->outputHTTPHeaders();
-$darkMode = $this->getContainer()->appConfig->get('darkmode', 0);
 
 if (defined('AKEEBA_SOLOWP_OBFLAG'))
 {
@@ -20,7 +19,7 @@ else
 }
 
 ?>
-<div class="akeeba-renderer-fef <?php echo $darkMode ? 'akeeba-renderer-fef--dark' : 'akeeba-wp' ?>">
+<div class="akeeba-renderer-fef akeeba-wp">
 <?php if (\Awf\Application\Application::getInstance()->getContainer()->input->getCmd('tmpl', '') != 'component'): ?>
     <header class="akeeba-navbar">
         <div class="akeeba-maxwidth akeeba-flex">

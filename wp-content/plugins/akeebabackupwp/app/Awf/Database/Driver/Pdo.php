@@ -1,8 +1,10 @@
 <?php
 /**
- * @package    awf
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package     Awf
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license     GNU GPL version 3 or later
+ *
+ * This class is adapted from the Joomla! Framework
  */
 
 namespace Awf\Database\Driver;
@@ -14,8 +16,6 @@ use Awf\Database\Query;
 
 /**
  * PDO Database Driver Class
- *
- * This class is adapted from the Joomla! Framework
  *
  * @see    http://php.net/pdo
  * @since  1.0

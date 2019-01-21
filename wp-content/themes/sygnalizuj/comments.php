@@ -20,13 +20,13 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area mt-4">
 
 	<?php
 	// You can start editing here -- including this comment!
 	if ( have_comments() ) :
 		?>
-		<h2 class="comments-title">
+		<h4 class="comments-title h5-responsive mb-4">
 			<?php
 			$sygnalizuj_comment_count = get_comments_number();
 			if ( '1' === $sygnalizuj_comment_count ) {
@@ -44,18 +44,18 @@ if ( post_password_required() ) {
 				);
 			}
 			?>
-		</h2><!-- .comments-title -->
+		</h4><!-- .comments-title -->
 
 		<?php the_comments_navigation(); ?>
 
-		<ol class="comment-list">
+		<div class="card comment-list px-3 pt-3 pb-1 mb-4">
 			<?php
 			wp_list_comments( array(
-				'style'      => 'ol',
+				'style'      => 'div',
 				'short_ping' => true,
 			) );
 			?>
-		</ol><!-- .comment-list -->
+		</div><!-- .comment-list -->
 
 		<?php
 		the_comments_navigation();
@@ -69,7 +69,14 @@ if ( post_password_required() ) {
 
 	endif; // Check for have_comments().
 
-	comment_form();
+	$comments_args = array(
+        // redefine your own textarea (the comment body)
+        'class_submit'      => 'btn btn-sm btn-info',
+        'comment_field' => '<div class="form-group mt-4"><label for="comment"><i class="fas fa-pencil-alt prefix mr-2"></i>' . _x( 'Comment', 'noun' ) . '</label><textarea type="text" id="comment" name="comment" class="form-control mb-2" rows="3" aria-required="true"></textarea>
+        ',
+	);
+
+	comment_form($comments_args);
 	?>
 
 </div><!-- #comments -->

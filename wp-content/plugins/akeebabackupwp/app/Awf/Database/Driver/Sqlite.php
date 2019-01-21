@@ -1,8 +1,10 @@
 <?php
 /**
- * @package    awf
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package     Awf
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license     GNU GPL version 3 or later
+ *
+ * This class is adapted from the Joomla! Framework
  */
 
 namespace Awf\Database\Driver;
@@ -15,8 +17,6 @@ use Sqlite3;
 
 /**
  * SQLite database driver supporting PDO based connections
- *
- * This class is adapted from the Joomla! Framework
  *
  * @see    http://php.net/manual/en/ref.pdo-sqlite.php
  * @since  1.0

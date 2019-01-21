@@ -3,23 +3,21 @@
 Plugin Name: Akeeba Backup for WordPress
 Plugin URI: https://www.akeebabackup.com
 Description: The complete backup solution for WordPress
-Version: 3.3.3
+Version: 3.3.2
 Author: Akeeba Ltd
 Author URI: https://www.akeebabackup.com
 Network: true
 License: GPLv3
 */
 
-/**
- * @package    akeebabackupwp
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
- *
+/*
+ * Copyright 2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the

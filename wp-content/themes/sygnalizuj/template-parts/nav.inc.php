@@ -1,7 +1,7 @@
 	<!-- Main navigation -->
 <header id="header-main">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+  <nav class="navbar navbar-expand-lg nav-fill navbar-dark fixed-top scrolling-navbar">
     <div class="container">
       <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
       	<strong><?php bloginfo( 'name' ); ?></strong>
@@ -20,7 +20,7 @@
       'container'       => 'div',
       'container_class' => 'collapse navbar-collapse',
       'container_id'    => 'navbarSupportedContent-7',
-      'menu_class'      => 'navbar-nav mr-auto',
+      'menu_class'      => 'navbar-nav w-100',
       'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
       'walker'          => new WP_Bootstrap_Navwalker(),
     ) );

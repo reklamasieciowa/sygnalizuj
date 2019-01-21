@@ -1,8 +1,12 @@
 <?php
 /**
- * @package    akeebabackupwp
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * Akeeba Engine
+ * The modular PHP5 site backup engine
+ *
+ * @copyright Copyright (c)2014-2017 Nicholas K. Dionysopoulos
+ * @license   GNU GPL version 3 or, at your option, any later version
+ * @package   akeebabackupwp
+ *
  */
 
 namespace Akeeba\Engine\Platform;

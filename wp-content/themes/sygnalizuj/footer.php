@@ -22,7 +22,7 @@
 
     <div class="text-center my-4">
       <a class="btn btn-danger wow fadeInLeft" role="button" data-wow-delay="0.7s">Prześlij zgłoszenie <i class="fas fa-paper-plane fa-lg ml-2"></i></a>
-      <a href="http://localhost/www/sygnalizuj/rekomendacja/" class="btn btn-success wow fadeInRight" role="button" data-wow-delay="0.9s">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja/" class="btn btn-success wow fadeInRight" role="button" data-wow-delay="0.9s">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
     </div>
     <hr>
     <?php get_sidebar('footerbottom'); ?>

@@ -1,8 +1,8 @@
 <?php
 /**
- * @package    akeebabackupwp
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        akeebabackupwp
+ * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
  */
 
 use Awf\Uri\Uri;
@@ -18,7 +18,6 @@ $scripts = $this->getScripts();
 $scriptDeclarations = $this->getScriptDeclarations();
 $styles = $this->getStyles();
 $styleDeclarations = $this->getStyleDeclarations();
-$darkMode = $this->getContainer()->appConfig->get('darkmode', 0);
 
 AkeebaBackupWP::enqueueScript(Uri::base() . 'media/js/akjqnamespace.min.js');
 
@@ -85,11 +84,6 @@ if (!empty($styles))
 }
 
 AkeebaBackupWP::enqueueStyle(Uri::base() . 'media/css/fef-wp.min.css');
-
-if ($darkMode)
-{
-	AkeebaBackupWP::enqueueStyle(Uri::base() . 'media/css/dark.min.css');
-}
 
 if (defined('AKEEBADEBUG') && AKEEBADEBUG && @file_exists(dirname(AkeebaBackupWP::$absoluteFileName) . '/app/media/css/theme.css'))
 {

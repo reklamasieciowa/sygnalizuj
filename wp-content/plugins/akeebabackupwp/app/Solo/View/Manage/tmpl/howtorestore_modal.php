@@ -1,8 +1,8 @@
 <?php
 /**
- * @package    solo
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        solo
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
  */
 
 use Awf\Text\Text;
@@ -31,7 +31,7 @@ $this->getContainer()->application->getDocument()->addScriptDeclaration($js);
 ?>
 
 <div id="akeeba-config-howtorestore-bubble" style="display: none;">
-    <div class="akeeba-renderer-fef <?php echo $this->getContainer()->appConfig->get('darkmode', 0) ? 'akeeba-renderer-fef--dark' : '' ?>">
+    <div class="akeeba-renderer-fef">
         <h4>
 		    <?php echo Text::_('COM_AKEEBA_BUADMIN_LABEL_HOWDOIRESTORE_LEGEND') ?>
         </h4>

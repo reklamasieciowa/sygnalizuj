@@ -1,8 +1,10 @@
 <?php
 /**
- * @package    awf
- * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license    GNU GPL version 3 or later
+ * @package        awf
+ * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
+ *
+ * Based on ideas and code from FOF, Joomla! Platform, Joomla! Framework and Laravel 4
  */
 
 namespace Awf\Mvc;
@@ -34,8 +36,6 @@ use Awf\Text\Text;
  * @method DataModel belongsToMany() belongsToMany(string $name, string $foreignModelClass = null, string $localKey = null, string $foreignKey = null, string $pivotTable = null, string $pivotLocalKey = null, string $pivotForeignKey = null)
  *
  * Type hinting -- end
- *
- * Based on ideas and code from FOF, Joomla! Platform, Joomla! Framework and Laravel 4
  *
  * @package Awf\Mvc
  */
