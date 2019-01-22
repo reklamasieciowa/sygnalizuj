@@ -21,8 +21,8 @@
     <hr>
 
     <div class="text-center my-4">
-      <a class="btn btn-danger wow fadeInLeft" role="button" data-wow-delay="0.7s">Prześlij zgłoszenie <i class="fas fa-paper-plane fa-lg ml-2"></i></a>
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja/" class="btn btn-success wow fadeInRight" role="button" data-wow-delay="0.9s">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
+      <a class="btn btn-danger" role="button">Prześlij zgłoszenie <i class="fas fa-paper-plane fa-lg ml-2"></i></a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja/" class="btn btn-success" role="button">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
     </div>
     <hr>
     <?php get_sidebar('footerbottom'); ?>
@@ -118,10 +118,10 @@ $(document).ready(function() {
 
 $('.callme :checkbox').change(function() {
   if($(this).is(":checked")) {
-      $('.callme-form').addClass('fadeIn').toggleClass('hidden');
+      $('.callme-form').toggleClass('hidden');
       return;
    }
-   $('.callme-form').removeClass('fadeIn').toggleClass('hidden');
+   $('.callme-form').toggleClass('hidden');
 }); 
 
 });

@@ -19,9 +19,9 @@ get_header();
         <div class="row">
           <!--Grid column-->
           <div class="col-md-12 white-text text-center text-md-left mt-6 mt-lg-3">
-            <span class="h1-responsive font-weight-bold mt-sm-5 pt-xl-4 text-center text-shadow">
+            <span class="font-weight-bold mt-sm-5 pt-xl-4 text-center text-shadow">
       				<?php
-      					the_archive_title( '<h1 class="page-title">', '</h1>' );
+      					the_archive_title( '<h1 class="h2-responsive page-title">', '</h1>' );
       					the_archive_description( '<div class="archive-description">', '</div>' );
       				?>
             </span>

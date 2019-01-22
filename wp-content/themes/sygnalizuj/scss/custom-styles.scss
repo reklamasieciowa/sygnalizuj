@@ -4,13 +4,27 @@
     &.home-intro {
     height: 450px;
 
+    #logo {
+      width: 400px;
+
+      @include media-breakpoint-down(sm) {
+        width: 250px;
+      }
+    }
+
     span {
       display: block;
       width: 100%;
     }
 
     @include media-breakpoint-down(sm) {
-      height: 600px;
+      height: 550px;
+    }
+
+    span {
+      @include media-breakpoint-down(sm) {
+        margin-top: 70px;
+      }
     }
   }
 
@@ -40,6 +54,10 @@
 .home .navbar:not(.top-nav-collapse) {
   // background: transparent !important;
   background: #01579b!important;
+}
+
+#logo-nav {
+  width: 180px;
 }
 
 @include media-breakpoint-down(lg) {
@@ -158,6 +176,20 @@
   }
 }
 
+.home {
+  .entry-content {
+    .col-md-4 {
+        @include media-breakpoint-down(md) {
+         margin-bottom: 45px;
+
+         p {
+          margin-bottom: 1rem!important;
+         }
+        }
+    }
+  }
+}
+
 hr {
   &.wp-block-separator {
     margin: 4rem 0;
@@ -194,6 +226,8 @@ strong {
       }
     }
   }
+
+
 }
 
 .hidden {
