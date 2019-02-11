@@ -14,7 +14,7 @@
 	</div><!-- #content -->
 
 <!-- Footer -->
-<footer class="page-footer font-small light-blue darken-4 pt-4">
+<footer class="page-footer font-small bg-gray pt-4">
 
     <?php get_sidebar('footer1'); ?>
 
@@ -22,7 +22,7 @@
 
     <div class="text-center my-4">
       <a class="btn btn-danger" role="button">Prześlij zgłoszenie <i class="fas fa-paper-plane fa-lg ml-2"></i></a>
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja/" class="btn btn-success" role="button">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja/" class="btn btn-light-gray" role="button">Zarekomenduj Sygnalizuj.com <i class="fas fa-thumbs-up fa-lg ml-2"></i></a>
     </div>
     <hr>
     <?php get_sidebar('footerbottom'); ?>
@@ -61,20 +61,19 @@
     </div>
     <!-- Copyright -->
 
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+<div class="fixed-action-btn" style="bottom: 85px; right: 5px;">
   <a class="btn-floating btn-lg red">
-    <i class="far fa-comments"></i>
+    <i class="far fa-life-ring fa-lg"></i>
   </a>
 
   <ul class="list-unstyled">
-    <li><a class="btn-floating red"><i class="fas fa-star"></i></a></li>
-    <li><a class="btn-floating yellow darken-1"><i class="fas fa-user"></i></a></li>
-    <li><a class="btn-floating green"><i class="fas fa-envelope"></i></a></li>
-    <li><a class="btn-floating blue"><i class="fas fa-shopping-cart"></i></a></li>
+    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#" class="btn-floating red"><i class="fas fa-paper-plane"></i></a></li>
+    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>rekomendacja" class="btn-floating green"><i class="fas fa-thumbs-up"></i></a></li>
+    <li><a href="tel:123456789" class="btn-floating default-color"><i class="fas fa-phone"></i></a></li>
+    <li><a href="mailto:sygnalizuj@sygnalizuj.com" class="btn-floating info-color"><i class="fas fa-envelope"></i></a></li>
+    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>kontakt" class="btn-floating blue"><i class="far fa-comments"></i></a></li>
   </ul>
 </div>
-
-
 
 </footer>
 <!-- Footer -->

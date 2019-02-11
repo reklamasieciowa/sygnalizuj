@@ -14,7 +14,56 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5aafea', endColorstr='#3b61b0',GradientType=1 );
 }
 
-$red: #ff3547;
+.rgba-gradient-blue-syg {
+  background: rgb(40,108,131);
+  background: -moz-radial-gradient(center, ellipse cover, rgba(40,108,131,.6) 0%, rgba(17,61,77,.6) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(40,108,131,.6) 0%,rgba(17,61,77,.6) 100%);
+  background: radial-gradient(ellipse at center, rgba(40,108,131,.6) 0%,rgba(17,61,77,.6) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#286c83', endColorstr='#113d4d',GradientType=1 );
+}
+
+$red: #db203d;
+$gray: #465665;
+$light-gray: #a5a5a5;
+$blue-syg: #418eac;
+
+.btn-danger {
+  background-color: $red!important;
+}
+
+.btn-gray {
+  background-color: $gray;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.bg-gray {
+  background-color: $gray;
+}
+
+.bg-light-gray {
+  background-color: $light-gray;
+}
+
+.btn-light-gray {
+  color:#fff!important;
+  background-color: $light-gray;
+
+  &:hover {
+    background-color: $red!important;
+    color: #fff;
+  }
+}
+
+.blue-syg-text {
+  color: $blue-syg;
+}
+
+.bg-blue-syg {
+  background-color: $blue-syg;
+}
 
 .text-shadow {
   text-shadow: 0px 2px 10px rgba(0,0,0, .4);

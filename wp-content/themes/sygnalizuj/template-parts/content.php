@@ -14,10 +14,9 @@
 		<div class="col-lg-4 <?php echo (get_query_var('evenness') == 'odd') ? 'order-lg-1' : 'order-lg-2'; ?>">
 
 			<div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
-				<a href="<?php esc_url(get_permalink());?>" title="<?php the_title(); ?>">
-					<!-- <img class="img-fluid" src="<?php //sygnalizuj_post_thumbnail('medium'); ?>" alt=""> -->
+				<a href="<?php echo esc_url(get_permalink());?>" title="<?php the_title(); ?>">
+					<!-- <img class="img-fluid" src="<?php the_post_thumbnail('medium'); ?>" alt=""> -->
 					<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(28).jpg" alt="<?php the_title(); ?>" title="<?php the_title(); ?>">
-					<a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
 				</div>
@@ -98,7 +97,7 @@
 
 						<?php if ( is_category() || is_archive() && has_excerpt() ): ?>
 						<div class="excerpt mt-3">
-							<a class="btn btn-sm btn-info m-0" href="<?php echo get_permalink(); ?>" role="button">Więcej <i class="fas fa-angle-double-right"></i></a>
+							<a class="btn btn-sm btn-light-gray m-0" href="<?php echo get_permalink(); ?>" role="button">Więcej <i class="fas fa-angle-double-right"></i></a>
 						</div>
 					<?php endif; ?>
 
