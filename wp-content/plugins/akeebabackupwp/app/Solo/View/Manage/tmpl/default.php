@@ -1,11 +1,13 @@
 <?php
 /**
- * @package     Solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license     GNU GPL version 3 or later
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 use Awf\Text\Text;
+
+defined('_AKEEBA') or die();
 
 // Used for type hinting
 /** @var \Solo\View\Manage\Html $this */
@@ -211,7 +213,7 @@ endif; ?>
 							<?php echo $this->escape($record['description']) ?>
                         </a>
                         <br/>
-                        <div style="border-top: 1px solid #eee; color: #999; padding-top: 2px; margin-top: 2px"
+                        <div class="akeeba-buadmin-startdate"
                              title="<?php echo Text::_('COM_AKEEBA_BUADMIN_LABEL_START') ?>">
                             <small>
                                 <span class="akion-calendar"></span>

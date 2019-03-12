@@ -1,19 +1,23 @@
 === Contact Form 7 Database + | CFDB+ ===
-Contributors: contactic
+Contributors: contactic,mouveo,francois86
 Tags: CF7,Contact form 7,CFDB,contact form,database,contact form database,save contact form,form database,contactic
 Requires at least: 4.0
-Tested up to: 5.0.2
+Tested up to: 5.1
 Requires PHP: 5.4.45
-Stable tag: 1.0.5
+Stable tag: 1.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Saves submitted form data to the database. Export the data to a file or use shortcodes to display it. Get statistics as well as track your contacts.
+Saves all your messages from Contact Form 7... Export data to a file or use shortcodes to display them. Get statistics as well as track your contacts.
 
 == Description ==
 ### CONTACT FORM 7 DATABASE + : BACKUP & STATS
 
-Contact Form 7 Database + saves contacts form submissions and provides admin pages and shortcodes to view, track and display the data with stats.
+Contactic saves all your messages from 15 Contact Form plugins and more (with a shortcode).
+You can export data to a file (CSV, XLS, Google Sheet...) or even display them online.
+You can track your contacts and know if they are useful or not, handle or not...
+You can see quickly your progress thanks to statistical graphs.
+More than 50 features are included in Contactic!
 
 > With CFDB+, secure your forms and get stats, quickly and easily!
 
@@ -66,7 +70,7 @@ Follow us and get exclusive news on [Twitter](https://twitter.com/Contactic_io)
 == Installation ==
 #### FROM WITHIN WORDPRESS
 Visit ‘Plugins > Add New’
-Search for 'Contact Form 7 Database +'
+Search for 'Contactic +'
 Activate 'Contact Form 7 Database +' from your Plugins page.
 Go to "after activation" below.
 
@@ -97,7 +101,7 @@ In the admin page, "Contacts"
 Yes, go to [Plugin Documentation Site](https://contactic.io/docs)  on shortcodes `[cfdb-html]`, `[cfdb-datatable]`, `[cfdb-table]`, `[cfdb-json]` and `[cfdb-value]`, etc.
 
 ##### What is the name of the table where the data is stored?
-`wp_cf7dbplugin_submits`
+`wp_contactic_submits`
 > Note: if you changed your WordPress MySql table prefix from the default `wp_` to something else, then this table will also have that prefix instead of `wp_` (`$wpdb->prefix`)
 
 ##### If I uninstall the plugin, what happens to its data in the database?
@@ -116,6 +120,30 @@ If you use an old version of CFDB, you will have stats, better UI and tools to t
 
 == Changelog ==
 
+= 1.2.2 =
+* New : source can now be pushed in cf7 email.
+* Tested every feature, our plugin is Wordpress 5.1 compatible.
+
+= 1.2.1 =
+* Fix : missing js asset.
+
+= 1.2.0 =
+* New : get the source (origin referer) and submit page even on cached pages.
+* Added source (origin referer) and submit page in details modal.
+
+= 1.1.0 =
+* Support session-less php servers configurations.
+* Custom admin footer in our plugin pages.
+
+= 1.0.7 =
+* Fix submit details modal display issue on mobile in overview and contacts pages.
+* Added date range filtering in contacts page.
+* Remove old options that are now useless
+
+= 1.0.6 =
+* Handle multiple emails forms fields to display and dedup in overview page.
+* Added a date range picker in overview page.
+
 = 1.0.5 =
 * Fix duplicate email display that may occur in overview page.
 
@@ -127,7 +155,7 @@ If you use an old version of CFDB, you will have stats, better UI and tools to t
 
 = 1.0.2 =
 * Saving page ID in submitted form data instead of splitting form name.
-
+ 
 = 1.0.1 =
 * Added a checkbox option to merge same forms in shortcode/export builder.
  

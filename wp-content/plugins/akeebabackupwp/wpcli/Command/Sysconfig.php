@@ -1,8 +1,8 @@
 <?php
 /**
- * @package        akeebabackupwp
- * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Akeeba\WPCLI\Command;
@@ -26,6 +26,7 @@ use WP_CLI\Utils as CliUtils;
 class Sysconfig
 {
 	private $defaultOptions = [
+		'darkmode'                         => 0,
 		'useencryption'                    => 1,
 		'timezone'                         => '',
 		'localtime'                        => 1,

@@ -1,48 +1,55 @@
 <?php
 /**
- * @package        akeebabackupwp
- * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 if (!isset($exc))
 {
 	die();
 }
+
 switch ($exc->getCode())
 {
 	case 400:
-		header('HTTP/1.1 400 Bad Request');
+		$header   = 'HTTP/1.1 400 Bad Request';
 		$appError = 'Bad Request';
 		break;
 	case 401:
-		header('HTTP/1.1 401 Unauthorized');
+		$header   = 'HTTP/1.1 401 Unauthorized';
 		$appError = 'Unauthorised';
 		break;
 	case 403:
-		header('HTTP/1.1 403 Forbidden');
+		$header   = 'HTTP/1.1 403 Forbidden';
 		$appError = 'Access Denied';
 		break;
 	case 404:
-		header('HTTP/1.1 404 Not Found');
+		$header   = 'HTTP/1.1 404 Not Found';
 		$appError = 'Not Found';
 		break;
 	case 501:
-		header('HTTP/1.1 501 Not Implemented');
+		$header   = 'HTTP/1.1 501 Not Implemented';
 		$appError = 'Not Implemented';
 		break;
 	case 503:
-		header('HTTP/1.1 503 Service Unavailable');
+		$header   = 'HTTP/1.1 503 Service Unavailable';
 		$appError = 'Service Unavailable';
 		break;
 	case 500:
 	default:
-		header('HTTP/1.1 500 Internal Server Error');
+		$header   = 'HTTP/1.1 500 Internal Server Error';
 		$appError = 'Application Error';
 		break;
 }
 
-include __DIR__ . '/php/head.php';
+// Avoid errors if headers were already sent
+if (!headers_sent())
+{
+    header($header);
+}
+
+include __DIR__ . '/php/head_wp.php';
 ?>
 <div class="akeeba-renderer-fef" id="error-wrap">
     <div class="akeeba-panel--danger">
@@ -57,7 +64,7 @@ include __DIR__ . '/php/head.php';
             <p>
                 Please submit the following error message and trace in its entirety when requesting support
             </p>
-            <h4 class="text-info">
+            <h4 class="text-info" id="error-message-text">
 				<?php echo $exc->getCode() . ' :: ' . $exc->getMessage(); ?>
                 in
 				<?php echo $exc->getFile() ?>
@@ -72,5 +79,3 @@ include __DIR__ . '/php/head.php';
 		<?php endif; ?>
     </div>
 </div>
-</body>
-</html>

@@ -1,10 +1,15 @@
 <?php
+/**
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
+ */
 
 $plugin_dir  = get_option('akeebabackupwp_plugin_dir', 'akeebabackupwp');
 $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_dir;
 
 // Let's double check that the file is at the same version of the component
-define('AKEEBABACKUP_MUPLUGIN_COREUPDATE_VERSION', 'revCA414FF');
+define('AKEEBABACKUP_MUPLUGIN_COREUPDATE_VERSION', 'revF0C7E8E9');
 
 if (!defined('AKEEBABACKUP_VERSION'))
 {

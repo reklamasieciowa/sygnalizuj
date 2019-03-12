@@ -41,6 +41,9 @@ class CTC_IntegrationContactForm7 {
         if ($this->plugin->getOption('GenerateSubmitTimeInCF7Email', 'false', true) == 'true') {
             add_action('wpcf7_posted_data', array(&$this, 'generateSubmitTimeForCF7'));
         }
+        if ($this->plugin->getOption('GenerateSourceInCF7Email', 'false', true) == 'true') {
+            add_action('wpcf7_posted_data', array(&$this, 'generateSourceForCF7'));
+        }
     }
 
     /**
@@ -76,7 +79,7 @@ class CTC_IntegrationContactForm7 {
                 $data['uploaded_files'] = $submission->uploaded_files();
                 $data['WPCF7_ContactForm'] = $cf7;
 
-                if ('true' == $this->plugin->getOption('IntegrateWithCF7SavePageTitle', 'false', true)) {
+                /*if ('true' == $this->plugin->getOption('IntegrateWithCF7SavePageTitle', 'false', true)) {
                     $data['posted_data']['Page Title'] = wpcf7_post_related_smt('', '_post_title', '');
                 }
                 if ('true' == $this->plugin->getOption('IntegrateWithCF7SavePageUrl', 'false', true)) {
@@ -84,7 +87,7 @@ class CTC_IntegrationContactForm7 {
                 }
                 if ('true' == $this->plugin->getOption('IntegrateWithCF7SaveSubmittedPageUrl', 'false', true)) {
                     $data['posted_data']['Submitted Page URL'] = wpcf7_special_mail_tag('', '_url', '');
-                }
+                }*/
 
                 return (object) $data;
             }
@@ -109,6 +112,21 @@ class CTC_IntegrationContactForm7 {
 //                    $this->getDBPageSlug(),
 //                    $time);
 //            $posted_data['submit_url'] = $url;
+        } catch (Exception $ex) {
+            $this->plugin->getErrorLog()->logException($ex);
+        }
+        return $posted_data;
+    }
+
+    /**
+     * Get the source so they can be added to CF7 mail
+     * @param $posted_data array
+     * @return array
+     */
+    public function generateSourceForCF7($posted_data) {
+        try {
+            $source = (isset($_SESSION["original_referer"])) ? $_SESSION["original_referer"] : 'Unknown';
+            $posted_data['source'] = (empty($source)) ? 'Direct' : $source;
         } catch (Exception $ex) {
             $this->plugin->getErrorLog()->logException($ex);
         }

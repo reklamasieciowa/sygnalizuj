@@ -1,8 +1,8 @@
 <?php
 /**
- * @package        akeebabackupwp
- * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Akeeba\WPCLI\Command;
@@ -164,6 +164,11 @@ class Backup
 		$model->setState('limit', $limit);
 
 		$output = $model->getStatisticsListWithMeta(false, $filters, $order);
+
+		if (empty($output))
+		{
+			return;
+		}
 
 		$keys     = array_keys($output);
 		$firstKey = array_shift($keys);

@@ -72,7 +72,7 @@
   }
 
   &.top-nav-collapse {
-    background-color: $blue-syg!important;
+    background-color: $gray!important;
   
     #logo-nav-sygnalizuj {
       fill: #fff!important;
@@ -127,7 +127,11 @@
 }
 
 
-
+article {
+  .h3-responsive {
+    margin:30px 0 20px;
+  }
+}
 
 
 
@@ -171,6 +175,11 @@
 
       .nav-link {
         color: #fff!important;
+
+        &.active {
+          color: #fff!important;
+          background-color: $red!important;
+        }
       }
   }
 }
@@ -337,8 +346,18 @@ strong {
       }
     }
   }
+}
 
+.card-deck {
+  .card {
+    @include media-breakpoint-down(sm) {
+      flex: 1 1 100%!important;
+    }
 
+    @include media-breakpoint-down(md) {
+      flex: 1 1 45%!important;
+    }
+  }
 }
 
 .hidden {

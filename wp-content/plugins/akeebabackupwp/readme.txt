@@ -5,7 +5,7 @@ Tags: backup, restore, migrate, move
 Requires at least: 3.8.0
 Tested up to: 4.5
 Requires PHP: 5.4
-Stable tag: 3.3.2
+Stable tag: 3.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -179,6 +179,27 @@ link on our site to request more information for your specific needs.
 7. Want to automate your backups? Akeeba Backup will give you step by step instructions, specific to your site.
 
 == Changelog ==
+
+= 3.4.0 =
+* Do not load the Akeeba Engine when fetching update information
+* WordPress restoration: Handling of more .htaccess use cases
+* [HIGH] Google Storage JSON API could not download files when the path or filename contained spaces
+* [HIGH] Google Storage would create large files with %2F in the filename instead of using subdirectories (the Google API documentation was, unfortunately, instructing us to do something wrong)
+* [MEDIUM] Restoring with the FTP or Hybrid file write mode didn't work properly
+* [MEDIUM] Integrated restoration with JPS archives wasn't allowed
+* [LOW] WP-CLI: Did not apply any configuration overrides (command-line or built-in) during backup
+* [LOW] WP-CLI: PHP warnings when the list of backups is empty
+* [LOW] WP-CLI: It did not know the hostname of the site, causing restoration issues when transferring to a new host
+* [LOW] Fixed styling in ALICE page
+* [LOW] Fixed displaying the error page
+* [LOW] Google Storage would not work on hosts which disable parse_ini_string()
+
+= 3.3.3.1 =
+* The restoration of WordPress backups was broken
+
+= 3.3.3 =
+* Official support for ClassicPress 1.x
+* Dark Mode (optional; activate it through System Configuration)
 
 = 3.3.2 =
 * [HIGH] Restoration of WordPress sites: database error during data replacement

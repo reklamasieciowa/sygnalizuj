@@ -1,8 +1,8 @@
 <?php
 /**
- * @package        solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Solo\Model;
@@ -89,7 +89,7 @@ class Restore extends Model
 		$lastDot = strrpos($filename, '.');
 		$extension = strtoupper(substr($filename, $lastDot + 1));
 
-		if (!in_array($extension, array('JPA', 'ZIP')))
+		if (!in_array($extension, array('JPS', 'JPA', 'ZIP')))
 		{
 			throw new \RuntimeException(Text::_('COM_AKEEBA_RESTORE_ERROR_INVALID_TYPE'), 500);
 		}
@@ -177,9 +177,9 @@ class Restore extends Model
 		// Used for tests
 		if (defined('AKEEBA_TESTS_SLOW_RESTORATION'))
 		{
-			$max_exec = 1;
-			$min_exec = 5;
-			$bias	  = 50;
+			$max_exec = 2;
+			$min_exec = 1;
+			$bias	  = 75;
 		}
 
 		$data = "<?php\ndefined('_AKEEBA_RESTORATION') or die();\n";
@@ -214,7 +214,7 @@ ENDDATA;
 		}
 
 		// If we're using the FTP or Hybrid engine we need to set up the FTP parameters
-		if (in_array($procengine, array('ftp', 'hybrid')))
+		if (in_array($procEngine, array('ftp', 'hybrid')))
 		{
 			$ftp_host = $this->getState('ftp_host', '');
 			$ftp_port = $this->getState('ftp_port', '21');

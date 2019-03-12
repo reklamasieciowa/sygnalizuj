@@ -1,13 +1,14 @@
 <?php
 /**
- * @package        solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Solo\View\Restore;
 
 use Akeeba\Engine\Factory;
+use Akeeba\Engine\Platform;
 use Awf\Text\Text;
 use Awf\Uri\Uri;
 use Awf\Utils\Template;
@@ -16,6 +17,13 @@ use Solo\View\Html as BaseHtml;
 
 class Html extends BaseHtml
 {
+	public $password;
+	public $id;
+	public $ftpparams;
+	public $extractionmodes;
+	public $extension;
+	public $siteURL;
+
 	public function display($tpl = null)
 	{
 		Template::addJs('media://js/solo/configuration.js', $this->container->application);
@@ -34,6 +42,9 @@ class Html extends BaseHtml
 		$this->id              = $model->getState('id', 0);
 		$this->ftpparams       = $model->getFTPParams();
 		$this->extractionmodes = $model->getExtractionModes();
+
+		$backup = Platform::getInstance()->get_statistics($this->id);
+		$this->extension       = strtolower(substr($backup['absolute_path'], -3));
 
 		$router        = $this->container->router;
 		$urlBrowser    = addslashes($router->route('index.php?view=browser&tmpl=component&processfolder=1&folder='));

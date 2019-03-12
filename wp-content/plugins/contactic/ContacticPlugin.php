@@ -51,10 +51,11 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         return array(
             // Integrations
                 'IntegrateWithCF7' =>  array('<a target="_cf7" href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>', 'true', 'false'),
-                'IntegrateWithCF7SavePageTitle' => array('&#x21B3; ' . __('Save Page Title from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
+                /*'IntegrateWithCF7SavePageTitle' => array('&#x21B3; ' . __('Save Page Title from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
                 'IntegrateWithCF7SavePageUrl' => array(__('&#x21B3; ' . 'Save Page URL from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
-                'IntegrateWithCF7SaveSubmittedPageUrl' => array(__('&#x21B3; ' . 'Save Submitted From Page URL from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
+                'IntegrateWithCF7SaveSubmittedPageUrl' => array(__('&#x21B3; ' . 'Save Submitted From Page URL from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),*/
                 'GenerateSubmitTimeInCF7Email' => array(__('&#x21B3; ' . 'Generate [submit_time] tag for Contact Form 7 email', 'contact-form-7-to-database-extension'), 'false', 'true'),
+                'GenerateSourceInCF7Email' => array(__('&#x21B3; ' . 'Include source in Contact Form 7 email', 'contact-form-7-to-database-extension'), 'false', 'true'),
                 'IntegrateWithCalderaForms' => array('<a target="_caldera" href="https://wordpress.org/plugins/caldera-forms/">Caldera Forms</a>', 'true', 'false'),
                 'IntegrateWithCFormsII' => array('<a target="_cf2" href="https://wordpress.org/plugins/cforms2/">CformsII</a>', 'true', 'false'),
                 'IntegrateWithEnfoldThemForms' => array('<a target="_enfld" href="http://themeforest.net/item/enfold-responsive-multipurpose-theme/4519990">Enfold Theme</a>', 'true', 'false'),
@@ -318,6 +319,8 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
         // save the post id in session
         add_action( 'wp_footer', array(&$this, 'ctc_get_the_page'));
+        add_action( 'wp_ajax_nopriv_get_the_page', array(&$this, 'ctc_get_the_page_ajax'));
+        add_action( 'wp_ajax_get_the_page', array(&$this, 'ctc_get_the_page_ajax'));
 
         // Add the Admin Config page for this plugin
 
@@ -1063,6 +1066,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             wp_enqueue_script('contactic_js_fontawesome_r', '//use.fontawesome.com/releases/v5.0.13/js/regular.js', array(), null, $in_footer = true);
             add_action('admin_print_styles', array(&$this, 'clean_styles'), 19);
             add_action('wp_print_scripts', array(&$this, 'clean_js'));
+            add_filter('admin_footer_text', array(&$this, 'ctc_admin_footer'));
         }
 
         // Needed for dialog in ContactsPage
@@ -1078,6 +1082,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             wp_enqueue_script('contactic_js_bootstrap', '//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array(), null, $in_footer = true);
             add_action('admin_print_styles', array(&$this, 'clean_styles'), 19);
             add_action('wp_print_scripts', array(&$this, 'clean_js'));
+            add_filter('admin_footer_text', array(&$this, 'ctc_admin_footer'));
         }
 
         // Needed for dialog in ShortCodePage
@@ -1090,6 +1095,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             wp_enqueue_script('CF7DBdes', $pluginUrl . 'assets/js/des.js');
             wp_enqueue_script('CF7DBdes', $pluginUrl . 'assets/js/des.js');
             wp_enqueue_style('jquery-ui', plugins_url('/assets/css/jquery-ui.css', __FILE__));
+            add_filter('admin_footer_text', array(&$this, 'ctc_admin_footer'));
         }
 
         // ShortCodes
@@ -1116,6 +1122,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             require_once('CTC_ViewOptions.php');
             $optionsView = new CTC_ViewOptions($this);
             add_action('admin_enqueue_scripts', array(&$optionsView, 'enqueueSettingsPageScripts'));
+            add_filter('admin_footer_text', array(&$this, 'ctc_admin_footer'));
         }
 
         add_submenu_page($menuSlug,
@@ -1125,6 +1132,10 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                          $settingsSlug,
                          array(&$this, 'settingsPage'));
 
+    }
+
+    function ctc_admin_footer(){
+        echo 'Please rate <strong>Contactic</strong> <a href="https://wordpress.org/support/plugin/contactic/reviews/?filter=5#new-post" target="_blank" rel="noopener noreferrer">★★★★★</a> on <a href="https://wordpress.org/support/plugin/contactic/reviews/?filter=5#new-post" target="_blank">WordPress.org</a> to help us spread the word. Thank you from the Contactic team!';
     }
 
     /**
@@ -1627,62 +1638,85 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
     // save the page uri and title in session
     public function ctc_get_the_page() {
-        $sep = esc_html(convert_chars(wptexturize(apply_filters( 'document_title_separator', '-'))));
-        if(in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))){ 
-            if ($wpseo_titles = get_option('wpseo_titles')){
-                if (isset($wpseo_titles['separator']) && !empty($wpseo_titles['separator'])){
-                    switch ($wpseo_titles['separator']) {
-                        case 'sc-dash':
-                            $sep = esc_html(convert_chars(wptexturize(html_entity_decode('-'))));
-                            break;
-                        case 'sc-ndash':
-                            $sep = '&ndash;';
-                            break;
-                        case 'sc-mdash':
-                            $sep = '&mdash;';
-                            break;
-                        case 'sc-colon':
-                            $sep = esc_html(convert_chars(wptexturize(html_entity_decode(':'))));
-                            break;
-                        case 'sc-middot':
-                            $sep = '&middot;';
-                            break;
-                        case 'sc-bull':
-                            $sep = '&bull;';
-                            break;
-                        case 'sc-star':
-                            $sep = esc_html(convert_chars(wptexturize(html_entity_decode('*'))));
-                            break;
-                        case 'sc-smstar':
-                            $sep = '&#8902;';
-                            break;
-                        case 'sc-pipe':
-                            $sep = '|';
-                            break;
-                        case 'sc-tilde':
-                            $sep = '~';
-                            break;
-                        case 'sc-laquo':
-                            $sep = '&laquo;';
-                            break;
-                        case 'sc-raquo':
-                            $sep = '&raquo;';
-                            break;
-                        case 'sc-lt':
-                            $sep = '&lt;';
-                            break;
-                        case 'sc-gt':
-                            $sep = '&gt;';
-                            break;
-                        default:
-                            break;
+        $pluginUrl = plugins_url('/', __FILE__);
+        wp_enqueue_script( 'get-the-page', $pluginUrl.'assets/js/get-the-page.js', array('jquery'), '1.0', true );
+        wp_localize_script('get-the-page', 'ajaxurl', admin_url('admin-ajax.php') );
+    }
+
+    // save the page uri and title + referer in session (ajax mode because of page chaching)
+    public function ctc_get_the_page_ajax() {
+        // referer
+        if ( !isset( $_SESSION["original_referer"] ) ){
+            if (isset($_POST["ctc_referer"])){
+                $referer = parse_url(sanitize_text_field($_POST["ctc_referer"]));
+                $_SESSION["original_referer"] = $referer['host'];
+            }
+        }
+
+        // page uri & title
+        if (isset($_POST['ctc_title'])){
+            $sep = esc_html(convert_chars(wptexturize(apply_filters( 'document_title_separator', '-'))));
+            if(in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))){ 
+                if ($wpseo_titles = get_option('wpseo_titles')){
+                    if (isset($wpseo_titles['separator']) && !empty($wpseo_titles['separator'])){
+                        switch ($wpseo_titles['separator']) {
+                            case 'sc-dash':
+                                $sep = '-';
+                                break;
+                            case 'sc-ndash':
+                                $sep = '&ndash;';
+                                break;
+                            case 'sc-mdash':
+                                $sep = '&mdash;';
+                                break;
+                            case 'sc-colon':
+                                $sep = ':';
+                                break;
+                            case 'sc-middot':
+                                $sep = '&middot;';
+                                break;
+                            case 'sc-bull':
+                                $sep = '&bull;';
+                                break;
+                            case 'sc-star':
+                                $sep = '*';
+                                break;
+                            case 'sc-smstar':
+                                $sep = '&#8902;';
+                                break;
+                            case 'sc-pipe':
+                                $sep = '|';
+                                break;
+                            case 'sc-tilde':
+                                $sep = '~';
+                                break;
+                            case 'sc-laquo':
+                                $sep = '&laquo;';
+                                break;
+                            case 'sc-raquo':
+                                $sep = '&raquo;';
+                                break;
+                            case 'sc-lt':
+                                $sep = '&lt;';
+                                break;
+                            case 'sc-gt':
+                                $sep = '&gt;';
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
+            $sep = html_entity_decode($sep);
+            $title = explode(" $sep ", html_entity_decode(sanitize_text_field($_POST['ctc_title'])));
+            $_SESSION['_ctc_last_page_title'] = trim($title[0]);
         }
-        $title = explode(" $sep ", esc_html(convert_chars(wptexturize(wp_get_document_title()))));
-        $_SESSION['_ctc_last_page_title'] = trim($title[0]);
-        $_SESSION['_ctc_last_page_uri'] = $_SERVER['REQUEST_URI'];
+        if (isset($_POST['ctc_uri'])){
+            $_SESSION['_ctc_last_page_uri'] = sanitize_text_field($_POST['ctc_uri']);
+        }
+        
+        die();
     }
 
     // Let's check notice on our server & save it if exists
@@ -1918,6 +1952,15 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         $options['draw'] = intval($_REQUEST['draw']);
         $options['totalRows'] = $dbRowCount;
         $options['datatables_serverside'] = true;
+
+        if (isset($_REQUEST['minDateFilter']) && !empty($_REQUEST['minDateFilter']) && isset($_REQUEST['maxDateFilter']) && !empty($_REQUEST['maxDateFilter'])){
+            $options['filter'] = 'submit_time>='.sanitize_text_field($_REQUEST['minDateFilter'])
+                                .'&&submit_time<='.sanitize_text_field($_REQUEST['maxDateFilter']);
+        }elseif (isset($_REQUEST['minDateFilter']) && !empty($_REQUEST['minDateFilter'])){
+            $options['filter'] = 'submit_time>='.sanitize_text_field($_REQUEST['minDateFilter']);
+        }elseif (isset($_REQUEST['maxDateFilter']) && !empty($_REQUEST['maxDateFilter'])){
+            $options['filter'] = 'submit_time<='.sanitize_text_field($_REQUEST['maxDateFilter']);
+        }
         if (!empty($_REQUEST['search']['value'])){ 
             $options['search'] = sanitize_text_field($_REQUEST['search']['value']);
             $dbRowCountFiltered = $exporter->exportCount(stripslashes($currSelection), $options);

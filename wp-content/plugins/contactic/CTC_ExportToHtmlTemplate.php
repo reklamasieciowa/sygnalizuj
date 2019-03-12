@@ -90,9 +90,16 @@ class CTC_ExportToHtmlTemplate extends CTC_ExportBase implements CTC_Export {
                     $colNamesToSub[] = $aSubVar;
                     $varNamesToSub[] = '${' . $aSubVar . '}';
                 }
-                else if ($aSubVar == 'submit_time') {
+                elseif ($aSubVar == 'submit_time') {
                     $colNamesToSub[] = 'submit_time';
                     $varNamesToSub[] = '${submit_time}';
+                }
+                elseif ($aSubVar == '_ctc_referer') {
+                    $colNamesToSub[] = '_ctc_referer';
+                    $varNamesToSub[] = '${_ctc_referer}';
+                }elseif ($aSubVar == '_ctc_last_page_title') {
+                    $colNamesToSub[] = '_ctc_last_page_title';
+                    $varNamesToSub[] = '${_ctc_last_page_title}';
                 }
             }
         }
@@ -193,9 +200,46 @@ class CTC_ExportToHtmlTemplate extends CTC_ExportBase implements CTC_Export {
                         }
                     } else {
                         if (isset($this->dataIterator->row[$aCol])) {
-                            $replacements[] = htmlentities($this->dataIterator->row[$aCol], null, 'UTF-8');
+                            if ($aCol == '_ctc_last_page_title'){
+                                $page_title = 'Unkown';
+                                if (isset($this->dataIterator->row['_ctc_last_page_title']) && isset($this->dataIterator->row['_ctc_last_page_uri'])){
+                                    $title = $this->dataIterator->row['_ctc_last_page_title'];
+                                    $anchor = strlen($title) > 30 ? esc_attr(trim(substr($title, 0, 30)).'&hellip;') : esc_attr($title);
+                                    $page_title = "<a href='".$this->dataIterator->row['_ctc_last_page_uri']."' title=\"".esc_attr($title)."\" target='ctc_page'>".$anchor."</a>";
+                                }elseif (isset($this->dataIterator->row['_ctc_last_page_ID']) && ($this->dataIterator->row['_ctc_last_page_ID'] > 0)){
+                                    $title = get_the_title($this->dataIterator->row['_ctc_last_page_ID']);
+                                    $anchor = strlen($title) > 30 ? esc_attr(trim(substr($title, 0, 30)).'&hellip;') : esc_attr($title);
+                                    $page_title = "<a href='".get_permalink($this->dataIterator->row['_ctc_last_page_ID'])."' title=\"".esc_attr($title)."\" target='ctc_page'>".$anchor."</a>";
+                                }elseif (preg_match('/^Page ID (\d+) - .*$/', $this->dataIterator->row['FormName'], $matches)){
+                                    $post_id = $matches[1];
+                                    $page_title = "<a href='".get_permalink($post_id)."' target='ctc_page'>".get_the_title($post_id)."</a>";
+                                }
+
+                                if ($page_title == 'Unkown'){
+                                    global $session_handler_error;
+                                    if ($session_handler_error){
+                                        $page_title = '<span data-toggle="tooltip" data-placement="top" title="&#9888; It looks like your php server configuration for sessions is incorrect so this cannot be supported by Contactic plugin. Please check it out to unlock our greatest features !">Unkown &#9888;</span>';
+                                    }
+                                }
+                                $replacements[] = $page_title;
+                            }elseif ($aCol == '_ctc_referer'){
+                                $replacements[] = (empty($this->dataIterator->row[$aCol])) ? htmlentities('Direct', null, 'UTF-8') : htmlentities($this->dataIterator->row[$aCol], null, 'UTF-8');
+                            }else{
+                                $replacements[] = htmlentities($this->dataIterator->row[$aCol], null, 'UTF-8');
+                            }
                         } else {
-                            $replacements[] = '';
+                            if ($aCol == '_ctc_last_page_title'){
+                                $page_title = 'Unkown';
+                                global $session_handler_error;
+                                if ($session_handler_error){
+                                    $page_title = '<span data-toggle="tooltip" data-placement="top" title="&#9888; It looks like your php server configuration for sessions is incorrect so this cannot be supported by Contactic plugin. Please check it out to unlock our greatest features !">Unkown &#9888;</span>';
+                                }
+                                $replacements[] = $page_title;
+                            }elseif ($aCol == '_ctc_referer'){
+                                $replacements[] = 'Unkown';
+                            }else{
+                                $replacements[] = '';
+                            }
                         }
                     }
                 }

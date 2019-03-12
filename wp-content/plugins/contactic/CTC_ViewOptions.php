@@ -87,7 +87,7 @@ class CTC_ViewOptions extends CTC_View {
                     <h3><?php _e('Capture form submissions from these plugins', 'contact-form-7-to-database-extension') ?></h3>
                     <?php
                     $filter = function ($name) {
-                        return strpos($name, 'IntegrateWith') === 0 || $name == 'GenerateSubmitTimeInCF7Email';
+                        return strpos($name, 'IntegrateWith') === 0 || $name == 'GenerateSubmitTimeInCF7Email' || $name == 'GenerateSourceInCF7Email';
                     };
                     $this->outputSettings($filter, $plugin);
                     ?>

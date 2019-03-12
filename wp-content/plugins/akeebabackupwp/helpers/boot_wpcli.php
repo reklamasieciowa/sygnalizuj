@@ -1,14 +1,16 @@
 <?php
 /**
- * @package        akeebabackupwp
- * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 // Bootstrap file for Akeeba Solo for WordPress
 
 defined('AKEEBASOLO') or define('AKEEBASOLO', 1);
 
+global $akeebaBackupWordPressLoadPlatform;
+$akeebaBackupWordPressLoadPlatform = true;
 $container = require 'integration.php';
 
 // Set up autoloader for our WP-CLI commands

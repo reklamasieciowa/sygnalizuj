@@ -1,12 +1,8 @@
 <?php
 /**
- * Akeeba Engine
- * The modular PHP5 site backup engine
- *
- * @copyright Copyright (c)2014-2017 Nicholas K. Dionysopoulos
- * @license   GNU GPL version 3 or, at your option, any later version
- * @package   akeebabackupwp
- *
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Akeeba\Engine\Platform;
@@ -292,6 +288,18 @@ class Wordpress extends Base
 	{
 		$overrideURL = Factory::getConfiguration()->get('akeeba.platform.site_url', '');
 		$overrideURL = trim($overrideURL);
+
+		if (defined('WPINC') && (function_exists('home_url') || function_exists('network_home_url')))
+		{
+			if (function_exists('is_multisite') && function_exists('network_home_url') && is_multisite())
+			{
+				$overrideURL = network_home_url('/', 'https');
+			}
+			elseif (function_exists('home_url'))
+			{
+				$overrideURL = home_url('/', 'https');
+			}
+		}
 
 		if (!empty($overrideURL))
 		{

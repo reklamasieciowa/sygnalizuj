@@ -84,6 +84,24 @@ class CTC_ExportEntry extends CTC_ExportToHtmlTemplate implements CTC_Export {
                     // CTCExportToHtmlTemplate, so don't sanitize here
                     $aCol);
         }
+
+        $template .= sprintf('<tr><td><div>%s</div></td><td title="%s"><div id="%s,%s">${%s}</div></td></tr>',
+                    esc_html('Source'),
+                    esc_attr('Source'),
+                    esc_attr($this->submitTime),
+                    esc_attr('Source'),
+                    // last $aCol is a template ${variable} string that gets replaced by the post-processing in
+                    // CTCExportToHtmlTemplate, so don't sanitize here
+                    '_ctc_referer');
+        $template .= sprintf('<tr><td><div>%s</div></td><td title="%s"><div id="%s,%s">${%s}</div></td></tr>',
+                    esc_html('Page'),
+                    esc_attr('Page'),
+                    esc_attr($this->submitTime),
+                    esc_attr('Page'),
+                    // last $aCol is a template ${variable} string that gets replaced by the post-processing in
+                    // CTCExportToHtmlTemplate, so don't sanitize here
+                    '_ctc_last_page_title');
+
         $template .= '</tbody></table>';
         //$template .= "{{AFTER}}$javascript{{/AFTER}}";
         return $template;

@@ -1,7 +1,7 @@
-/**
- * @package     Solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license     GNU GPL version 3 or later
+/*
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 var AKEEBA_ANALYZE_SUCCESS = 1;
@@ -90,6 +90,7 @@ akeeba.Alice.onAnalyze = function (e)
     }
 
 	akeeba.Alice.raw_output.style.display = 'none';
+	document.getElementById('stepper-complete').style.display = 'none';
 
 	var stepper = new AkeebaStepper({
         'akeebaUrl': akeeba.Alice.akeebaUrl,

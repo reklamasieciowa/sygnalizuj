@@ -32,9 +32,6 @@ class CTC_ExportToOverview extends CTC_ExportBase implements CTC_Export {
      */
     static $wroteDefaultHtmlTableStyle = false;
 
-
-
-
     /**
      * Echo a table of submitted form data
      * @param string $formName
@@ -119,6 +116,13 @@ class CTC_ExportToOverview extends CTC_ExportBase implements CTC_Export {
                     $page_title = "<a href='".get_permalink($post_id)."' target='ctc_page'>".get_the_title($post_id)."</a>";
                 }
 
+                if ($page_title == 'Unkown'){
+                    global $session_handler_error;
+                    if ($session_handler_error){
+                        $page_title = '<span data-toggle="tooltip" data-placement="top" title="&#9888; It looks like your php server configuration for sessions is incorrect so this cannot be supported by Contactic plugin. Please check it out to unlock our greatest features !">Unkown &#9888;</span>';
+                    }
+                }
+
                 if (!isset($this->dataIterator->row['_ctc_referer'])){
                     $this->dataIterator->row['_ctc_referer'] = 'Unkown';
                 }
@@ -139,9 +143,16 @@ class CTC_ExportToOverview extends CTC_ExportBase implements CTC_Export {
                     </td>
                     <td class="sorting d-none d-md-table-cell">
                         <?php 
-                            $emails = explode(' ', $this->dataIterator->row['merge']);
-                            $emails = array_unique($emails);
-                            echo implode(' ', $emails);
+                            $emails = array();
+                            foreach (explode(' ', $this->dataIterator->row['merge']) as $email) {
+                                $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+                                if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+                                    $emails[] = $email;
+                                }
+                            }
+                            $dedup_emails = array_unique($emails);
+                            
+                            echo implode(', ', $dedup_emails);
                         ?>
                     </td>
                     <td class="sorting d-none d-lg-table-cell" style="text-align:center;">

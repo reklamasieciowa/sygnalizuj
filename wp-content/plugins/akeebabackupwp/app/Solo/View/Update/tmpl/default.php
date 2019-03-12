@@ -1,11 +1,13 @@
 <?php
 /**
- * @package		solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license		GNU GPL version 3 or later
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 use Awf\Text\Text;
+
+defined('_AKEEBA') or die();
 
 /** @var   \Solo\View\Update\Html  $this */
 
@@ -19,7 +21,7 @@ $requirePlatformName = $this->container->segment->get('platformNameForUpdates', 
 
 <?php if (!empty($releaseNotes)): ?>
 <div class="modal fade" id="releaseNotesPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
-    <div class="akeeba-renderer-fef">
+    <div class="akeeba-renderer-fef <?php echo $this->getContainer()->appConfig->get('darkmode', 0) ? 'akeeba-renderer-fef--dark' : '' ?>">
         <h4 class="modal-title" id="myModalLabel">
 			<?php echo Text::_('SOLO_UPDATE_RELEASENOTES'); ?>
         </h4>

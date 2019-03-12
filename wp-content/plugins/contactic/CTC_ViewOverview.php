@@ -95,6 +95,12 @@ class CTC_ViewOverview extends CTC_View {
         wp_enqueue_style('datatables_css');
         wp_enqueue_script('datatables_js');
 
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+
+        // You need styling for the datepicker. For simplicity I've linked to Google's hosted jQuery UI CSS.
+        wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css' );
+        //wp_register_style('jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css' );
+        wp_enqueue_style( 'jquery-ui' );
     }
 
     public function enqueueSettingsPageScripts() {
@@ -248,6 +254,20 @@ class CTC_ViewOverview extends CTC_View {
 
             <!-- /.GRAPHS -->
 
+            <?php /*
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h4 class="card-title">Get more stats and tracking on your leads</h4>
+                    </div>
+                    <div>
+                        <p><a href="admin.php?page=ContacticPluginSettings#contactic">Connect your metrics to contactic.io, start here.</a></p>
+                        <p>We do not collect the e-mails or messages, only the metrics to help you in your campaigns and give you more analytics on your leads.</p>
+                    </div>
+                </div>
+            </div>
+            */ ?>
+
             <!-- TABLEAU -->
 
             <div class="row tableau">
@@ -264,8 +284,8 @@ class CTC_ViewOverview extends CTC_View {
 
                             <div id="contactic1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                                <div class="row d-none d-md-block">
-                                    <div class="col">
+                                <div class="row">
+                                    <div class="col-6">
                                         <h6 class="card-subtitle">Export all data to the format you want</h6>
                                         <div class="dt-buttons d-none d-md-block">
                                             <a target="export" href="<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=cfdb-export&form=*&enc=CSVUTF8" class="dt-button buttons-csv buttons-html5 btn btn-primary mr-1" tabindex="0" aria-controls="contactic1"><span>CSV</span></a>
@@ -274,6 +294,12 @@ class CTC_ViewOverview extends CTC_View {
                                             <a target="export" href="<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=cfdb-export&form=*&enc=HTML" class="dt-button buttons-csv buttons-html5 btn btn-primary mr-1" tabindex="0" aria-controls="contactic1"><span>HTML</span></a>
                                             <a target="export" href="<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=cfdb-export&form=*&enc=JSON" class="dt-button buttons-csv buttons-html5 btn btn-primary mr-1" tabindex="0" aria-controls="contactic1"><span>JSON</span></a>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <p id="date_filter" style="text-align: right">
+                                            <label id="date-label-from" class="date-label">From: <input class="date_range_filter date" type="text" id="datepicker_from" /></label>
+                                            <label id="date-label-to" class="date-label">To: <input class="date_range_filter date" type="text" id="datepicker_to" /></label>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -327,6 +353,7 @@ class CTC_ViewOverview extends CTC_View {
 
         <script type="text/javascript">
             jQuery(document).ready(function($) {
+                $('#modal-contact').parent().on('show.bs.modal', function(e){ $(e.relatedTarget.attributes['data-target'].value).appendTo('body'); });
                 $(document).on("click", ".opensubmitdetailsmodal", function () {
                     $.ajax({
                         url: ajaxurl,
@@ -439,7 +466,7 @@ class CTC_ViewOverview extends CTC_View {
                     });
                 });
 
-                $('#contactic1').DataTable({
+                oTable = $('#contactic1').DataTable({
                     "order": [[ 0, "desc" ]],
                     "columns": [
                         { "data": "Date" },
@@ -451,6 +478,64 @@ class CTC_ViewOverview extends CTC_View {
                         { "data": "Details", orderable: false }
                     ]
                 });
+
+
+
+                $("#datepicker_from").datepicker({
+                    "onSelect": function(date) {
+                        minDateFilter = new Date(date).getTime();
+                        oTable.draw();
+                    }
+                }).keyup(function() {
+                    minDateFilter = new Date(this.value).getTime();
+                    oTable.draw();
+                });
+
+                $("#datepicker_to").datepicker({
+                    "onSelect": function(date) {
+                        maxDateFilter = new Date(date).getTime();
+                        oTable.draw();
+                    }
+                }).keyup(function() {
+                    maxDateFilter = new Date(this.value).getTime();
+                    oTable.draw();
+                });
+
+                // Date range filter
+                minDateFilter = "";
+                maxDateFilter = "";
+
+
+                $.fn.dataTableExt.afnFiltering.push(
+                    function(oSettings, aData, iDataIndex) {
+                        if (typeof aData._date == 'undefined') {
+                            aData._date = new Date(aData[0]).getTime();
+                        }
+
+                        if (minDateFilter && !isNaN(minDateFilter)) {
+                            if (aData._date <= minDateFilter) {
+                                return false;
+                            }
+                        }
+
+                        if (maxDateFilter && !isNaN(maxDateFilter)) {
+                            if (aData._date >= maxDateFilter) {
+                                return false;
+                            }
+                        }
+
+                        return true;
+                    }
+                );
+
+                <?php 
+                    global $session_handler_error;
+                    if ($session_handler_error){
+                        ?>
+                        $('[data-toggle="tooltip"]').tooltip();
+                        <?php
+                    }
+                ?>
             });
         </script>
 

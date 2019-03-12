@@ -2,7 +2,7 @@
 /*
    Plugin Name: Contactic
    Plugin URI: https://contactic.io/
-   Version: 1.0.5
+   Version: 1.2.2
    Author: Contactic
    Description: Save form submissions to the database from <a href="https://wordpress.org/extend/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/extend/plugins/si-contact-form/">Fast Secure Contact Form</a>, <a href="https://wordpress.org/extend/plugins/jetpack/">JetPack Contact Form</a> and <a href="https://www.gravityforms.com">Gravity Forms</a>. Includes exports and short codes. | <a href="admin.php?page=ContacticPluginSubmissions">Data</a> | <a href="admin.php?page=ContacticPluginShortCodeBuilder">Shortcodes</a> | <a href="admin.php?page=ContacticPluginSettings">Settings</a> | <a href="https://contactic.io/docs/">Docs</a>
    Text Domain: contact-form-7-to-database-plus

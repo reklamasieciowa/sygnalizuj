@@ -1,13 +1,13 @@
 <?php
 /**
- * @package     Solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license     GNU GPL version 3 or later
- *
- * @var \Solo\View\Setup\Html $this
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 use Awf\Text\Text;
+
+defined('_AKEEBA') or die();
 
 /** @var \Solo\View\Wizard\Html $this */
 

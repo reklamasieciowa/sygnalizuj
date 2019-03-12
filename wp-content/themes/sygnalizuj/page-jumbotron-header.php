@@ -12,7 +12,7 @@ get_header();
 <!-- Full Page Intro -->
   <div class="view home-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/architecture.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <!-- Mask & flexbox options-->
-    <div class="mask rgba-gradient-blue-syg d-flex justify-content-center align-items-center">
+    <div class="mask rgba-gradient-blue-syg2 d-flex justify-content-center align-items-center">
       <!-- Content -->
       <div class="container">
         <!--Grid row-->

@@ -1,8 +1,8 @@
 <?php
 /**
- * @package        solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Solo;
@@ -104,6 +104,8 @@ class PostUpgradeScript
 		'Solo/engine/Postproc/Connector/OneDriveBusiness.php',
 
 		// Removed platforms
+		'Solo/Pythia/Oracle/Drupal7.php',
+		'Solo/Pythia/Oracle/Drupal8.php',
 		'Solo/Pythia/Oracle/Grav.php',
 		'Solo/Pythia/Oracle/Magento.php',
 		'Solo/Pythia/Oracle/Magento2.php',
@@ -111,6 +113,21 @@ class PostUpgradeScript
 		'Solo/Pythia/Oracle/Octobercms.php',
 		'Solo/Pythia/Oracle/Pagekit.php',
 		'Solo/Pythia/Oracle/Phpbb.php',
+		'Solo/Platform/Solo/Filter/Drupal7TableData.php',
+		'Solo/Platform/Solo/Filter/Drupal8TableData.php',
+		'Solo/Platform/Solo/Filter/GravSkipDirs.php',
+		'Solo/Platform/Solo/Filter/GravSkipFiles.php',
+		'Solo/Platform/Solo/Filter/MagentoSkipDirs.php',
+		'Solo/Platform/Solo/Filter/MagentoSkipFiles.php',
+		'Solo/Platform/Solo/Filter/OctobercmsSkipDirs.php',
+		'Solo/Platform/Solo/Filter/OctobercmsSkipFiles.php',
+		'Solo/Platform/Solo/Filter/OctobercmsTableData.php',
+		'Solo/Platform/Solo/Filter/PagekitSkipDirs.php',
+		'Solo/Platform/Solo/Filter/PagekitSkipFiles.php',
+		'Solo/Platform/Solo/Filter/PagekitTableData.php',
+		'Solo/Platform/Solo/Filter/PrestashopSkipDirs.php',
+		'Solo/Platform/Solo/Filter/PrestashopSkipFiles.php',
+		'Solo/Platform/Solo/Filter/PrestashopTableData.php',
 	);
 
 	/**

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
+ */
 
 use Akeeba\Engine\Platform;
 use Awf\Database\Installer;
@@ -6,7 +11,7 @@ use Awf\Mvc\Model;
 
 /**
  * @package		akeebabackupwp
- * @copyright	2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @copyright	2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
  * @license		GNU GPL version 3 or later
  */
 
@@ -219,6 +224,13 @@ class AkeebaBackupWP
 
 		$relPath = __DIR__ . '/../';
 
+		self::loadAppConfig();
+
+		if (isset(self::$appConfig['darkmode']) && (self::$appConfig['darkmode'] == 1))
+		{
+			$theEntireUniverseOfStyles[] = 'dark';
+		}
+
 		foreach ($theEntireUniverseOfStyles as $style)
 		{
 			$scriptPath = 'app/media/css/' . $style . '.min.css';
@@ -266,7 +278,7 @@ class AkeebaBackupWP
 			deactivate_plugins(self::$fileName);
 		}
 
-		$container = AkeebaBackupWPUpdater::loadAkeebaBackup();
+		$container = self::loadAkeebaBackup();
 
 		if ($container)
 		{
@@ -317,7 +329,7 @@ class AkeebaBackupWP
 	 */
 	public static function uninstall()
 	{
-		$container = AkeebaBackupWPUpdater::loadAkeebaBackup();
+		$container = self::loadAkeebaBackup();
 
 		if ($container)
 		{
@@ -599,4 +611,69 @@ class AkeebaBackupWP
 
 		self::$appConfig = $config;
 	}
+
+	/**
+	 * Includes all the required pieces to load Akeeba Backup from within a standard WordPress page
+	 *
+	 * @return \Solo\Container|false
+	 */
+	public static function loadAkeebaBackup()
+	{
+		static $localContainer;
+
+		// Do not run the whole logic if we already have a valid Container
+		if ($localContainer)
+		{
+			return $localContainer;
+		}
+
+		if (!defined('AKEEBASOLO'))
+		{
+			define('AKEEBASOLO', 1);
+		}
+
+		@include_once __DIR__.'/../app/version.php';
+
+		// Include the autoloader
+		if (!include_once __DIR__ . '/../app/Awf/Autoloader/Autoloader.php')
+		{
+			return false;
+		}
+
+		global $akeebaBackupWordPressLoadPlatform;
+		$akeebaBackupWordPressLoadPlatform = true;
+
+		if (!file_exists(__DIR__ . '/../helpers/integration.php'))
+		{
+			return false;
+		}
+
+		/** @var \Solo\Container $container */
+		$container = require __DIR__ . '/../helpers/integration.php';
+
+		// Ok, really don't know why but this function gets called TWICE. It seems to completely ignore the first result
+		// (even if we report that there's an update) and calls it again. This means that the require_once above will be ignored.
+		// I can't simply return the current $transient because it doesn't contain the updated info.
+		// So I'll save a previous copy of the container and then use it later.
+		if (!$localContainer)
+		{
+			$localContainer = $container;
+		}
+
+		if (!$localContainer)
+		{
+			return false;
+		}
+
+		// Get all info saved inside the configuration
+		$container->appConfig->loadConfiguration();
+		$container->basePath = WP_PLUGIN_DIR.'/akeebabackupwp/app/Solo';
+
+		// Require the application for the first time by passing all values. In this way we prime the internal cache and
+		// we will be covered on cases where we fetch the application from the getInstance method instead of using the container
+		\Awf\Application\Application::getInstance('Solo', $container);
+
+		return $localContainer;
+	}
+
 }

@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: nicholas
- * Date: 28/12/2017
- * Time: 3:40 μμ
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Solo\Helper;

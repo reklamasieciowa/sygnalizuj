@@ -1,8 +1,8 @@
 <?php
 /**
- * @package		akeebabackupwp
- * @copyright	2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license		GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 use Akeeba\Engine\Platform;
@@ -41,6 +41,7 @@ abstract class AkeebaBackupWPUpdater
 	public static function getupdates($transient)
 	{
 		global $wp_version;
+		global $akeebaBackupWordPressLoadPlatform;
 
 		// On WordPress < 4.3 we can't use the integrated update system since the hook we're using to tweak
 		// the installation is not available (upgrader_package_options).
@@ -54,6 +55,8 @@ abstract class AkeebaBackupWPUpdater
 
 		// When the plugin is deleted, WP reloads the updates. Since this file was already in memory, its code runs even
 		// if Akeeba Backup is not anymore installed. This is a sanity check to prevent error during the uninstallation
+		$akeebaBackupWordPressLoadPlatform = false;
+
 		if (!file_exists(__DIR__ . '/../helpers/integration.php'))
 		{
 			return $transient;
@@ -342,6 +345,7 @@ HTML;
 	 * @return \Solo\Container|false
 	 */
 	public static function loadAkeebaBackup()
+
 	{
 		static $localContainer;
 
@@ -363,6 +367,9 @@ HTML;
 		{
 			return false;
 		}
+
+		global $akeebaBackupWordPressLoadPlatform;
+		$akeebaBackupWordPressLoadPlatform = false;
 
 		if (!file_exists(__DIR__ . '/../helpers/integration.php'))
 		{

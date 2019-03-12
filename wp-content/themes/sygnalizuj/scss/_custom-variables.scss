@@ -22,10 +22,22 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#286c83', endColorstr='#113d4d',GradientType=1 );
 }
 
+$gradientStart:  rgba(133,188,208,.9);
+$gradientStop:  rgba(42,100,122,.7);
+
+.rgba-gradient-blue-syg2 {
+  background: -moz-linear-gradient(45deg, $gradientStart, $gradientStop 100%);
+  background: -webkit-linear-gradient(45deg, $gradientStart, $gradientStop 100%);
+  background: -webkit-gradient(linear, 45deg, from($gradientStart), to($gradientStop));
+  background: -o-linear-gradient(45deg, $gradientStart, $gradientStop 100%);
+  background: linear-gradient(to 45deg, $gradientStart, $gradientStop 100%);
+}
+
 $red: #db203d;
 $gray: #465665;
-$light-gray: #a5a5a5;
-$blue-syg: #418eac;
+$light-gray: #a1a4a9;
+$blue-syg: #127ea5;
+$apla: #e8edf0;
 
 .btn-danger {
   background-color: $red!important;
@@ -57,12 +69,28 @@ $blue-syg: #418eac;
   }
 }
 
+.note {
+  padding: 10px;
+  border-left: none;
+  border-top: 3px solid;
+  border-radius: 0;
+
+  &.note-info {
+    background-color: $apla;
+    border-color: $red;
+  }
+}
+
 .blue-syg-text {
   color: $blue-syg;
 }
 
 .bg-blue-syg {
   background-color: $blue-syg;
+}
+
+.bg-gray {
+  background-color: $gray;
 }
 
 .text-shadow {

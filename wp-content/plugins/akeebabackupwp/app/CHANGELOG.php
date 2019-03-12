@@ -1,4 +1,25 @@
 <?php die();?>
+Akeeba Solo 3.4.0
+================================================================================
+- Removed support for PrestaShop
++ WordPress restoration: Handling of more .htaccess use cases
+# [HIGH] Google Storage JSON API could not download files when the path or filename contained spaces
+# [HIGH] Google Storage would create large files with %2F in the filename instead of using subdirectories (the Google API documentation was, unfortunately, instructing us to do something wrong)
+# [MEDIUM] Restoring with the FTP or Hybrid file write mode didn't work properly
+# [MEDIUM] Integrated restoration with JPS archives wasn't allowed
+# [LOW] Fixed styling in ALICE page
+# [LOW] Some character combinations in configuration values (e.g. \$) could get changed or removed upon saving
+# [LOW] Google Storage would not work on hosts which disable parse_ini_string()
+
+Akeeba Solo 3.3.3.1
+================================================================================
+! The restoration of WordPress backups was broken
+
+Akeeba Solo 3.3.3
+================================================================================
++ Official support for ClassicPress 1.x (works with the WordPress option)
++ Dark Mode (optional; activate it through System Configuration)
+
 Akeeba Solo 3.3.2
 ================================================================================
 # [HIGH] Restoration of WordPress sites: database error during data replacement

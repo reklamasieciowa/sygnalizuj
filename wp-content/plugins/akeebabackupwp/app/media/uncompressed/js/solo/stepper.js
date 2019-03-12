@@ -1,7 +1,7 @@
-/**
- * @package     Solo
- * @copyright Copyright (c)2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license     GNU GPL version 3 or later
+/*
+ * @package    solo
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 var AkeebaStepper = function (options)
@@ -131,13 +131,14 @@ var AkeebaStepper = function (options)
 
 	this.renderBars = function (active_step)
 	{
+		var normal_class = 'akeeba-label--green';
+
 		if (active_step == undefined)
 		{
-			active_step = '';
+			normal_class = 'akeeba-label--grey';
 		}
-
-		var normal_class = 'label-success';
-		var this_class   = '';
+		
+		var this_class   = 'akeeba-label--teal';
 
 		var steps       = document.querySelector(that.options.steps);
 		steps.innerHTML = '';
@@ -147,15 +148,15 @@ var AkeebaStepper = function (options)
 			var element = this.domains[counter];
 
 			var step         = document.createElement('div');
-			step.className   = 'label';
+			step.className   = '';
 			step.textContent = element[1];
 			akeeba.System.data.set(step, 'domain', element[0]);
 			document.querySelector(that.options.steps).appendChild(step);
 
 			if (element[0] == active_step)
 			{
-				normal_class = '';
-				this_class   = 'label-info';
+				normal_class = 'akeeba-label--grey';
+				this_class   = 'akeeba-label--teal';
 			}
 			else
 			{

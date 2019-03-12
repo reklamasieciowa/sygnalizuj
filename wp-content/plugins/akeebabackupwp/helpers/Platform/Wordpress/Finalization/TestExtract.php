@@ -1,10 +1,8 @@
 <?php
 /**
- * @package AkeebaBackup
- * @copyright Copyright (c)2014-2017 Nicholas K. Dionysopoulos
- * @license GNU General Public License version 3, or later
- *
- * @since 1.3
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Akeeba\Engine\Finalization;

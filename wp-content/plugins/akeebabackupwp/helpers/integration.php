@@ -1,8 +1,8 @@
 <?php
 /**
- * @package		akeebabackupwp
- * @copyright	2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license		GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 // Bootstrap file for Akeeba Solo for WordPress
@@ -14,6 +14,12 @@ use Akeeba\Engine\Platform;
 defined('AKEEBASOLO') or die;
 
 global $akeebaBackupWordPressContainer;
+global $akeebaBackupWordPressLoadPlatform;
+
+if (!isset($akeebaBackupWordPressLoadPlatform))
+{
+	$akeebaBackupWordPressLoadPlatform = true;
+}
 
 if (isset($akeebaBackupWordPressContainer))
 {
@@ -41,31 +47,31 @@ if (!class_exists('Awf\\Autoloader\\Autoloader'))
 }
 
 // Add our app to the autoloader
-Awf\Autoloader\Autoloader::getInstance()->addMap('Solo\\', array(
+Awf\Autoloader\Autoloader::getInstance()->addMap('Solo\\', [
 	__DIR__ . '/Solo',
 	__DIR__ . '/../app/Solo',
-));
+]);
 
 // If we are not called from inside WordPress itself we will need to import its configuration
 if (!defined('WPINC'))
 {
 	$foundWpConfig = false;
 
-	$dirParts = explode(DIRECTORY_SEPARATOR, __DIR__);
-	$dirParts = array_splice($dirParts, 0, -4);
-	$filePath = implode(DIRECTORY_SEPARATOR, $dirParts);
+	$dirParts      = explode(DIRECTORY_SEPARATOR, __DIR__);
+	$dirParts      = array_splice($dirParts, 0, -4);
+	$filePath      = implode(DIRECTORY_SEPARATOR, $dirParts);
 	$foundWpConfig = file_exists($filePath . '/wp-config.php');
 
 	if (!$foundWpConfig)
 	{
-		$dirParts = array_splice($dirParts, 0, -1);
-		$altFilePath = implode(DIRECTORY_SEPARATOR, $dirParts);
+		$dirParts      = array_splice($dirParts, 0, -1);
+		$altFilePath   = implode(DIRECTORY_SEPARATOR, $dirParts);
 		$foundWpConfig = file_exists($altFilePath . '/wp-config.php');
 	}
 
 	if (!$foundWpConfig)
 	{
-		$dirParts = array();
+		$dirParts = [];
 
 		if (isset($_SERVER['SCRIPT_FILENAME']))
 		{
@@ -93,8 +99,8 @@ if (!defined('WPINC'))
 
 			if (!$foundWpConfig)
 			{
-				$dirParts = array_splice($dirParts, 0, -1);
-				$altFilePath = implode(DIRECTORY_SEPARATOR, $dirParts);
+				$dirParts      = array_splice($dirParts, 0, -1);
+				$altFilePath   = implode(DIRECTORY_SEPARATOR, $dirParts);
 				$foundWpConfig = file_exists($altFilePath . '/wp-config.php');
 			}
 		}
@@ -105,7 +111,7 @@ if (!defined('WPINC'))
 	if (!$oracle->isRecognised())
 	{
 		$filePath = realpath($filePath . '/..');
-		$oracle = new \Solo\Pythia\Oracle\Wordpress($filePath);
+		$oracle   = new \Solo\Pythia\Oracle\Wordpress($filePath);
 	}
 
 	if (!$oracle->isRecognised())
@@ -147,10 +153,10 @@ ENDTEXT;
 require_once __DIR__ . '/defines.php';
 
 // Add our app to the autoloader
-Awf\Autoloader\Autoloader::getInstance()->addMap('Solo\\', array(
+Awf\Autoloader\Autoloader::getInstance()->addMap('Solo\\', [
 	__DIR__ . '/Solo',
-	APATH_BASE . '/Solo'
-));
+	APATH_BASE . '/Solo',
+]);
 
 // Should I enable debug?
 if (defined('AKEEBADEBUG'))
@@ -160,97 +166,99 @@ if (defined('AKEEBADEBUG'))
 }
 
 // Include the Akeeba Engine and ALICE factories
-define('AKEEBAENGINE', 1);
-$factoryPath = $akeebaBackupWpRoot . 'Solo/engine/Factory.php';
-$alicePath = $akeebaBackupWpRoot . 'Solo/alice/factory.php';
+if ($akeebaBackupWordPressLoadPlatform)
+{
+	define('AKEEBAENGINE', 1);
+	$factoryPath = $akeebaBackupWpRoot . 'Solo/engine/Factory.php';
+	$alicePath   = $akeebaBackupWpRoot . 'Solo/alice/factory.php';
 
-// Load the engine
-if (!file_exists($factoryPath))
-{
-	echo "ERROR!\n";
-	echo "Could not load the backup engine; file does not exist. Technical information:\n";
-	echo "Path to " . basename(__FILE__) . ": " . __DIR__ . "\n";
-	echo "Path to factory file: $factoryPath\n";
-	die("\n");
-}
-else
-{
-	try
-	{
-		require_once $factoryPath;
-	}
-	catch (\Exception $e)
+	// Load the engine
+	if (!file_exists($factoryPath))
 	{
 		echo "ERROR!\n";
-		echo "Backup engine returned an error. Technical information:\n";
-		echo "Error message:\n\n";
-		echo $e->getMessage() . "\n\n";
-		echo "Path to " . basename(__FILE__) . ":" . __DIR__ . "\n";
+		echo "Could not load the backup engine; file does not exist. Technical information:\n";
+		echo "Path to " . basename(__FILE__) . ": " . __DIR__ . "\n";
 		echo "Path to factory file: $factoryPath\n";
 		die("\n");
 	}
-}
+	else
+	{
+		try
+		{
+			require_once $factoryPath;
+		}
+		catch (\Exception $e)
+		{
+			echo "ERROR!\n";
+			echo "Backup engine returned an error. Technical information:\n";
+			echo "Error message:\n\n";
+			echo $e->getMessage() . "\n\n";
+			echo "Path to " . basename(__FILE__) . ":" . __DIR__ . "\n";
+			echo "Path to factory file: $factoryPath\n";
+			die("\n");
+		}
+	}
 
-if(file_exists($alicePath))
-{
-	require_once $alicePath;
-}
+	if (file_exists($alicePath))
+	{
+		require_once $alicePath;
+	}
 
-Platform::addPlatform('Wordpress', __DIR__ . '/Platform/Wordpress');
-Platform::getInstance()->load_version_defines();
-Platform::getInstance()->apply_quirk_definitions();
+	Platform::addPlatform('Wordpress', __DIR__ . '/Platform/Wordpress');
+	Platform::getInstance()->load_version_defines();
+	Platform::getInstance()->apply_quirk_definitions();
+}
 
 try
 {
 	// Create objects
-	$container = new \Solo\Container(array(
-		'appConfig'			=> function (\Awf\Container\Container $c)
+	$akeebaBackupWordPressContainer = new \Solo\Container([
+		'appConfig'        => function (\Awf\Container\Container $c) {
+			return new \Solo\Application\AppConfig($c);
+		},
+		'userManager'      => function (\Awf\Container\Container $c) {
+			return new \Solo\Application\UserManager($c);
+		},
+		'input'            => function (\Awf\Container\Container $c) {
+			// WordPress is always escaping the input. WTF!
+			// See http://stackoverflow.com/questions/8949768/with-magic-quotes-disabled-why-does-php-wordpress-continue-to-auto-escape-my
+
+			global $_REAL_REQUEST;
+
+			if (isset($_REAL_REQUEST))
 			{
-				return new \Solo\Application\AppConfig($c);
-			},
-		'userManager'		=> function (\Awf\Container\Container $c)
+				return new \Awf\Input\Input($_REAL_REQUEST, ['magicQuotesWorkaround' => true]);
+			}
+			elseif (defined('WPINC'))
 			{
-				return new \Solo\Application\UserManager($c);
-			},
-		'input'				=> function (\Awf\Container\Container $c)
+				$fakeRequest = array_map('stripslashes_deep', $_REQUEST);
+
+				return new \Awf\Input\Input($fakeRequest, ['magicQuotesWorkaround' => true]);
+			}
+			else
 			{
-				// WordPress is always escaping the input. WTF!
-				// See http://stackoverflow.com/questions/8949768/with-magic-quotes-disabled-why-does-php-wordpress-continue-to-auto-escape-my
+				return new \Awf\Input\Input();
+			}
+		},
+		'application_name' => 'Solo',
+		'filesystemBase'   => AKEEBA_SOLOWP_PATH . '/app',
+		'updateStreamURL'  => 'http://cdn.akeebabackup.com/updates/backupwpcore.ini',
+		'changelogPath'    => AKEEBA_SOLOWP_PATH . 'CHANGELOG.php',
+	]);
 
-				global $_REAL_REQUEST;
-
-				if (isset($_REAL_REQUEST))
-				{
-					return new \Awf\Input\Input($_REAL_REQUEST, array('magicQuotesWorkaround' => true));
-				}
-				elseif (defined('WPINC'))
-				{
-					$fakeRequest   = array_map('stripslashes_deep', $_REQUEST);
-
-					return new \Awf\Input\Input($fakeRequest, array('magicQuotesWorkaround' => true));
-				}
-				else
-				{
-					return new \Awf\Input\Input();
-				}
-			},
-		'application_name'	=> 'Solo',
-		'filesystemBase' => AKEEBA_SOLOWP_PATH . '/app',
-		'updateStreamURL' => 'http://cdn.akeebabackup.com/updates/backupwpcore.ini',
-		'changelogPath'	=> AKEEBA_SOLOWP_PATH . 'CHANGELOG.php',
-	));
-
-	$downloadId = $container->appConfig->get('options.update_dlid', '');
-	$hasPro = AKEEBABACKUP_PRO ? true : !empty($downloadId);
+	$downloadId = $akeebaBackupWordPressContainer->appConfig->get('options.update_dlid', '');
+	$hasPro     = AKEEBABACKUP_PRO ? true : !empty($downloadId);
 	unset($downloadId);
 	if ($hasPro)
 	{
-		$container['updateStreamURL'] = 'http://cdn.akeebabackup.com/updates/backupwppro.ini';
+		$akeebaBackupWordPressContainer['updateStreamURL'] = 'http://cdn.akeebabackup.com/updates/backupwppro.ini';
 	}
 	unset($hasPro);
 }
 catch (Exception $exc)
 {
+	unset($akeebaBackupWordPressContainer);
+
 	$filename = null;
 
 	if (isset($application))
@@ -274,7 +282,12 @@ catch (Exception $exc)
 	include $filename;
 }
 
-$akeebaBackupWordPressContainer = $container;
-unset($container);
+if (!$akeebaBackupWordPressLoadPlatform)
+{
+	$temp_akeebaBackupWordPressContainer = $akeebaBackupWordPressContainer;
+	unset($akeebaBackupWordPressContainer);
+
+	return $temp_akeebaBackupWordPressContainer;
+}
 
 return $akeebaBackupWordPressContainer;

@@ -1,8 +1,8 @@
 <?php
 /**
- * @package        akeebabackupwp
- * @copyright      2014-2018 Nicholas K. Dionysopoulos / Akeeba Ltd
- * @license        GNU GPL version 3 or later
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 use Awf\Uri\Uri;
@@ -13,11 +13,26 @@ if (typeof Solo === 'undefined') { var Solo = {}; }
 if (typeof akeeba.loadScripts === 'undefined') { akeeba.loadScripts = []; }
 </script>
 <?php
+// This page can be included by Awf\Document\Html or directly from the boot_webapp script in case of error.
+// In that case, we do not have a reference to $this, so we have to work around that
+if (isset($this))
+{
+	$scripts = $this->getScripts();
+	$scriptDeclarations = $this->getScriptDeclarations();
+	$styles = $this->getStyles();
+	$styleDeclarations = $this->getStyleDeclarations();
+	$darkMode = $this->getContainer()->appConfig->get('darkmode', 0);
+}
+else
+{
+    /** @var \Awf\Container\Container $container */
+	$scripts = $container->application->getDocument()->getScripts();
+	$scriptDeclarations = $container->application->getDocument()->getScriptDeclarations();
+	$styles = $container->application->getDocument()->getStyles();
+	$styleDeclarations = $container->application->getDocument()->getStyleDeclarations();
+	$darkMode = $container->appConfig->get('darkmode', 0);
+}
 
-$scripts = $this->getScripts();
-$scriptDeclarations = $this->getScriptDeclarations();
-$styles = $this->getStyles();
-$styleDeclarations = $this->getStyleDeclarations();
 
 AkeebaBackupWP::enqueueScript(Uri::base() . 'media/js/akjqnamespace.min.js');
 
@@ -84,6 +99,11 @@ if (!empty($styles))
 }
 
 AkeebaBackupWP::enqueueStyle(Uri::base() . 'media/css/fef-wp.min.css');
+
+if ($darkMode)
+{
+	AkeebaBackupWP::enqueueStyle(Uri::base() . 'media/css/dark.min.css');
+}
 
 if (defined('AKEEBADEBUG') && AKEEBADEBUG && @file_exists(dirname(AkeebaBackupWP::$absoluteFileName) . '/app/media/css/theme.css'))
 {

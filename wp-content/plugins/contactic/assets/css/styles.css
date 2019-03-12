@@ -285,3 +285,7 @@ table.dataTable tr.selected td.select-checkbox:after, table.dataTable tr.selecte
 .cfdb_options_div {
 	margin-top: 20px;
 }
+
+.ui-state-highlight {
+    height: auto;
+}

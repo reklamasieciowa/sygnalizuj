@@ -36,6 +36,13 @@ class CTC_ViewWhatsInDB extends CTC_View {
         wp_enqueue_style('contactic_fonts');
         wp_enqueue_style('datatables_css');
         wp_enqueue_script('datatables_js');
+
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+
+        // You need styling for the datepicker. For simplicity I've linked to Google's hosted jQuery UI CSS.
+        wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css' );
+        //wp_register_style('jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css' );
+        wp_enqueue_style( 'jquery-ui' );
     }
 
 
@@ -378,6 +385,13 @@ class CTC_ViewWhatsInDB extends CTC_View {
 
                                 ?>
 
+                                <div class="col-12">
+                                    <p id="date_filter" style="text-align: right">
+                                        <label id="date-label-from" class="date-label">From: <input class="date_range_filter date" type="text" id="datepicker_from" /></label>
+                                        <label id="date-label-to" class="date-label">To: <input class="date_range_filter date" type="text" id="datepicker_to" /></label>
+                                    </p>
+                                </div>
+
                                 <script type="text/javascript" language="Javascript">
 
                                     (function ($) {
@@ -404,11 +418,20 @@ class CTC_ViewWhatsInDB extends CTC_View {
 
                                         $(document).ready(function() {
                                             var url = "admin.php?page=<?php echo $plugin->getDBPageSlug() ?>&form_name=<?php echo urlencode($currSelection) ?>&submit_time=";
+
+                                            // Date range filter
+                                            var minDateFilter = "";
+                                            var maxDateFilter = "";
+
                                             oTable = $('#<?php echo $tableHtmlId ?>').dataTable( {
                                                 serverSide: true,
                                                 ajax: {
                                                     url: "<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=load_contacts&form_name=<?php echo urlencode($currSelection); ?>",
                                                     type: "POST",
+                                                    data: function ( d ) {
+                                                        d.minDateFilter = minDateFilter;
+                                                        d.maxDateFilter = maxDateFilter;
+                                                    }
                                                 },
                                                 scrollX: true,
                                                 scrollY: '50vh',
@@ -513,6 +536,7 @@ class CTC_ViewWhatsInDB extends CTC_View {
                                                 },
                                                 order: [[ 1, 'desc' ]]
                                             });
+
                                             $('#selectall').click( function () {
                                                 if (this.checked) {
                                                     oTable.api().rows().select();
@@ -520,6 +544,31 @@ class CTC_ViewWhatsInDB extends CTC_View {
                                                     oTable.api().rows().deselect();
                                                 }
                                             });
+
+                                            $("#datepicker_from").datepicker({
+                                                "onSelect": function(date) {
+                                                    minDateFilter = new Date(date).getTime() / 1000;
+                                                    if (isNaN(minDateFilter)) minDateFilter = '';
+                                                    oTable.fnDraw();
+                                                }
+                                            }).keyup(function() {
+                                                minDateFilter = new Date(this.value).getTime() / 1000;
+                                                if (isNaN(minDateFilter)) minDateFilter = '';
+                                                oTable.fnDraw();
+                                            });
+
+                                            $("#datepicker_to").datepicker({
+                                                "onSelect": function(date) {
+                                                    maxDateFilter = new Date(date).getTime() / 1000;
+                                                    if (isNaN(maxDateFilter)) maxDateFilter = '';
+                                                    oTable.fnDraw();
+                                                }
+                                            }).keyup(function() {
+                                                maxDateFilter = new Date(this.value).getTime() / 1000;
+                                                if (isNaN(maxDateFilter)) maxDateFilter = '';
+                                                oTable.fnDraw();
+                                            });
+
                                         });
                                     })(jQuery);
                                 </script>
@@ -635,6 +684,7 @@ class CTC_ViewWhatsInDB extends CTC_View {
 
                     // open modal from js side
                     jQuery('#modal-contact').modal('show');
+                    jQuery('#modal-contact').appendTo('body');
                     $.ajax({
                         url: ajaxurl,
                         data: {

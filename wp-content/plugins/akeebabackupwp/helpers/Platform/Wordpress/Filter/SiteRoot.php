@@ -1,12 +1,8 @@
 <?php
 /**
- * Akeeba Engine
- * The modular PHP5 site backup engine
- *
- * @copyright Copyright (c)2014-2017 Nicholas K. Dionysopoulos
- * @license   GNU GPL version 3 or, at your option, any later version
- * @package   akeebabackupwp
- *
+ * @package    akeebabackupwp
+ * @copyright  Copyright (c)2014-2019 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license    GNU GPL version 3 or later
  */
 
 namespace Akeeba\Engine\Filter;

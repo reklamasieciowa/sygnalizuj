@@ -19,6 +19,12 @@
     If not, see <http://www.gnu.org/licenses/>.
 */
 
+function session_error_handling_function($code, $msg, $file, $line) {
+    // no active session handler :(
+    global $session_handler_error;
+    $session_handler_error = true;
+}
+
 function CTC_Plugin_init($file) {
 
     require_once('ContacticPlugin.php');
@@ -42,14 +48,12 @@ function CTC_Plugin_init($file) {
     $aPlugin->addActionsAndFilters();
 
     // save referer in session
+    global $session_handler_error;
+    $session_handler_error = false;
     if (!session_id()) {
+        set_error_handler('session_error_handling_function');
         session_start();
-    }
-    if ( !isset( $_SESSION["original_referer"] ) ){
-        if (isset($_SERVER["HTTP_REFERER"])){
-            $referer = parse_url($_SERVER["HTTP_REFERER"]);
-            $_SESSION["original_referer"] = $referer['host'];
-        }
+        restore_error_handler();
     }
     
     if (!$file) {
