@@ -26,7 +26,11 @@ get_header();
       				?>
             </span>
             <p class="text-center">
-            	bread
+            	<?php
+              if ( function_exists('yoast_breadcrumb') ) {
+                yoast_breadcrumb( '<div id="breadcrumbs">','</div>' );
+              }
+              ?>
             </p>
           </div>
           <!--Grid column-->

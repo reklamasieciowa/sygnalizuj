@@ -126,6 +126,24 @@
 
 }
 
+#breadcrumbs {
+  width: 100%;
+  display: block;
+  text-align: center;
+
+  span {
+    display: inline;
+
+    .breadcrumb_last {
+      text-decoration: underline;
+    }
+  }
+
+  a {
+      color: #fff;
+      display: inline;
+    }
+}
 
 article {
   .h3-responsive {

@@ -21,12 +21,19 @@ get_header();
           <div class="col-md-12 white-text text-center text-md-left mt-6 mt-lg-3">
             <span class="font-weight-bold mt-sm-5 pt-xl-4 text-center text-shadow">
       				<?php
-      					the_archive_title( '<h1 class="h2-responsive page-title">', '</h1>' );
+      					//the_archive_title( '<h1 class="h2-responsive page-title">', '</h1>' );
+      					echo '<h1 class="h2-responsive page-title">';
+      					single_cat_title('Blog: ', true);
+      					echo '</h1>';
       					the_archive_description( '<div class="archive-description">', '</div>' );
       				?>
             </span>
             <p class="text-center">
-            	bread
+            	<?php
+				if ( function_exists('yoast_breadcrumb') ) {
+				  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+				}
+				?>
             </p>
           </div>
           <!--Grid column-->
