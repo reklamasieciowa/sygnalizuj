@@ -9,7 +9,7 @@ $plugin_dir  = get_option('akeebabackupwp_plugin_dir', 'akeebabackupwp');
 $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_dir;
 
 // Let's double check that the file is at the same version of the component
-define('AKEEBABACKUP_MUPLUGIN_COREUPDATE_VERSION', 'revF0C7E8E9');
+define('AKEEBABACKUP_MUPLUGIN_COREUPDATE_VERSION', 'rev5056A7CC');
 
 if (!defined('AKEEBABACKUP_VERSION'))
 {

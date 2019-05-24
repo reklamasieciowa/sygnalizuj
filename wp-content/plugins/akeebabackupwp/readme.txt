@@ -5,7 +5,7 @@ Tags: backup, restore, migrate, move
 Requires at least: 3.8.0
 Tested up to: 4.5
 Requires PHP: 5.4
-Stable tag: 3.4.0
+Stable tag: 3.4.2.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -179,6 +179,26 @@ link on our site to request more information for your specific needs.
 7. Want to automate your backups? Akeeba Backup will give you step by step instructions, specific to your site.
 
 == Changelog ==
+
+= 3.4.2.2 =
+* Backup over CLI does not work if you have encryption enabled under certain conditions
+
+= 3.4.2.1 =
+* Remote JSON API backups were broken
+
+= 3.4.2 =
+* Backup over CLI was broken
+* [HIGH] Cannot use JPS passwords with a double quote inside them for backups through the web interface
+* [HIGH] Path browser does not work on Windows
+
+= 3.4.1 =
+* Now using JSON instead of INI for storing settings, improving compatibility with Windows hosts
+* Allow Site Transfer Wizard to ignore free disk space requirements
+* Added BackupID in the failed backups email notifications
+* [HIGH] Upload to Azure: incompatible with HTTP/2
+* [HIGH] Regression: WP-CLI integration was broken after changes to work around broken caching scripts interfering with WordPress fetching updates
+* [LOW] Site Transfer Wizard: Could not complete transfer even with ignorable errors
+* [LOW] JavaScript error in the backup page while using a JPS archive and some special chars
 
 = 3.4.0 =
 * Do not load the Akeeba Engine when fetching update information

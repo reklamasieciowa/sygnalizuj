@@ -53,7 +53,7 @@ $model = $this->getModel();
 				<td></td>
 				<td></td>
 				<td>
-					<input type="text" name="description" value="<?php echo $model->getState('description', '');?>"
+					<input type="text" name="description" value="<?php echo $model->getState('description', '', 'string');?>"
 						   placeholder="<?php echo Text::_('COM_AKEEBA_PROFILES_COLLABEL_DESCRIPTION')?>"
 						   onchange="forms.adminForm.submit();" style="width: 100%;" />
 				</td>

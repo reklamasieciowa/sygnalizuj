@@ -39,7 +39,7 @@ class Html extends BaseHtml
 		/** @var \Solo\Model\Restore $model */
 		$model = $this->getModel();
 
-		$this->id              = $model->getState('id', 0);
+		$this->id              = $model->getState('id', 0, 'int');
 		$this->ftpparams       = $model->getFTPParams();
 		$this->extractionmodes = $model->getExtractionModes();
 

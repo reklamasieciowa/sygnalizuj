@@ -24,7 +24,7 @@ class Html extends \Solo\View\Html
 	public function onBeforeMain()
 	{
 		$model = $this->getModel();
-		$task  = $model->getState('browse_task', 'normal');
+		$task  = $model->getState('browse_task', 'normal', 'cmd');
 
 		$router = $this->container->router;
 

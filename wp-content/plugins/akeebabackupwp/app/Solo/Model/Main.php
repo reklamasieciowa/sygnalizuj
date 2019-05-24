@@ -661,7 +661,8 @@ HTML;
 			$string .= "Start time  : ".$fail['backupstart']."\n";
 			$string .= "Origin      : ".$fail['origin']."\n";
 			$string .= "Type        : ".$fail['type']."\n";
-			$string .= "Profile ID  : ".$fail['profile_id'];
+			$string .= "Profile ID  : ".$fail['profile_id']."\n";
+			$string .= "Backup ID   : ".$fail['id'];
 
 			$failedReport[] = $string;
 		}

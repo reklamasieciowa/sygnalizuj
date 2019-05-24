@@ -9,9 +9,6 @@ namespace Solo\Model\Exception;
 
 use RuntimeException;
 
-// Protect from unauthorized access
-defined('_JEXEC') or die();
-
 class TransferFatalError extends RuntimeException
 {
 

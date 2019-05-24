@@ -1,4 +1,28 @@
 <?php die(); ?>
+Akeeba Backup for WordPress 3.4.2.2
+================================================================================
+! Backup over CLI does not work if you have encryption enabled under certain conditions
+
+Akeeba Backup for WordPress 3.4.2.1
+================================================================================
+! Remote JSON API backups were broken
+
+Akeeba Backup for WordPress 3.4.2
+================================================================================
+! Backup over CLI was broken
+# [HIGH] Cannot use JPS passwords with a double quote inside them for backups through the web interface
+# [HIGH] Path browser does not work on Windows
+
+Akeeba Backup for WordPress 3.4.1
+================================================================================
+~ Now using JSON instead of INI for storing settings, improving compatibility with Windows hosts
++ Allow Site Transfer Wizard to ignore free disk space requirements
++ Added BackupID in the failed backups email notifications
+# [HIGH] Upload to Azure: incompatible with HTTP/2
+# [HIGH] Regression: WP-CLI integration was broken after changes to work around broken caching scripts interfering with WordPress fetching updates
+# [LOW] Site Transfer Wizard: Could not complete transfer even with ignorable errors
+# [LOW] JavaScript error in the backup page while using a JPS archive and some special chars
+
 Akeeba Backup for WordPress 3.4.0
 ================================================================================
 ~ Do not load the Akeeba Engine when fetching update information

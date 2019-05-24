@@ -58,7 +58,7 @@ class Html extends \Solo\View\Html
 		$model = $this->getModel();
 		$this->logs = $model->getLogList();
 
-		$tag = $model->getState('tag');
+		$tag = $model->getState('tag', '', 'string');
 
 		if (empty($tag))
 		{
@@ -113,7 +113,7 @@ JS;
 	{
 		/** @var Log $model */
 		$model = $this->getModel();
-		$tag = $model->getState('tag');
+		$tag = $model->getState('tag', '', 'string');
 
 		if (empty($tag))
 		{

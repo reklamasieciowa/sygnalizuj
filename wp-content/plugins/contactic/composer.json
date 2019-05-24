@@ -13,7 +13,7 @@
   "homepage": "https://contactic.io/",
   "type": "wordpress-plugin",
   "support": {
-    "issues": "https://github.com/mdsimpson/contact-form-7-to-database-extension/issues"
+    "issues": "https://wordpress.org/support/plugin/contactic/"
   },
   "require": {
     "php": ">5.3"

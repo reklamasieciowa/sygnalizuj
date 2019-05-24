@@ -2,20 +2,20 @@
 /*
     "Contact Form to Database" Copyright (C) 2011-2013 Michael Simpson  (email : michael.d.simpson@gmail.com)
 
-    This file is part of Contact Form to Database.
+    This file is part of Contactic.
 
-    Contact Form to Database is free software: you can redistribute it and/or modify
+    Contactic is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Contact Form to Database is distributed in the hope that it will be useful,
+    Contactic is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Contact Form to Database.
+    along with Contactic.
     If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -139,7 +139,7 @@ class CTC_ExportToHtmlTable extends CTC_ExportBase implements CTC_Export {
         if ($useDT) {
             $dtJsOptions = isset($options['dt_options']) ?
                     $options['dt_options'] :
-                    '"bJQueryUI": true, "aaSorting": [], "iDisplayLength": -1, "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "' . __('All', 'contact-form-7-to-database-extension') . '"]]';
+                    '"bJQueryUI": true, "aaSorting": [], "iDisplayLength": -1, "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "' . __('All', 'contactic') . '"]]';
             $i18nUrl = $this->plugin->getDataTableTranslationUrl();
             if ($i18nUrl) {
                 if (!empty($dtJsOptions)) {
@@ -232,7 +232,7 @@ class CTC_ExportToHtmlTable extends CTC_ExportBase implements CTC_Export {
             <tr>
             <?php if ($canDelete) { ?>
             <th id="delete_th">
-                <button id="delete" name="cfdbdel" class="button" onclick="this.form.submit()"><?php echo esc_html(__('Delete', 'contact-form-7-to-database-extension'))?></button>
+                <button id="delete" name="cfdbdel" class="button" onclick="this.form.submit()"><?php echo esc_html(__('Delete', 'contactic'))?></button>
                 <input type="checkbox" id="selectall"/>
                 <script type="text/javascript">
                     jQuery(document).ready(function() {

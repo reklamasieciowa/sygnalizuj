@@ -1,21 +1,21 @@
 <?php
 /*
-    "Contact Form to Database" Copyright (C) 2011-2016 Michael Simpson  (email : michael.d.simpson@gmail.com)
+    "Contactic" Copyright (C) 2019 Contactic.io - Copyright (C) 2011-2015 Michael Simpson
 
-    This file is part of Contact Form to Database.
+    This file is part of Contactic.
 
-    Contact Form to Database is free software: you can redistribute it and/or modify
+    Contactic is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Contact Form to Database is distributed in the hope that it will be useful,
+    Contactic is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Contact Form to Database.
+    along with Contactic.
     If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -40,7 +40,7 @@ require_once('CTC_ErrorLog.php');
 class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
     public function getPluginDisplayName() {
-        return 'Contact Form to DB Extension';
+        return 'Contactic';
     }
 
     protected function getMainPluginFileName() {
@@ -51,11 +51,11 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         return array(
             // Integrations
                 'IntegrateWithCF7' =>  array('<a target="_cf7" href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>', 'true', 'false'),
-                /*'IntegrateWithCF7SavePageTitle' => array('&#x21B3; ' . __('Save Page Title from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
-                'IntegrateWithCF7SavePageUrl' => array(__('&#x21B3; ' . 'Save Page URL from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
-                'IntegrateWithCF7SaveSubmittedPageUrl' => array(__('&#x21B3; ' . 'Save Submitted From Page URL from Contact Form 7 submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),*/
-                'GenerateSubmitTimeInCF7Email' => array(__('&#x21B3; ' . 'Generate [submit_time] tag for Contact Form 7 email', 'contact-form-7-to-database-extension'), 'false', 'true'),
-                'GenerateSourceInCF7Email' => array(__('&#x21B3; ' . 'Include source in Contact Form 7 email', 'contact-form-7-to-database-extension'), 'false', 'true'),
+                /*'IntegrateWithCF7SavePageTitle' => array('&#x21B3; ' . __('Save Page Title from Contact Form 7 submissions', 'contactic'), 'false', 'true'),
+                'IntegrateWithCF7SavePageUrl' => array(__('&#x21B3; ' . 'Save Page URL from Contact Form 7 submissions', 'contactic'), 'false', 'true'),
+                'IntegrateWithCF7SaveSubmittedPageUrl' => array(__('&#x21B3; ' . 'Save Submitted From Page URL from Contact Form 7 submissions', 'contactic'), 'false', 'true'),*/
+                'GenerateSubmitTimeInCF7Email' => array(__('&#x21B3; ' . 'Generate [submit_time] tag for Contact Form 7 email', 'contactic'), 'false', 'true'),
+                'GenerateSourceInCF7Email' => array(__('&#x21B3; ' . 'Include source in Contact Form 7 email', 'contactic'), 'false', 'true'),
                 'IntegrateWithCalderaForms' => array('<a target="_caldera" href="https://wordpress.org/plugins/caldera-forms/">Caldera Forms</a>', 'true', 'false'),
                 'IntegrateWithCFormsII' => array('<a target="_cf2" href="https://wordpress.org/plugins/cforms2/">CformsII</a>', 'true', 'false'),
                 'IntegrateWithEnfoldThemForms' => array('<a target="_enfld" href="http://themeforest.net/item/enfold-responsive-multipurpose-theme/4519990">Enfold Theme</a>', 'true', 'false'),
@@ -72,45 +72,65 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                 'IntegrateWithWrContactForms' => array('<a target="_wr" href="https://wordpress.org/plugins/wr-contactform/">WR ContactForm</a>', 'true', 'false'),
 
             // Security
-                'HideAdminPanelFromNonAdmins' => array(__('Allow only Administrators to see CFDB administration screens', 'contact-form-7-to-database-extension'), 'true', 'false'),
-                'CanSeeSubmitDataViaShortcode' => array(__('Can See Submission when using shortcodes', 'contact-form-7-to-database-extension'),
+                'HideAdminPanelFromNonAdmins' => array(__('Allow only Administrators to see CFDB administration screens', 'contactic'), 'true', 'false'),
+                'CanSeeSubmitDataViaShortcode' => array(__('Can See Submission when using shortcodes', 'contactic'),
                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
-                'CanSeeSubmitData' => array(__('Can See Submission data', 'contact-form-7-to-database-extension'),
+                'CanSeeSubmitData' => array(__('Can See Submission data', 'contactic'),
                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
-                'CanChangeSubmitData' => array(__('Can Edit/Delete Submission data', 'contact-form-7-to-database-extension'),
+                'CanChangeSubmitData' => array(__('Can Edit/Delete Submission data', 'contactic'),
                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
-                'FunctionsInShortCodes' => array(__('Allow Any Function in Short Codes', 'contact-form-7-to-database-extension') .
-                        ' <a target="_blank" href="https://cfdbplugin.com/?page_id=1073">' . __('(Creates a security hole)', 'contact-form-7-to-database-extension') . '</a>', 'false', 'true'),
-                'AllowRSS' => array(__('Allow RSS URLs', 'contact-form-7-to-database-extension') .
-                        ' <a target="_blank" href="https://cfdbplugin.com/?p=918">' . __('(Creates a security hole)', 'contact-form-7-to-database-extension') . '</a>', 'false', 'true'),
+                'FunctionsInShortCodes' => array(__('Allow Any Function in Short Codes', 'contactic') .
+                        ' <a target="_blank" href="https://cfdbplugin.com/?page_id=1073">' . __('(Creates a security hole)', 'contactic') . '</a>', 'false', 'true'),
+                'AllowRSS' => array(__('Allow RSS URLs', 'contactic') .
+                        ' <a target="_blank" href="https://cfdbplugin.com/?p=918">' . __('(Creates a security hole)', 'contactic') . '</a>', 'false', 'true'),
 
             // Saving
-                'Timezone' => array(__('Timezone to capture Submit Time. Blank will use WordPress Timezone setting. <a target="_blank" href="http://www.php.net/manual/en/timezones.php">Options</a>', 'contact-form-7-to-database-extension')),
-                'NoSaveFields' => array(__('Do not save <u>fields</u> in DB named (comma-separated list, no spaces)', 'contact-form-7-to-database-extension')),
-                'NoSaveForms' => array(__('Do not save <u>forms</u> in DB named (comma-separated list, no spaces)', 'contact-form-7-to-database-extension')),
-                'SaveCookieData' => array(__('Save Cookie Data with Form Submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
-                'SaveCookieNames' => array(__('Save only cookies in DB named (comma-separated list, no spaces, and above option must be set to true)', 'contact-form-7-to-database-extension')),
+                'Timezone' => array(__('Timezone to capture Submit Time. Blank will use WordPress Timezone setting. <a target="_blank" href="http://www.php.net/manual/en/timezones.php">Options</a>', 'contactic')),
+                'NoSaveFields' => array(__('Do not save <u>fields</u> in DB named (comma-separated list, no spaces)', 'contactic')),
+                'NoSaveForms' => array(__('Do not save <u>forms</u> in DB named (comma-separated list, no spaces)', 'contactic')),
+                'SaveCookieData' => array(__('Save Cookie Data with Form Submissions', 'contactic'), 'false', 'true'),
+                'SaveCookieNames' => array(__('Save only cookies in DB named (comma-separated list, no spaces, and above option must be set to true)', 'contactic')),
 
             // Export
-                'UseCustomDateTimeFormat' => array(__('Use Custom Date-Time Display Format (below)', 'contact-form-7-to-database-extension'), 'true', 'false'),
-                'SubmitDateTimeFormat' => array('<a target="_blank" href="http://php.net/manual/en/function.date.php">' . __('Date-Time Display Format', 'contact-form-7-to-database-extension') . '</a>'),
-                'ShowFileUrlsInExport' => array(__('Export URLs instead of file names for uploaded files', 'contact-form-7-to-database-extension'), 'false', 'true'),
+                'UseCustomDateTimeFormat' => array(__('Use Custom Date-Time Display Format (below)', 'contactic'), 'true', 'false'),
+                'SubmitDateTimeFormat' => array('<a target="_blank" href="http://php.net/manual/en/function.date.php">' . __('Date-Time Display Format', 'contactic') . '</a>'),
+                'ShowFileUrlsInExport' => array(__('Export URLs instead of file names for uploaded files', 'contactic'), 'false', 'true'),
 
             // Admin View
-                'MaxRows' => array(__('Maximum number of rows to retrieve from the DB for the Admin display', 'contact-form-7-to-database-extension')),
-                'MaxVisibleRows' => array(__('#Rows (of maximum above) visible in the Admin datatable', 'contact-form-7-to-database-extension')),
-                'InputMerge' => array(__('Merge these input fields names to get the e-mail on the <a href="admin.php?page=contactic_menu">overview page</a>', 'contact-form-7-to-database-extension')),
-                'HorizontalScroll' => array(__('Use fixed width in Admin datatable', 'contact-form-7-to-database-extension'), 'true', 'false'),
-                //'UseDataTablesJS' => array(__('Use Javascript-enabled tables in Admin Database page', 'contact-form-7-to-database-extension'), 'true', 'false'),
-                'ShowLineBreaksInDataTable' => array(__('Show line breaks in submitted data table', 'contact-form-7-to-database-extension'), 'true', 'false'),
-                'ShowQuery' => array(__('Show the query used to display results', 'contact-form-7-to-database-extension'), 'false', 'true'),
+                'MaxRows' => array(__('Maximum number of rows to retrieve from the DB for the Admin display', 'contactic')),
+                'MaxVisibleRows' => array(__('#Rows (of maximum above) visible in the Admin datatable', 'contactic')),
+                'InputMerge' => array(__('Merge these input fields names to get the e-mail on the <a href="admin.php?page=ContacticPlugin">overview page</a>', 'contactic')),
+                'HorizontalScroll' => array(__('Use fixed width in Admin datatable', 'contactic'), 'true', 'false'),
+                //'UseDataTablesJS' => array(__('Use Javascript-enabled tables in Admin Database page', 'contactic'), 'true', 'false'),
+                'ShowLineBreaksInDataTable' => array(__('Show line breaks in submitted data table', 'contactic'), 'true', 'false'),
+                'ShowQuery' => array(__('Show the query used to display results', 'contactic'), 'false', 'true'),
 
             // System
-                'ErrorOutput' => array(__('Error output file or email address', 'contact-form-7-to-database-extension')),
-                'DropOnUninstall' => array(__('Drop this plugin\'s Database table on uninstall', 'contact-form-7-to-database-extension'), 'false', 'true'),
-            //'SubmitTableNameOverride' => array(__('Use this table to store submission data rather than the default (leave blank for default)', 'contact-form-7-to-database-extension'))
+                'ErrorOutput' => array(__('Error output file or email address', 'contactic')),
+                'DropOnUninstall' => array(__('Drop this plugin\'s Database table on uninstall', 'contactic'), 'false', 'true'),
+            //'SubmitTableNameOverride' => array(__('Use this table to store submission data rather than the default (leave blank for default)', 'contactic'))
             //'_version' => array('Installed Version'), // For testing upgrades
         );
+    }
+
+    public function getWebhookMetaData() {
+        return array(
+            'PipedriveApiKey' => array(__('Pipedrive API Key', 'contactic')),
+            'PipedriveConfig' => array(__('Pipedrive Configuration', 'contactic')),
+            'SlackWebhookUrl' => array(__('Slack Webhook Url', 'contactic')),
+            'WebhookConf' => array(__('Webhook Configuration', 'contactic'))
+
+        );
+    }
+
+    public function getWebhookSlackConf() {
+            return array(
+                'SlackBotName' => array(__('Slack Bot Name', 'contactic')),
+                'SlackMessage' => array(__('Message', 'contactic')),
+                'SlackChannel' => array(__('Slack Channel', 'contactic')),
+                'SlackIconUrl' => array(__('Icon Url', 'contactic')),
+                'formTrigger'  => array(__('Trigger message on form', 'contactic')),
+            );
     }
 
     public function settingsPage() {
@@ -128,30 +148,100 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                 }
             }
         }
-        require_once('CTC_ViewOptions.php');
+        require_once('view/CTC_ViewOptions.php');
         $optionsView = new CTC_ViewOptions();
         $optionsView->display($this);
     }
 
-        public function getOptionValueI18nString($optionValue) {
+    public function webhooksPage() {
+
+        if (!current_user_can('manage_options')) {
+            wp_die(__('You do not have sufficient permissions to access this page.', 'community-yard-sale'));
+        }
+
+        // Save webhook initial conf
+        foreach ($this->getWebhookMetaData() as $aWebhookKey => $aWebhookMeta) {
+            if (isset($_POST[$aWebhookKey])) {
+                $this->updateOption($aWebhookKey, sanitize_text_field($_POST[$aWebhookKey]));
+            }
+        }
+
+        // Delete Webhook
+        if (isset($_GET['remove']) && is_numeric($_GET['remove'])) {
+            // delete webhook
+            $webhookConf = $this->getOption('WebhookConf', array(), true);
+            if(isset($webhookConf[(int)$_GET['remove']])) {
+                unset($webhookConf[(int)$_GET['remove']]);
+                $this->updateOption('WebhookConf', $webhookConf);
+                echo '<script type="text/javascript">';
+                echo 'window.location = "'.get_admin_url() . 'admin.php?page=' . $this->getSlug('webhooks').'";';
+                echo '</script>';
+                exit;
+            }
+        }
+
+
+        // Save Webhook id conf
+        if (isset($_POST['webhook_id']) && isset($_POST['webhook_type'])) {
+
+            $webhookConf = $this->getOption('WebhookConf', array(), true);
+            if ($webhookConf  === false) $webhookConf = array();
+
+            if ($_POST['webhook_type'] == 'slack') {
+
+                $conf = array();
+                foreach ($this->getWebhookSlackConf() as $aConfKey => $aWConfMeta) {
+                    if (isset($_POST[$aConfKey])) {
+
+                        if (is_array($_POST[$aConfKey])) {
+
+                            foreach($_POST[$aConfKey] as $arrK => $arrV) {
+                                $conf[$aConfKey][$arrK] = sanitize_text_field($arrV);
+                            }
+
+                        } else {
+                            $conf[$aConfKey] = sanitize_text_field($_POST[$aConfKey]);
+                        }
+
+                    }
+                }
+                $conf['webhook_type'] = $_POST['webhook_type'];
+
+                // if webhook id exists in webhook conf
+                if ($_POST['webhook_id'] == '') {
+                    $webhookConf[] = $conf;
+                } else {
+                    $webhookConf[$_POST['webhook_id']] = $conf;
+                }
+
+                $this->updateOption('WebhookConf', $webhookConf);
+            }
+        }
+
+        require_once('view/CTC_ViewWebhooks.php');
+        $webhooksView = new CTC_ViewWebhooks();
+        $webhooksView->display($this);
+    }
+
+    public function getOptionValueI18nString($optionValue) {
         switch ($optionValue) {
             case 'true':
-                return __('true', 'contact-form-7-to-database-extension');
+                return __('true', 'contactic');
             case 'false':
-                return __('false', 'contact-form-7-to-database-extension');
+                return __('false', 'contactic');
 
             case 'Administrator':
-                return __('Administrator', 'contact-form-7-to-database-extension');
+                return __('Administrator', 'contactic');
             case 'Editor':
-                return __('Editor', 'contact-form-7-to-database-extension');
+                return __('Editor', 'contactic');
             case 'Author':
-                return __('Author', 'contact-form-7-to-database-extension');
+                return __('Author', 'contactic');
             case 'Contributor':
-                return __('Contributor', 'contact-form-7-to-database-extension');
+                return __('Contributor', 'contactic');
             case 'Subscriber':
-                return __('Subscriber', 'contact-form-7-to-database-extension');
+                return __('Subscriber', 'contactic');
             case 'Anyone':
-                return __('Anyone', 'contact-form-7-to-database-extension');
+                return __('Anyone', 'contactic');
         }
         return $optionValue;
     }
@@ -613,17 +703,17 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         require_once('CTC_Die.php');
         if (!$this->canUserDoRoleOption('CanSeeSubmitData') &&
             !$this->canUserDoRoleOption('CanSeeSubmitDataViaShortcode')) {
-            CTC_Die::wp_die(__('You do not have sufficient permissions to access this page.', 'contact-form-7-to-database-extension'));
+            CTC_Die::wp_die(__('You do not have sufficient permissions to access this page.', 'contactic'));
         }
         $submitTime = stripslashes(sanitize_text_field($_REQUEST['s']));
         $formName = stripslashes(sanitize_text_field($_REQUEST['form']));
         $fieldName = stripslashes(sanitize_text_field($_REQUEST['field']));
         if (!$submitTime || !$formName || !$fieldName) {
-            CTC_Die::wp_die(__('Missing form parameters', 'contact-form-7-to-database-extension'));
+            CTC_Die::wp_die(__('Missing form parameters', 'contactic'));
         }
         $fileInfo = (array)$this->getFileFromDB($submitTime, $formName, $fieldName);
         if ($fileInfo == null) {
-            CTC_Die::wp_die(__('No such file.', 'contact-form-7-to-database-extension'));
+            CTC_Die::wp_die(__('No such file.', 'contactic'));
         }
 
         require_once('CTC_MimeTypeExtensions.php');
@@ -693,10 +783,10 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             $time = strtotime($submitTime);
         }
         if ($invalid === $time) {
-            echo esc_html(__('Invalid: ', 'contact-form-7-to-database-extension'));
+            echo esc_html(__('Invalid: ', 'contactic'));
         }
         else {
-            echo esc_html(__('Valid: ', 'contact-form-7-to-database-extension'));
+            echo esc_html(__('Valid: ', 'contactic'));
         }
 
         echo "'$submitTime' = $time";
@@ -714,26 +804,26 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         header('Content-Type: text/plain; charset=UTF-8');
         header("Pragma: no-cache");
         header("Expires: Thu, 01 Jan 1970 00:00:00 GMT");
-        echo esc_html(__('Checking for conflicting entries. This may take a few minutes.', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Checking for conflicting entries. This may take a few minutes.', 'contactic'));
         echo "\n";
         require_once('CTC_CleanupData.php');
         $cleanup = new CTC_CleanupData($this);
 
-        echo esc_html(__('Phase 1 of 3...', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Phase 1 of 3...', 'contactic'));
         $count = $cleanup->cleanupForms();
-        echo esc_html(__('Database entries fixed: ', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Database entries fixed: ', 'contactic'));
         echo ($count);
         echo "\n";
 
-        echo esc_html(__('Phase 2 of 3...', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Phase 2 of 3...', 'contactic'));
         $count = $cleanup->deleteEmptyEntries();
-        echo esc_html(__('Database entries fixed: ', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Database entries fixed: ', 'contactic'));
         echo ($count);
         echo "\n";
 
-        echo esc_html(__('Phase 3 of 3...', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Phase 3 of 3...', 'contactic'));
         $count = $cleanup->cleanupEntries();
-        echo esc_html(__('Database entries fixed: ', 'contact-form-7-to-database-extension'));
+        echo esc_html(__('Database entries fixed: ', 'contactic'));
         echo ($count);
         echo "\n";
         die();
@@ -742,9 +832,9 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
     public function addSettingsSubMenuPage() {
 //        $this->requireExtraPluginFiles();
 //        $displayName = $this->getPluginDisplayName();
-//        add_submenu_page('wpcf7', //$this->getDBPageSlug(),
+//        add_submenu_page('wpcf7', //$this->getSlug('sumbissions'),
 //                         $displayName . ' Options',
-//                         __('Database Options', 'contact-form-7-to-database-extension'),
+//                         __('Database Options', 'contactic'),
 //                         'manage_options',
 //                         get_class($this) . 'Settings',
 //                         array(&$this, 'settingsPage'));
@@ -780,7 +870,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
     public function saveFormData($cf7) {
         try {
             if (
-                    !empty($cf7->posted_data['submit_time']) &&
+               !empty($cf7->posted_data['submit_time']) &&
                     (is_numeric($cf7->posted_data['submit_time']) ||
                             // Looks like is_numeric may fail on decimal '.' when ',' is the localization
                             preg_match('/^\d+\.?\d*$/', $cf7->posted_data['submit_time']))
@@ -842,10 +932,6 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             $foundUploadFiles = array();
             global $wpdb;
 
-//            $hasDropBox = $this->getOption('dropbox');
-//            if ($hasDropBox) {
-//                require_once('CTC_ShortCodeSavePostData.php');
-//            }
             $cf7->posted_data['_ctc_referer'] = $_SESSION['original_referer'];
             $cf7->posted_data['_ctc_usefulness'] = 'Undefined';
             $cf7->posted_data['_ctc_status'] = 'Todo';
@@ -944,7 +1030,32 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                                             $order));
             }
 
-            // Capture the IP Address of the submitter
+            // fire webhook if needed
+            $slackWebhook = $this->getOption('SlackWebhookUrl', false);
+            $webhook = $this->getOption('WebhookConf', array(), true);
+
+
+            if ($webhook !== false && $slackWebhook !== '') {
+
+
+
+                foreach ($webhook as $webhookKey => $webhookConf) {
+                    if($webhookConf['webhook_type'] == 'slack' && $slackWebhook !== '') {
+                        if ($webhookConf['formTrigger'][0] == '*') {
+                            $this->slackNotification($slackWebhook, $webhookConf);
+                        } else if (in_array($title, $webhookConf['formTrigger'])) {
+                            $this->slackNotification($slackWebhook, $webhookConf);
+                        } else {
+                            // do nothing...
+                        }
+
+                    }
+
+                }
+            }
+
+
+                // Capture the IP Address of the submitter
             if (!$this->fieldMatches('Submitted From', $noSaveFields)) {
                 $order = ($order < 10000) ? 10000 : $order + 1; // large order num to try to make it always last
                 $wpdb->query($wpdb->prepare($parametrizedQuery,
@@ -957,11 +1068,47 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
         }
         catch (Exception $ex) {
+
             $this->getErrorLog()->logException($ex);
         }
 
         // Indicate success to WordPress so it continues processing other unrelated hooks.
         return true;
+    }
+
+    /**
+     * @param $fieldName string
+     * @param $patternsArray array
+     * @return boolean true succeeded
+     */
+    public function slackNotification($webhook, $webhookConf) {
+
+
+        $payload = array(
+            'text' => 'from wp',
+            'username' => 'contactic-bot',
+            'icon_url' => '',
+            'channel' => '#général'
+        );
+
+        if (isset($webhookConf['SlackBotName'])) $payload['username'] = $webhookConf['SlackBotName'];
+        if (isset($webhookConf['SlackMessage'])) $payload['text'] = $webhookConf['SlackMessage'];
+        if (isset($webhookConf['SlackChannel'])) $payload['channel'] = $webhookConf['SlackChannel'];
+        if (isset($webhookConf['SlackIconUrl'])) $payload['icon_url'] = $webhookConf['SlackIconUrl'];
+
+
+        $post_data = json_encode($payload);
+
+
+        $result    = file_get_contents($webhook, false, stream_context_create(array(
+            'http' => array(
+                'header'           => array('Content-Type: application/json'),
+                'method'           => 'POST',
+                'content'          => $post_data,
+            ),
+        )));
+
+
     }
 
     /**
@@ -1028,11 +1175,11 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             return;
         }
 
-        $menuSlug = 'contactic_menu';
+        $menuSlug = $this->getSlug();
 
         //create new top-level menu
         add_menu_page($displayName,                                                     // page_name
-            __('Contactic', 'contact-form-7-to-database-extension') ,                   // menu_title
+            __('Contactic', 'contactic') ,                   // menu_title
             $this->roleToCapability($roleAllowed),                                      // role
             $menuSlug,                                                                  // menu_slug
             array(&$this, 'showOverviewPage'),
@@ -1041,7 +1188,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
         add_submenu_page($menuSlug,
             $displayName . ' Overview',
-            __('Overview', 'contact-form-7-to-database-extension'),
+            __('Overview', 'contactic'),
             'manage_options',
             $menuSlug,
             array(&$this, 'showOverviewPage')
@@ -1049,9 +1196,9 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
         add_submenu_page($menuSlug,
             $displayName . ' Contacts',
-            __('Contacts', 'contact-form-7-to-database-extension'),
+            __('Contacts', 'contactic'),
             'manage_options',
-            $this->getDBPageSlug(),
+            $this->getSlug('submissions'),
             array(&$this, 'whatsInTheDBPage')
         );
 
@@ -1070,7 +1217,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         }
 
         // Needed for dialog in ContactsPage
-        if (strpos($_SERVER['REQUEST_URI'], $this->getDBPageSlug()) !== false) {
+        if (strpos($_SERVER['REQUEST_URI'], $this->getSlug('sumbissions')) !== false) {
             $pluginUrl = $this->getPluginFileUrl() . '/';
 
             wp_enqueue_script('jquery');
@@ -1086,7 +1233,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         }
 
         // Needed for dialog in ShortCodePage
-        if (strpos($_SERVER['REQUEST_URI'], $this->getShortCodeBuilderPageSlug()) !== false) {
+        if (strpos($_SERVER['REQUEST_URI'], $this->getSlug('shortcodes')) !== false) {
             $pluginUrl = $this->getPluginFileUrl() . '/';
             wp_enqueue_script('jquery');
             wp_enqueue_script('jquery-ui-core', array('jquery'));
@@ -1101,15 +1248,15 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         // ShortCodes
         add_submenu_page($menuSlug,
                          $displayName . ' Shortcode Builder',
-                         __('Shortcodes', 'contact-form-7-to-database-extension'),
+                         __('Shortcodes', 'contactic'),
                          $this->roleToCapability($roleAllowed),
-                         $this->getShortCodeBuilderPageSlug(),
+                         $this->getSlug('shortcodes'),
                          array(&$this, 'showShortCodeBuilderPage'));
 
         if ($this->isEditorActive() && $this->canUserDoRoleOption('CanSeeSubmitData')) {
             add_submenu_page($menuSlug,
                     $displayName . ' Import',
-                __('Import', 'contact-form-7-to-database-extension'),
+                __('Import', 'contactic'),
                 $this->roleToCapability($this->getRoleOption('CanChangeSubmitData')),
                     get_class($this) . 'Import',
                 array(&$this, 'showShortImportCsvPage'));
@@ -1117,20 +1264,26 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
 
         // Needed for the Settings Page
-        $settingsSlug = $this->getSettingsSlug();
-        if (strpos($_SERVER['REQUEST_URI'], $settingsSlug) !== false) {
-            require_once('CTC_ViewOptions.php');
+        if (strpos($_SERVER['REQUEST_URI'], $this->getSlug('options')) !== false) {
+            require_once('view/CTC_ViewOptions.php');
             $optionsView = new CTC_ViewOptions($this);
             add_action('admin_enqueue_scripts', array(&$optionsView, 'enqueueSettingsPageScripts'));
             add_filter('admin_footer_text', array(&$this, 'ctc_admin_footer'));
         }
 
         add_submenu_page($menuSlug,
-                         $displayName . ' Options',
-                         __('Options', 'contact-form-7-to-database-extension'),
-                         'manage_options',
-                         $settingsSlug,
-                         array(&$this, 'settingsPage'));
+            $displayName . ' Options',
+            __('Options', 'contactic'),
+            'manage_options',
+            $this->getSlug('options'),
+            array(&$this, 'settingsPage'));
+
+        add_submenu_page($menuSlug,
+            $displayName .  'Webhooks',
+            __('Webhooks', 'contactic'),
+            'manage_options',
+            $this->getSlug('webhooks'),
+            array(&$this, 'webhooksPage'));
 
     }
 
@@ -1139,35 +1292,45 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
     }
 
     /**
+     * @param string $page the page identifier, can be submissions, overview, shortcodes or webhooks
+     *
      * @return string WP Admin slug for page to view DB data
      */
-    public function getDBPageSlug() {
-        return get_class($this) . 'Submissions';
-    }
+    public function getSlug($page = '') {
 
-    public function getOverviewPageSlug() {
-        return get_class($this) . 'Overview';
-    }
+        $prefix = 'ContacticPlugin';
 
-    public function getShortCodeBuilderPageSlug() {
-        return get_class($this) . 'ShortCodeBuilder';
+        switch ($page) {
+            case 'submissions':
+                return $prefix.'Submissions';
+            case 'overview':
+                return $prefix.'Overview';
+            case 'shortcodes':
+                return $prefix.'ShortCodeBuilder';
+            case 'options':
+                return $prefix.'Options';
+            case 'webhooks':
+                return $prefix.'Webhooks';
+            default:
+                return $prefix;
+        }
     }
 
     public function showShortCodeBuilderPage() {
-        require_once('CTC_ViewShortCodeBuilder.php');
+        require_once('view/CTC_ViewShortCodeBuilder.php');
         $view = new CTC_ViewShortCodeBuilder;
         $view->display($this);
     }
 
     public function showShortImportCsvPage() {
-        require_once('CTC_ViewImportCsv.php');
+        require_once('view/CTC_ViewImportCsv.php');
         $view = new CTCViewImportCsv;
         $view->display($this);
     }
 
 
     public function showOverviewPage() {
-        require_once('CTC_ViewOverview.php');
+        require_once('view/CTC_ViewOverview.php');
         $view = new CTC_ViewOverview();
         $view->display($this);
     }
@@ -1194,18 +1357,18 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
 
             ?>
             <div class="wrap">
-            <form action="<?php echo get_admin_url() . 'admin.php?page=' . $this->getDBPageSlug() . "&form_name=" . urlencode($form) ?>"
+            <form action="<?php echo get_admin_url() . 'admin.php?page=' . $this->getSlug('submissions') . "&form_name=" . urlencode($form) ?>"
                   method="post">
                 <input name="form_name" type="hidden" value="<?php echo esc_attr($form) ?>"/>
                 <input name="<?php echo esc_attr($submitTime) ?>" type="hidden" value="row"/>
                 <?php wp_nonce_field(); ?>
                 <button id="delete" name="cfdbdel" class="button"
-                        onclick="this.form.submit();"><?php echo esc_html(__('Delete', 'contact-form-7-to-database-extension')); ?></button>
+                        onclick="this.form.submit();"><?php echo esc_html(__('Delete', 'contactic')); ?></button>
             </form>
             <?php
             $exp->export($form, array('submit_time' => $submitTime, 'filelinks' => 'link'));
         } else {
-            require_once('CTC_ViewWhatsInDB.php');
+            require_once('view/CTC_ViewWhatsInDB.php');
             $view = new CTC_ViewWhatsInDB;
             $view->display($this);
         }
@@ -1825,7 +1988,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
             $i = intval($_REQUEST['i']);
             ?>
             <div class="modal-interaction text-right">
-                <p class="title"><h6>Is it usefull ?</h6>
+                <p class="title"><h6><?php _e('Is it usefull ?', 'contactic'); ?></h6>
                 <div class="dropdown">
                     <button type="button" data-toggle="dropdown" data-id="<?php echo $submitTime; ?>" class="btn waves-effect waves-light btn-<?php echo $usefulness_class ?> dropdown-toggle" id="modalusefulness_<?php echo $i; ?>"><?php echo $contact_usefulness; ?></button>
                     <div class="dropdown-menu" aria-labelledby="modalusefulness_<?php echo $i; ?>" data-id="<?php echo $submitTime; ?>" data-i="<?php echo $i; ?>">
@@ -1836,7 +1999,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                 </div>
             </div>
             <div class="modal-interaction text-right">
-                <p class="title"><h6>Did you handle the message ?</h6></p>
+                <p class="title"><h6><?php _e('Did you handle the message ?', 'contactic'); ?></h6></p>
                 <div class="dropdown">
                     <button type="button" data-id="<?php echo $submitTime; ?>" class="btn waves-effect waves-light btn-<?php echo $status_class ?> dropdown-toggle changestatus" id="modalstatus_<?php echo $i; ?>" data-i="<?php echo $i ?>"><?php echo $contact_status; ?></button>
                 </div>
@@ -1845,7 +2008,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                 <input type="hidden" id="form_name" value="<?php echo htmlentities(stripslashes($form)); ?>">
                 <button id="delete" name="cfdbdel" type="button" data-id="<?php echo $submitTime; ?>"
                         class="btn btn-lg waves-effect waves-light btn-danger text-center"
-                        ><?php echo esc_html(__('Delete', 'contact-form-7-to-database-extension')); ?></button>
+                        ><?php echo esc_html(__('Delete', 'contactic')); ?></button>
             </div>
             <?php
         }

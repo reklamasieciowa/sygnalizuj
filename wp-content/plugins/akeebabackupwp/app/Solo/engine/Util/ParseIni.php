@@ -13,6 +13,17 @@ namespace Akeeba\Engine\Util;
 // Protection against direct access
 defined('AKEEBAENGINE') or die();
 
+/**
+ * A utility class to parse INI files.
+ *
+ * This is marked deprecated since Akeeba Engine 6.4.1. The configuration of the engine is no longer stored as INI data.
+ * Moreover, we will be migrating away from the current INI files used for defining engine and GUI configuration
+ * parameters.
+ *
+ * @package     Akeeba\Engine\Util
+ *
+ * @deprecated  6.4.1
+ */
 abstract class ParseIni
 {
 	/**

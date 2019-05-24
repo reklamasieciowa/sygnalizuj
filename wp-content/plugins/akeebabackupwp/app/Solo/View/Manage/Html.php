@@ -255,7 +255,7 @@ JS;
 	{
 		$model = $this->getModel();
 
-		$this->recordId = $model->getState('id', -1);
+		$this->recordId = $model->getState('id', -1, 'int');
 		$this->record   = Platform::getInstance()->get_statistics($this->recordId);
 
 		$buttons = array(

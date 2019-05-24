@@ -32,13 +32,13 @@ class Html extends \Solo\View\Html
 		/** @var Browser $model */
 		$model = $this->getModel();
 
-		$this->folder                = $model->getState('folder');
-		$this->folder_raw            = $model->getState('folder_raw');
-		$this->parent                = $model->getState('parent');
-		$this->exists                = $model->getState('exists');
-		$this->inRoot                = $model->getState('inRoot');
-		$this->openbasedirRestricted = $model->getState('openbasedirRestricted');
-		$this->writable              = $model->getState('writable');
+		$this->folder                = $model->getState('folder', '', 'string');
+		$this->folder_raw            = $model->getState('folder_raw', '', 'string');
+		$this->parent                = $model->getState('parent', '', 'string');
+		$this->exists                = $model->getState('exists', 0, 'boolean');
+		$this->inRoot                = $model->getState('inRoot', 0, 'boolean');
+		$this->openbasedirRestricted = $model->getState('openbasedirRestricted', 0, 'boolean');
+		$this->writable              = $model->getState('writable', 0, 'boolean');
 		$this->subfolders            = $model->getState('subfolders');
 		$this->breadcrumbs           = $model->getState('breadcrumbs');
 

@@ -13,6 +13,12 @@ use Akeeba\Engine\Platform;
  */
 defined('AKEEBASOLO') or die;
 
+// Makes sure we have PHP 5.6.0 or later
+if (version_compare(PHP_VERSION, '5.6.0', 'lt'))
+{
+	echo sprintf('Akeeba Backup for WordPress requires PHP 5.6.0 or later but your server only has PHP %s.', PHP_VERSION);
+}
+
 global $akeebaBackupWordPressContainer;
 global $akeebaBackupWordPressLoadPlatform;
 
@@ -21,21 +27,16 @@ if (!isset($akeebaBackupWordPressLoadPlatform))
 	$akeebaBackupWordPressLoadPlatform = true;
 }
 
-if (isset($akeebaBackupWordPressContainer))
-{
-	return $akeebaBackupWordPressContainer;
-}
-
-// Makes sure we have PHP 5.4.0 or later
-if (version_compare(PHP_VERSION, '5.3.3', 'lt'))
-{
-	echo sprintf('Akeeba Backup for WordPress requires PHP 5.3.3 or later but your server only has PHP %s.', PHP_VERSION);
-}
-
 // Get the root to the Solo app itself
 $akeebaBackupWpRoot = __DIR__ . '/../app/';
 
-// Include the autoloader
+// Load the platform defines
+if (!defined('APATH_BASE'))
+{
+	require_once __DIR__ . '/defines.php';
+}
+
+// Load the autoloader, if not present. Normally, it SHOULD be included already.
 if (!class_exists('Awf\\Autoloader\\Autoloader'))
 {
 	if (false == include_once $akeebaBackupWpRoot . 'Awf/Autoloader/Autoloader.php')
@@ -46,8 +47,8 @@ if (!class_exists('Awf\\Autoloader\\Autoloader'))
 	}
 }
 
-// Add our app to the autoloader
-Awf\Autoloader\Autoloader::getInstance()->addMap('Solo\\', [
+// Add our app to the autoloader. We use setMap instead of addMap to improve its performance.
+Awf\Autoloader\Autoloader::getInstance()->setMap('Solo\\', [
 	__DIR__ . '/Solo',
 	__DIR__ . '/../app/Solo',
 ]);
@@ -149,24 +150,8 @@ ENDTEXT;
 	$table_prefix = $dbInfo['prefix'];
 }
 
-// Load the platform defines
-require_once __DIR__ . '/defines.php';
-
-// Add our app to the autoloader
-Awf\Autoloader\Autoloader::getInstance()->addMap('Solo\\', [
-	__DIR__ . '/Solo',
-	APATH_BASE . '/Solo',
-]);
-
-// Should I enable debug?
-if (defined('AKEEBADEBUG'))
-{
-	error_reporting(E_ALL | E_NOTICE | E_DEPRECATED);
-	ini_set('display_errors', 1);
-}
-
-// Include the Akeeba Engine and ALICE factories
-if ($akeebaBackupWordPressLoadPlatform)
+// Include the Akeeba Engine and ALICE factories, if required
+if ($akeebaBackupWordPressLoadPlatform && !defined('AKEEBAENGINE'))
 {
 	define('AKEEBAENGINE', 1);
 	$factoryPath = $akeebaBackupWpRoot . 'Solo/engine/Factory.php';
@@ -209,6 +194,20 @@ if ($akeebaBackupWordPressLoadPlatform)
 	Platform::getInstance()->apply_quirk_definitions();
 }
 
+// If I already have a Container return it and exit early.
+if (isset($akeebaBackupWordPressContainer))
+{
+	return $akeebaBackupWordPressContainer;
+}
+
+// Should I enable debug?
+if (defined('AKEEBADEBUG'))
+{
+	error_reporting(E_ALL | E_NOTICE | E_DEPRECATED);
+	ini_set('display_errors', 1);
+}
+
+// Create the Container
 try
 {
 	// Create objects

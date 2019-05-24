@@ -2,20 +2,20 @@
 /*
     "Contact Form to Database" Copyright (C) 2011-2012 Michael Simpson  (email : michael.d.simpson@gmail.com)
 
-    This file is part of Contact Form to Database.
+    This file is part of Contactic.
 
-    Contact Form to Database is free software: you can redistribute it and/or modify
+    Contactic is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Contact Form to Database is distributed in the hope that it will be useful,
+    Contactic is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Contact Form to Database.
+    along with Contactic.
     If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -56,7 +56,7 @@ class CTC_ShortcodeExportUrl extends CTC_ShortCodeLoader {
             return $url;
         }
 
-        $linkText = __('Export', 'contact-form-7-to-database-extension');
+        $linkText = __('Export', 'contactic');
         if (isset($atts['linktext'])) {
             $linkText = $atts['linktext'];
         }

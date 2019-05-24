@@ -6,18 +6,18 @@
 
     This file is part of Contactic_wp plugin.
 
-    Contact Form to Database is free software: you can redistribute it and/or modify
+    Contactic is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Contact Form to Database is distributed in the hope that it will be useful,
+    Contactic is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Contact Form to Database.
+    along with Contactic.
     If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -61,13 +61,13 @@ class CTC_ExportToOverview extends CTC_ExportBase implements CTC_Export {
         <table <?php if ($this->htmlTableId) echo "id=\"$this->htmlTableId\" "; if ($this->htmlTableClass) echo "class=\"$this->htmlTableClass\"" ?> >
             <thead>
                 <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Date</th>
-                    <th class="sorting d-none d-sm-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label="">Source</th>
-                    <th class="sorting" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label="">Page</th>
-                    <th class="sorting d-none d-md-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label="">Email</th>
-                    <th class="sorting d-none d-lg-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label="">Usefulness</th>
-                    <th class="sorting d-none d-lg-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label="">Status</th>
-                    <th class="sorting" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label="">Details</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-sort="ascending" aria-label=""><?php _e('Date', 'contactic'); ?></th>
+                    <th class="sorting d-none d-sm-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label=""><?php _e('Source', 'contactic'); ?></th>
+                    <th class="sorting" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label=""><?php _e('Page', 'contactic'); ?></th>
+                    <th class="sorting d-none d-md-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label=""><?php _e('Email', 'contactic'); ?></th>
+                    <th class="sorting d-none d-lg-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label=""><?php _e('Usefulness', 'contactic'); ?></th>
+                    <th class="sorting d-none d-lg-table-cell" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label=""><?php _e('Status', 'contactic'); ?></th>
+                    <th class="sorting" tabindex="0" aria-controls="contactic1" rowspan="1" colspan="1" aria-label=""><?php _e('Details', 'contactic'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -102,7 +102,7 @@ class CTC_ExportToOverview extends CTC_ExportBase implements CTC_Export {
                         break;
                 }
 
-                $page_title = 'Unkown';
+                $page_title = 'Unknown';
                 if (isset($this->dataIterator->row['_ctc_last_page_title']) && isset($this->dataIterator->row['_ctc_last_page_uri'])){
                     $title = $this->dataIterator->row['_ctc_last_page_title'];
                     $anchor = strlen($title) > 30 ? esc_attr(trim(substr($title, 0, 30)).'&hellip;') : esc_attr($title);
@@ -116,15 +116,15 @@ class CTC_ExportToOverview extends CTC_ExportBase implements CTC_Export {
                     $page_title = "<a href='".get_permalink($post_id)."' target='ctc_page'>".get_the_title($post_id)."</a>";
                 }
 
-                if ($page_title == 'Unkown'){
+                if ($page_title == 'Unknown'){
                     global $session_handler_error;
                     if ($session_handler_error){
-                        $page_title = '<span data-toggle="tooltip" data-placement="top" title="&#9888; It looks like your php server configuration for sessions is incorrect so this cannot be supported by Contactic plugin. Please check it out to unlock our greatest features !">Unkown &#9888;</span>';
+                        $page_title = '<span data-toggle="tooltip" data-placement="top" title="&#9888; It looks like your php server configuration for sessions is incorrect so this cannot be supported by Contactic plugin. Please check it out to unlock our greatest features !">Unknown &#9888;></span>';
                     }
                 }
 
                 if (!isset($this->dataIterator->row['_ctc_referer'])){
-                    $this->dataIterator->row['_ctc_referer'] = 'Unkown';
+                    $this->dataIterator->row['_ctc_referer'] = 'Unknown';
                 }
                 if (empty($this->dataIterator->row['_ctc_referer'])){
                     $this->dataIterator->row['_ctc_referer'] = 'Direct';

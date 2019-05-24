@@ -185,6 +185,7 @@ class Transfer extends ControllerDefault
 		$result = (object)array(
 			'status'    => true,
 			'message'   => '',
+			'ignorable' => false,
 		);
 
 		/** @var Transfers $model */
@@ -195,11 +196,20 @@ class Transfer extends ControllerDefault
 			$config = $model->getFtpConfig();
 			$model->initialiseUpload($config);
 		}
+		catch (TransferIgnorableError $e)
+		{
+			$result = (object) [
+				'status'    => false,
+				'message'   => $e->getMessage(),
+				'ignorable' => true,
+			];
+		}
 		catch (\Exception $e)
 		{
 			$result = (object)array(
 				'status'    => false,
 				'message'   => $e->getMessage(),
+				'ignorable' => false,
 			);
 		}
 

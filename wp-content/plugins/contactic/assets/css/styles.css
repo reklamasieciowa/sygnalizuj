@@ -276,16 +276,68 @@ table.dataTable tr.selected td.select-checkbox:after, table.dataTable tr.selecte
 	margin-top: 15px !important;
 }
 
-/*Shortcodes  Page*/
-.cfdb_top_div {
-	margin: 20px 0;
-}
+
 
 /*Options Page*/
-.cfdb_options_div {
-	margin-top: 20px;
-}
-
 .ui-state-highlight {
     height: auto;
+}
+
+#ctc_options_tabs, #ctc_top_tabs {margin-top:20px}
+#ctc_options_tabs .tab-content, #ctc_top_tabs .tab-content, #ctc_params_tabs .tab-content {
+    background-color: #FFF;
+    padding:30px
+}
+
+#ctc_options_tabs .nav-tabs .nav-item:first-of-type,
+#ctc_top_tabs .nav-tabs .nav-item:first-of-type,
+#ctc_params_tabs .nav-tabs .nav-item:first-of-type{
+	margin-left:20px
+}
+
+#ctc_params_tabs{
+	margin-right:20px;
+	margin-top:30px
+}
+.ui-state-highlight {
+    height: auto;
+}
+
+.nav-tabs > li > a:hover {
+    background: #eaeaea;
+}
+.nav-tabs > li > a:focus {
+    outline:none;
+    box-shadow:none;
+}
+
+.cfdb-options-table label {
+	margin-bottom: 0px !important;
+	margin-right: 5px;
+}
+	
+table.cfdb-options-table {
+    width: 100%
+}
+
+table.cfdb-options-table td{
+    padding: 7px 0px;
+}
+         
+table.cfdb-options-table tr:nth-child(even) {
+    background: #f9f9f9
+}
+
+table.cfdb-options-table tr:nth-child(odd) {
+    background: #FFF
+}
+
+table.cfdb-options-table td:first-child {
+    width: 50%;
+}
+
+table.cfdb-options-table td p {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-right: 4px
 }

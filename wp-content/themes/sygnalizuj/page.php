@@ -16,7 +16,7 @@ get_header();
 ?>
 
 <!-- Full Page Intro -->
-  <div class="view page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/architecture.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  <div class="view page-intro" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/main-photo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <!-- Mask & flexbox options-->
     <div class="mask rgba-gradient-blue-syg2 d-flex justify-content-center align-items-center">
       <!-- Content -->

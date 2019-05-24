@@ -22,8 +22,11 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#286c83', endColorstr='#113d4d',GradientType=1 );
 }
 
-$gradientStart:  rgba(133,188,208,.9);
-$gradientStop:  rgba(42,100,122,.7);
+// $gradientStart:  rgba(133,188,208,.9);
+// $gradientStop:  rgba(42,100,122,.7);
+
+$gradientStart:  rgba(17,118,152,.5);
+$gradientStop:  rgba(17,118,152,.5);
 
 .rgba-gradient-blue-syg2 {
   background: -moz-linear-gradient(45deg, $gradientStart, $gradientStop 100%);

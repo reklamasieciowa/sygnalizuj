@@ -1,22 +1,22 @@
 <?php
 
 /*
-    "Contact Form to Database" Copyright (C) 2011-2015 Michael Simpson  (email : michael.d.simpson@gmail.com)
+    "Contactic" Copyright (C) 2019 Contactic.io - Copyright (C) 2011-2015 Michael Simpson
 
-    This file is part of Contact Form to Database.
+    This file is part of Contactic.
 
-    Contact Form to Database is free software: you can redistribute it and/or modify
+    Contactic is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Contact Form to Database is distributed in the hope that it will be useful,
+    Contactic is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Contact Form to Database.
+    along with Contactic.
     If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -81,6 +81,14 @@ class CTC_IntegrationEnfoldTheme
                     // field label. But the $avia_form->form_elements array has labels for the fields.
                     // This code assumes that the order that the fields are listed in
                     // $new_post matches the order they are listed in $avia_form->form_elements
+                    foreach ($elements as $element) {
+                        if ($idx < $len) {
+                            if (is_array($elements[$idx]) && key_exists('label', $elements[$idx]) && ($elements[$idx]['type'] == 'html')) {
+                                // ignore enfold form custom html elements
+                                $idx++;
+                            }
+                        }
+                    }
                     if ($idx < $len) {
                         if (is_array($elements[$idx]) && key_exists('label', $elements[$idx])) {
                             $key = $elements[$idx]['label'];

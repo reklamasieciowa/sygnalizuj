@@ -2,20 +2,20 @@
 /*
     "Contact Form to Database" Copyright (C) 2011-2012 Michael Simpson  (email : michael.d.simpson@gmail.com)
 
-    This file is part of Contact Form to Database.
+    This file is part of Contactic.
 
-    Contact Form to Database is free software: you can redistribute it and/or modify
+    Contactic is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Contact Form to Database is distributed in the hope that it will be useful,
+    Contactic is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Contact Form to Database.
+    along with Contactic.
     If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -265,7 +265,9 @@ class CTC_OptionsManager {
         /*,plugins_url('/images/icon.png', __FILE__)*/); // if you call 'plugins_url; be sure to "require_once" it
 
         //call register settings function
+        add_action('admin_init', array(&$this, 'registerWebhooks'));
         add_action('admin_init', array(&$this, 'registerSettings'));
+
     }
 
     public function registerSettings() {
@@ -276,14 +278,24 @@ class CTC_OptionsManager {
         }
     }
 
+    public function registerWebhooks() {
+        $group = get_class($this) . '-webhooks-group';
+        $webhookMetaData = $this->getWebhookMetaData();
+
+        foreach ($webhookMetaData as $aWebhookKey => $aWebhookMeta) {
+            register_setting($group, $aWebhookMeta);
+        }
+    }
+
     /**
      * Creates HTML for the Administration page to set options for this plugin.
      * Override this method to create a customized page.
      * @return void
      */
     public function settingsPage() {
+        wp_die('error');
         if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'contact-form-7-to-database-extension'));
+            wp_die(__('You do not have sufficient permissions to access this page.', 'contactic'));
         }
 
         $optionMetaData = $this->getOptionMetaData();
@@ -330,7 +342,7 @@ class CTC_OptionsManager {
             ?>
             <p>
                 <input type="text" name="<?php echo esc_attr($aOptionKey) ?>" id="<?php echo esc_html($aOptionKey) ?>"
-                       value="<?php echo esc_attr($savedOptionValue) ?>" size="50"/>
+                       value="<?php echo esc_attr($savedOptionValue) ?>" size="40"/>
             </p>
             <?php
 
@@ -353,8 +365,8 @@ class CTC_OptionsManager {
      */
     public function getOptionValueI18nString($optionValue) {
         switch ($optionValue) {
-            case 'true': return __('true', 'contact-form-7-to-database-extension');
-            case 'false': return __('false', 'contact-form-7-to-database-extension');
+            case 'true': return __('true', 'contactic');
+            case 'false': return __('false', 'contactic');
         }
         return $optionValue;
     }

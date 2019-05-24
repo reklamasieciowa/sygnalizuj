@@ -1,15 +1,16 @@
 <?php
-/*
-   Plugin Name: Contactic
-   Plugin URI: https://contactic.io/
-   Version: 1.2.2
-   Author: Contactic
-   Description: Save form submissions to the database from <a href="https://wordpress.org/extend/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/extend/plugins/si-contact-form/">Fast Secure Contact Form</a>, <a href="https://wordpress.org/extend/plugins/jetpack/">JetPack Contact Form</a> and <a href="https://www.gravityforms.com">Gravity Forms</a>. Includes exports and short codes. | <a href="admin.php?page=ContacticPluginSubmissions">Data</a> | <a href="admin.php?page=ContacticPluginShortCodeBuilder">Shortcodes</a> | <a href="admin.php?page=ContacticPluginSettings">Settings</a> | <a href="https://contactic.io/docs/">Docs</a>
-   Text Domain: contact-form-7-to-database-plus
-   License: GPL3
-   GitHub Plugin URI: 
-   GitHub Branch: master
-  */
+/**
+ * Plugin Name: Contactic
+ * Plugin URI: https://contactic.io/
+ * Version: 1.3.4
+ * Author: Contactic
+ * Author URI: https://contactic.io/
+ * Text Domain: contact-form-7-to-database-plus
+ * License: GPL3
+ * Description: Save form submissions to the database from severals contact form plugins and themes. Includes exports, shortcodes, tracking and stats. | <a href="admin.php?page=ContacticPluginSubmissions">Data</a> | <a href="admin.php?page=ContacticPluginShortCodeBuilder">Shortcodes</a> | <a href="admin.php?page=ContacticPluginSettings">Settings</a> | <a href="https://contactic.io/docs/">Docs</a>
+ * Text Domain: contactic
+ * Domain Path: /languages
+ */
 
 
 $CTC_Plugin_minimalRequiredPhpVersion = '5.4';
@@ -20,9 +21,9 @@ $CTC_Plugin_minimalRequiredPhpVersion = '5.4';
 function CTC_Plugin_noticePhpVersionWrong() {
     global $CTC_Plugin_minimalRequiredPhpVersion;
     echo '<div class="updated fade">' .
-      __('Error: plugin "Contact Form to DB Extension" requires a newer version of PHP to be running.',  'contact-form-7-to-database-extension').
-            '<br/>' . __('Minimal version of PHP required: ', 'contact-form-7-to-database-extension') . '<strong>' . $CTC_Plugin_minimalRequiredPhpVersion . '</strong>' .
-            '<br/>' . __('Your server\'s PHP version: ', 'contact-form-7-to-database-extension') . '<strong>' . phpversion() . '</strong>' .
+      __('Error: plugin "Contactic" requires a newer version of PHP to be running.',  'contactic').
+            '<br/>' . __('Minimal version of PHP required: ', 'contactic') . '<strong>' . $CTC_Plugin_minimalRequiredPhpVersion . '</strong>' .
+            '<br/>' . __('Your server\'s PHP version: ', 'contactic') . '<strong>' . phpversion() . '</strong>' .
          '</div>';
 }
 
@@ -50,7 +51,7 @@ function CTC_Plugin_PhpVersionCheck() {
  */
 function CTC_Plugin_i18n_init() {
     $pluginDir = dirname(plugin_basename(__FILE__));
-    load_plugin_textdomain('contact-form-7-to-database-extension', false, $pluginDir . '/languages/');
+    load_plugin_textdomain('contactic', false, $pluginDir . '/languages/');
 }
 
 
@@ -68,3 +69,31 @@ if (CTC_Plugin_PhpVersionCheck()) {
     include_once('CTC_Plugin_init.php');
     CTC_Plugin_init(__FILE__);
 }
+
+function CTC_add_plugin_meta_links($meta_fields, $file) {
+  if ( plugin_basename(__FILE__) == $file ) {
+    $plugin_url = "https://wordpress.org/support/plugin/contactic/";
+    $meta_fields[] = "<a href='" . $plugin_url . "' target='blank'>" . _('Support Forum') . "</a>";
+    $meta_fields[] = "Please help us ❤ → <a href='https://wordpress.org/support/plugin/contactic/reviews/?filter=5#new-post' target='blank' title='" . _('Rate') . "'>
+            <i class='wdi-rate-stars'>"
+      . "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+      . "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+      . "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+      . "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+      . "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+      . "</i></a>";
+
+    $stars_color = "#ffb900";
+
+    echo "<style>"
+      . ".wdi-rate-stars{display:inline-block;color:" . $stars_color . ";position:relative;top:3px;}"
+      . ".wdi-rate-stars svg{fill:" . $stars_color . ";}"
+      . ".wdi-rate-stars svg:hover{fill:" . $stars_color . "}"
+      . ".wdi-rate-stars svg:hover ~ svg{fill:none;}"
+      . "</style>";
+  }
+
+  return $meta_fields;
+}
+
+add_filter("plugin_row_meta", 'CTC_add_plugin_meta_links', 10, 2);

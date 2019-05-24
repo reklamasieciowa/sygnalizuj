@@ -297,11 +297,15 @@ akeeba.Transfer.applyConnection = function ()
 
 akeeba.Transfer.uploadKickstart = function ()
 {
-	var stepKickstart  = document.getElementById("akeeba-transfer-upload-lbl-kickstart");
-	var stepArchive    = document.getElementById("akeeba-transfer-upload-lbl-archive");
-	var uploadErrorBox = document.getElementById("akeeba-transfer-upload-error");
+	var stepKickstart   = document.getElementById("akeeba-transfer-upload-lbl-kickstart");
+	var stepArchive     = document.getElementById("akeeba-transfer-upload-lbl-archive");
+	var uploadErrorBox  = document.getElementById("akeeba-transfer-upload-error");
+	var uploadErrorBody = document.getElementById("akeeba-transfer-upload-error-body");
+	var uploadForce     = document.getElementById('akeeba-transfer-upload-error-force');
 
 	uploadErrorBox.style.display = "none";
+	uploadForce.style.display    = "none";
+	uploadErrorBody.innerHTML    = "";
 
 	stepKickstart.className = "akeeba-label--orange";
 	stepArchive.className = "akeeba-label--grey";
@@ -319,9 +323,19 @@ akeeba.Transfer.uploadKickstart = function ()
 	{
 		if (!res.status)
 		{
+			if (uploadForce)
+			{
+				uploadForce.style.display = 'none';
+
+				if (res.ignorable)
+				{
+					uploadForce.style.display = 'inline-block';
+				}
+			}
+
 			stepKickstart.className = "akeeba-label--red";
 
-			uploadErrorBox.innerHTML     = res.message;
+			uploadErrorBody.innerHTML    = res.message;
 			uploadErrorBox.style.display = "block";
 
 			return;
@@ -339,10 +353,12 @@ akeeba.Transfer.uploadArchive = function (start)
 		start = 0;
 	}
 
-	var stepKickstart  = document.getElementById("akeeba-transfer-upload-lbl-kickstart");
-	var stepArchive    = document.getElementById("akeeba-transfer-upload-lbl-archive");
-	var uploadErrorBox = document.getElementById("akeeba-transfer-upload-error");
+	var stepKickstart   = document.getElementById("akeeba-transfer-upload-lbl-kickstart");
+	var stepArchive     = document.getElementById("akeeba-transfer-upload-lbl-archive");
+	var uploadErrorBox  = document.getElementById("akeeba-transfer-upload-error");
+	var uploadErrorBody = document.getElementById("akeeba-transfer-upload-error-body");
 
+	uploadErrorBody.innerHTML    = '';
 	uploadErrorBox.style.display = "none";
 
 	stepKickstart.className = "akeeba-label--green";
@@ -359,7 +375,7 @@ akeeba.Transfer.uploadArchive = function (start)
 		{
 			stepArchive.className = "akeeba-label--red";
 
-			uploadErrorBox.innerHTML     = res.message;
+			uploadErrorBody.innerHTML    = res.message;
 			uploadErrorBox.style.display = "block";
 
 			return;

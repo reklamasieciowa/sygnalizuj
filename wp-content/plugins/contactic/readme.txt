@@ -1,10 +1,10 @@
 === Contact Form 7 Database + | CFDB+ ===
 Contributors: contactic,mouveo,francois86
-Tags: CF7,Contact form 7,CFDB,contact form,database,contact form database,save contact form,form database,contactic
+Tags: CF7, contact form 7, CFDB, contact form, database, contact form database, save contact form, form database, contactic, form, forms, form builder, contact form, feedback, custom form, contact, web contact form, email, form manager, survey
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4.45
-Stable tag: 1.2.2
+Stable tag: 1.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,32 +13,34 @@ Saves all your messages from Contact Form 7... Export data to a file or use shor
 == Description ==
 ### CONTACT FORM 7 DATABASE + : BACKUP & STATS
 
-Contactic saves all your messages from 15 Contact Form plugins and more (with a shortcode).
-You can export data to a file (CSV, XLS, Google Sheet...) or even display them online.
+Contactic save form submissions to the database from severals contact form plugins and themes. 
+Includes exports (Excel, CSV, HTML, JSON, Google Spreadsheet...), shortcodes (datatable, value, count, html...), tracking (source, status, usefulness...) and stats.
+
+You can export data to a file (CSV, XLS, Google Sheet, JSON, ODS...) or even display them online.
 You can track your contacts and know if they are useful or not, handle or not...
 You can see quickly your progress thanks to statistical graphs.
 More than 50 features are included in Contactic!
 
+### New!
+You can receive on Slack a notification as soon as you get a submission on your website
+
 > With CFDB+, secure your forms and get stats, quickly and easily!
 
-Contact Form 7 Database + is a fork of the old plugin CFDB (contact-form-7-to-database-extension).
+Contact Form 7 Database + is a fork of the old plugin CFDB (contact-form-7-to-database-extension). If you have this old plugin, update quickly and easily!
 
-By simply installing the plugin, it will automatically begin to capture form submissions from:
+By simply installing the plugin, it will automatically begin to capture form submissions from (and more):
 
-* [Contact Form 7 (CF7) plugin](https://wordpress.org/plugins/contact-form-7)
-* [JetPack Contact Form plugin](https://wordpress.org/plugins/jetpack/)
-* [Gravity Forms plugin](http://www.gravityforms.com)
-* [WR ContactForm plugin](https://wordpress.org/plugins/wr-contactform/)
-* [Form Maker plugin](https://wordpress.org/plugins/form-maker/)
-* [Formidable Forms (BETA)](https://wordpress.org/plugins/formidable/)
-* [Forms Management System (BETA)](http://codecanyon.net/item/forms-management-systemwordpress-frontend-plugin/8978741)
-* [Quform plugin (BETA)](http://codecanyon.net/item/quform-wordpress-form-builder/706149/)
-* [Ninja Forms plugin (BETA)](https://wordpress.org/plugins/ninja-forms/)
-* [Caldera Forms plugin (BETA)](https://wordpress.org/plugins/caldera-forms/)
-* [CFormsII (BETA)](https://wordpress.org/plugins/cforms2/)
-* [FormCraft Premium (BETA)](http://codecanyon.net/item/formcraft-premium-wordpress-form-builder/5335056)
-* [Fast Secure Contact Form (FSCF) plugin](https://wordpress.org/plugins/si-contact-form/)
-* [Enfold theme forms](http://themeforest.net/item/enfold-responsive-multipurpose-theme/4519990)
+* Contact Form 7 (CF7) plugin
+* JetPack Contact Form plugin
+* Gravity Forms plugin
+* Form Maker plugin
+* Formidable Forms (BETA)
+* Quform plugin (BETA)
+* Ninja Forms plugin (BETA)
+* Caldera Forms plugin (BETA)
+* CFormsII (BETA)
+* FormCraft Premium (BETA)
+* Enfold theme forms
 
 Other form submissions can be saved with the addition of the [cfdb-save-form-post] shortcode on the target submission page.
 
@@ -56,6 +58,7 @@ This plugin provides four administration pages in the administration area under 
 * **CONTACTS** to view and export form submission data (by form)
 * **SHORTCODES** to generate shortcodes and exports
 * **OPTIONS** to change configuration parameters
+* **WEBHOOKS** Add your Slack Webhook Url to get notifyed by a message in your prefered channel, when someone submits a form. Once your webhook url save you will be able to create slack bots. (More to come...)
 
 ##### DISPLAYING SAVED DATA IN POSTS AND PAGES
 
@@ -114,11 +117,30 @@ You can always deactivate the plugin without loosing data.
 2. Contacts
 3. Shortcodes
 4. Options
+5. Webhooks
 
 == Upgrade Notice ==
 If you use an old version of CFDB, you will have stats, better UI and tools to track all your contacts form submissions.
 
 == Changelog ==
+
+= 1.3.4 =
+* Minor bugfix
+
+= 1.3.3 =
+* Improve french translation
+* Improve options design
+* Add Spanish translation
+
+= 1.3.2 =
+* Fix enfold form custom html elements labels matching bug
+
+= 1.3.1 =
+* Fix 1.3.0 release error missing files
+
+= 1.3.0 =
+* New : Add your Slack Webhook Url to get notifyed by a message in your prefered channel, when someone submits a form. Once your webhook url save you will be able to create slack bots. 
+* Fix a bug when using CTC_FormIterator class.
 
 = 1.2.2 =
 * New : source can now be pushed in cf7 email.

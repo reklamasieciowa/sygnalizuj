@@ -99,8 +99,8 @@ class Html extends \Solo\View\Html
 		$default_description = Text::_('COM_AKEEBA_BACKUP_DEFAULT_DESCRIPTION') . ' ' . $date->format(Text::_('DATE_FORMAT_LC2'), true);
 
 		$this->default_descr = Escape::escapeJS($default_description);
-		$this->description   = Escape::escapeJS($model->getState('description', $default_description));
-		$this->comment       = $model->getState('comment', '');
+		$this->description   = Escape::escapeJS($model->getState('description', $default_description, 'string'));
+		$this->comment       = $model->getState('comment', '', 'html');
 
 		// Push the return URL
 		$returnURL        = $model->getState('returnurl', '');
@@ -159,7 +159,7 @@ class Html extends \Solo\View\Html
 		$this->showANGIEKey = 1;
 		$this->angieKey     = $config->get('engine.installer.angie.key', '');
 
-		$this->autoStart = $model->getState('autostart', 0);
+		$this->autoStart = $model->getState('autostart', 0, 'boolean');
 
 		$this->srpInfo = $model->getState('srpinfo', array());
 
