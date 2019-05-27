@@ -151,17 +151,10 @@ article {
   }
 }
 
-
-
-
 // .home .navbar:not(.top-nav-collapse) {
 //   background: transparent !important;
 //   background: #01579b!important;
 // }
-
-
-
-
 
 #primary {
   :not(.btn) {
@@ -219,6 +212,28 @@ article {
       font-size: 1rem;
     }
    }
+}
+
+.sidebar {
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 7px 0;
+
+        &::before {
+          font-family: "Font Awesome 5 Free";
+          color: $red;
+          font-weight: 900;
+          font-size: 1rem;
+          position: relative;
+          margin-right: 4px;
+          content: "\f105";
+        }
+    }
+  }
 }
 
 #footer-logo {

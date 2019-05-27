@@ -48,45 +48,75 @@ get_header();
 
 	<div id="primary" class="container-fluid my-5">
 		<div class="container">
-			<main id="main" class="site-main">
+			<div class="row">
+				<div class="col-lg-8">
+					<main id="main" class="site-main">
 
-			<?php if ( have_posts() ) : ?>
+					<?php if ( have_posts() ) : ?>
 
-				<?php
-				/* Start the Loop */
-				while ( have_posts() ) :
-					the_post();
+						<?php
+						/* Start the Loop */
+						while ( have_posts() ) :
+							the_post();
 
-					if ($wp_query->current_post % 2 == 0):
-				       $evenness = 'even';
-				    else:
-				        $evenness = 'odd';
-				    endif;
+							if ($wp_query->current_post % 2 == 0):
+						       $evenness = 'even';
+						    else:
+						        $evenness = 'odd';
+						    endif;
 
-				    set_query_var( 'evenness', $evenness );
+						    set_query_var( 'evenness', $evenness );
 
-					/*
-					 * Include the Post-Type-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-					 */
+							/*
+							 * Include the Post-Type-specific template for the content.
+							 * If you want to override this in a child theme, then include a file
+							 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+							 */
 
-					 get_template_part( 'template-parts/content', get_post_type()); 
+							 get_template_part( 'template-parts/content', get_post_type()); 
 
-					 echo '<hr class="">';
+							 echo '<hr class="">';
 
-				endwhile;
+						endwhile;
 
-				the_posts_navigation();
+						the_posts_navigation();
 
-			else :
+					else :
 
-				get_template_part( 'template-parts/content', 'none' );
+						get_template_part( 'template-parts/content', 'none' );
 
-			endif;
-			?>
+					endif;
+					?>
 
-			</main><!-- #main -->
+					</main><!-- #main -->
+				</div>
+				<div class="col-lg-4 sidebar">
+					<?php get_sidebar('Sidebar1'); ?>
+					<hr>
+					<h5 class="h5-responsive font-weight-bold mt-4 mb-2">Artykuły</h5>
+					<?php 
+					// the query
+						$wpb_all_query = new WP_Query(array('post_type'=>'post', 'post_status'=>'publish', 'posts_per_page'=>-1)); ?>
+						 
+						<?php if ( $wpb_all_query->have_posts() ) : ?>
+						 
+						<ul class="posts-list">
+						    <!-- the loop -->
+						    <?php while ( $wpb_all_query->have_posts() ) : $wpb_all_query->the_post(); ?>
+						        <li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
+						    <?php endwhile; ?>
+						    <!-- end of the loop -->
+						 
+						</ul>
+						 
+						    <?php wp_reset_postdata(); ?>
+						 
+						<?php else : ?>
+						    <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+					<?php endif; ?>
+					
+				</div>
+			</div>
 		</div>
 	</div><!-- #primary -->
 

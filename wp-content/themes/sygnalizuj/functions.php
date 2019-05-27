@@ -113,7 +113,7 @@ function sygnalizuj_widgets_init() {
 		'description'   => esc_html__( 'Add widgets here.', 'sygnalizuj' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
+		'before_title'  => '<h5 class="h5-responsive font-weight-bold mt-3 mb-2">',
 		'after_title'   => '</h2>',
 	) );
 
@@ -123,7 +123,7 @@ function sygnalizuj_widgets_init() {
 		'description'   => esc_html__( 'Footer column 1.', 'sygnalizuj' ),
 		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'before_title'  => '<h5 class="h5-responsive font-weight-bold mt-3 mb-4">',
 		'after_title'   => '</h5>',
 	) );
 
@@ -133,7 +133,7 @@ function sygnalizuj_widgets_init() {
 		'description'   => esc_html__( 'Footer column 2.', 'sygnalizuj' ),
 		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'before_title'  => '<h5 class="h5-responsive font-weight-bold mt-3 mb-4">',
 		'after_title'   => '</h5>',
 	) );
 
@@ -143,7 +143,7 @@ function sygnalizuj_widgets_init() {
 		'description'   => esc_html__( 'Footer column 3.', 'sygnalizuj' ),
 		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'before_title'  => '<h5 class="h5-responsive font-weight-bold mt-3 mb-4">',
 		'after_title'   => '</h5>',
 	) );
 
@@ -153,7 +153,7 @@ function sygnalizuj_widgets_init() {
 		'description'   => esc_html__( 'Footer bottom.', 'sygnalizuj' ),
 		'before_widget' => '<div id="%1$s" class="footer-info %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h5 class="font-weight-bold mt-3 mb-4">',
+		'before_title'  => '<h5 class="h5-responsive font-weight-bold mt-3 mb-4">',
 		'after_title'   => '</h5>',
 	) );
 
