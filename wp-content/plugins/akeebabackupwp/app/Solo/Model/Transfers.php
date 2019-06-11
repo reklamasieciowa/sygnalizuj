@@ -76,20 +76,28 @@ class Transfers extends Model
 
 		if (is_null($backup))
 		{
-			return array(
+			return [
 				'size'   => 0,
 				'string' => '0.00 KB'
-			);
+			];
 		}
 
 		$approximateSize = 2.5 * (float) $backup['size'];
 
-		$unit = array('b', 'KB', 'MB', 'GB', 'TB', 'PB');
+		$unit	 = array('b', 'KB', 'MB', 'GB', 'TB', 'PB');
 
-		return array(
+		if (version_compare(PHP_VERSION, '5.6.0', 'lt'))
+		{
+			return [
+				'size'   => $approximateSize,
+				'string' => @round($approximateSize / pow(1024, ($i = floor(log($approximateSize, 1024)))), 2) . ' ' . $unit[$i]
+			];
+		}
+
+		return [
 			'size'   => $approximateSize,
-			'string' => @round($approximateSize / pow(1024, ($i = floor(log($approximateSize, 1024)))), 2) . ' ' . $unit[$i]
-		);
+			'string' => @round($approximateSize / (1024 ** ($i = floor(log($approximateSize, 1024)))), 2) . ' ' . $unit[$i]
+		];
 	}
 
 	/**

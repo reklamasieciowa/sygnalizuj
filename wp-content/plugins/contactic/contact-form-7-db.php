@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Contactic
  * Plugin URI: https://contactic.io/
- * Version: 1.3.4
+ * Version: 1.3.7
  * Author: Contactic
  * Author URI: https://contactic.io/
  * Text Domain: contact-form-7-to-database-plus

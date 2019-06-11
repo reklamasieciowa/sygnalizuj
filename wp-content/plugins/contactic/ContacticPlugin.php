@@ -941,6 +941,8 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                 $cf7->posted_data['_ctc_last_page_title'] = $_SESSION['_ctc_last_page_title'];
                 $cf7->posted_data['_ctc_last_page_uri'] = $_SESSION['_ctc_last_page_uri'];
             }
+            
+            $slack_message = '';
 
             foreach ($cf7->posted_data as $name => $value) {
                 $nameClean = stripslashes($name);
@@ -977,6 +979,10 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                         $nameClean,
                         $valueClean,
                         $order++));
+                    if (substr($nameClean, 0, 5) != '_ctc_'){
+                        $slack_message .= '*'.$nameClean.'*'.chr(10);
+                        $slack_message .= $valueClean.chr(10).chr(10);
+                    }
                 }
             }
 
@@ -1042,9 +1048,9 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
                 foreach ($webhook as $webhookKey => $webhookConf) {
                     if($webhookConf['webhook_type'] == 'slack' && $slackWebhook !== '') {
                         if ($webhookConf['formTrigger'][0] == '*') {
-                            $this->slackNotification($slackWebhook, $webhookConf);
+                            $this->slackNotification($slackWebhook, $webhookConf, $slack_message);
                         } else if (in_array($title, $webhookConf['formTrigger'])) {
-                            $this->slackNotification($slackWebhook, $webhookConf);
+                            $this->slackNotification($slackWebhook, $webhookConf, $slack_message);
                         } else {
                             // do nothing...
                         }
@@ -1081,14 +1087,14 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
      * @param $patternsArray array
      * @return boolean true succeeded
      */
-    public function slackNotification($webhook, $webhookConf) {
+    public function slackNotification($webhook, $webhookConf, $slack_message) {
 
 
         $payload = array(
             'text' => 'from wp',
             'username' => 'contactic-bot',
             'icon_url' => '',
-            'channel' => '#général'
+            'channel' => '#général',
         );
 
         if (isset($webhookConf['SlackBotName'])) $payload['username'] = $webhookConf['SlackBotName'];
@@ -1096,6 +1102,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         if (isset($webhookConf['SlackChannel'])) $payload['channel'] = $webhookConf['SlackChannel'];
         if (isset($webhookConf['SlackIconUrl'])) $payload['icon_url'] = $webhookConf['SlackIconUrl'];
 
+        $payload['text'] .= chr(10).chr(10).$slack_message;
 
         $post_data = json_encode($payload);
 
@@ -1189,7 +1196,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         add_submenu_page($menuSlug,
             $displayName . ' Overview',
             __('Overview', 'contactic'),
-            'manage_options',
+            $this->roleToCapability($roleAllowed),
             $menuSlug,
             array(&$this, 'showOverviewPage')
         );
@@ -1197,7 +1204,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         add_submenu_page($menuSlug,
             $displayName . ' Contacts',
             __('Contacts', 'contactic'),
-            'manage_options',
+            $this->roleToCapability($roleAllowed),
             $this->getSlug('submissions'),
             array(&$this, 'whatsInTheDBPage')
         );
@@ -1249,7 +1256,7 @@ class ContacticPlugin extends CTC_PluginLifeCycle implements CTC_DateFormatter {
         add_submenu_page($menuSlug,
                          $displayName . ' Shortcode Builder',
                          __('Shortcodes', 'contactic'),
-                         $this->roleToCapability($roleAllowed),
+                         $this->roleToCapability('Administrator'),
                          $this->getSlug('shortcodes'),
                          array(&$this, 'showShortCodeBuilderPage'));
 

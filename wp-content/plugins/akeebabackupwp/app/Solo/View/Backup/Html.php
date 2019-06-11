@@ -15,6 +15,7 @@ use Awf\Text\Text;
 use Awf\Uri\Uri;
 use Awf\Utils\Template;
 use Solo\Helper\Escape;
+use Solo\Helper\Utils;
 use Solo\Model\Main;
 
 /**
@@ -103,7 +104,7 @@ class Html extends \Solo\View\Html
 		$this->comment       = $model->getState('comment', '', 'html');
 
 		// Push the return URL
-		$returnURL        = $model->getState('returnurl', '');
+		$returnURL        = Utils::safeDecodeReturnUrl($model->getState('returnurl', ''));
 		$this->returnURL  = empty($returnURL) ? '' : $returnURL;
 		$this->returnForm = $model->getState('returnform', '');
 
@@ -221,19 +222,20 @@ class Html extends \Solo\View\Html
 	 */
 	protected function injectJavascript()
 	{
-		$configuration = Factory::getConfiguration();
-		$router        = $this->getContainer()->router;
-		$returnURL     = Escape::escapeJS($this->returnURL);
-		$returnForm    = $this->returnForm ? 'true' : 'false';
-		$isSTW         = $this->isSTW ? 'true' : 'false';
-		$ajaxURL       = $router->route('index.php?view=backup&task=ajax');
-		$logURL        = $router->route('index.php?view=log');
-		$aliceURL      = $router->route('index.php?view=alices');
-		$srpInfo       = Escape::escapeJS(json_encode($this->srpInfo));
-		$angieKey      = Escape::escapeJS($this->angieKey);
-		$jpsKey        = Escape::escapeJS($this->jpsKey);
-		$autoResume    = (int) $configuration->get('akeeba.advanced.autoresume', 1);
-		$autoTimeout   = (int) $configuration->get('akeeba.advanced.autoresume_timeout', 10);;
+		$configuration    = Factory::getConfiguration();
+		$router           = $this->getContainer()->router;
+		$returnURL        = Escape::escapeJS($this->returnURL);
+		$escapedReturnURL = addcslashes($this->returnURL, "'\\");
+		$returnForm       = $this->returnForm ? 'true' : 'false';
+		$isSTW            = $this->isSTW ? 'true' : 'false';
+		$ajaxURL          = $router->route('index.php?view=backup&task=ajax');
+		$logURL           = $router->route('index.php?view=log');
+		$aliceURL         = $router->route('index.php?view=alices');
+		$srpInfo          = Escape::escapeJS(json_encode($this->srpInfo));
+		$angieKey         = Escape::escapeJS($this->angieKey);
+		$jpsKey           = Escape::escapeJS($this->jpsKey);
+		$autoResume       = (int) $configuration->get('akeeba.advanced.autoresume', 1);
+		$autoTimeout      = (int) $configuration->get('akeeba.advanced.autoresume_timeout', 10);;
 		$autoMaxRetries        = (int) $configuration->get('akeeba.advanced.autoresume_maxretries', 3);
 		$iconURL               = Escape::escapeJS(Uri::base(false, $this->container) . '/media/logo/' . $this->container->iconBaseName . '-96.png');
 		$autoStart             = (!$this->unwritableOutput && ($this->autoStart || (isset($this->srpInfo['tag']) && ($this->srpInfo['tag'] == 'restorepoint')))) ? 1 : 0;
@@ -268,7 +270,7 @@ akeeba.loadScripts.push(function() {
 	akeeba.Backup.resume.retry = 0;
 
 	// The return URL
-	akeeba.Backup.returnUrl = '$returnURL';
+	akeeba.Backup.returnUrl = '$escapedReturnURL';
 
 	// Used as parameters to start_timeout_bar()
 	akeeba.Backup.maxExecutionTime = '{$this->maxexec}';

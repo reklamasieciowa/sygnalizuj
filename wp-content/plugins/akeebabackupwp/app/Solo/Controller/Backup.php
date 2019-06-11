@@ -7,6 +7,7 @@
 
 namespace Solo\Controller;
 use Akeeba\Engine\Platform;
+use Solo\Helper\Utils;
 
 /**
  * The controller for the Backup view
@@ -46,6 +47,10 @@ class Backup extends ControllerDefault
 			'xmlname'			=> $this->input->get('xmlname', '', 'string')
 		);
 
+		// Sanitize the return URL
+		$returnUrl = $this->input->get('returnurl', '', 'raw');
+		$returnUrl = Utils::safeDecodeReturnUrl($returnUrl);
+
 		$model->setState('srpinfo',	$srpinfo);
 
 		$model->setState('description',	$this->input->get('description', null, 'raw'));
@@ -53,7 +58,7 @@ class Backup extends ControllerDefault
 
 		$model->setState('jpskey',		$this->input->get('jpskey', '', 'raw'));
 		$model->setState('angiekey',	$this->input->get('angiekey', '', 'raw'));
-		$model->setState('returnurl',	$this->input->get('returnurl', '', 'raw'));
+		$model->setState('returnurl',	$returnUrl);
 		$model->setState('backupid',	$this->input->get('backupid', null, 'cmd'));
 
 		$this->display();

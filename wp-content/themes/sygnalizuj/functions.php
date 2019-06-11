@@ -42,6 +42,8 @@ if ( ! function_exists( 'sygnalizuj_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
+		add_image_size( 'blogmini', 700);
+
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Top menu', 'sygnalizuj' ),
@@ -224,6 +226,11 @@ function sygnalizuj_get_the_post_navigation( $args = array() ) {
  
     return $navigation;
 }
+
+function tn_custom_excerpt_length( $length ) {
+return 35;
+}
+add_filter( 'excerpt_length', 'tn_custom_excerpt_length', 999 );
 
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';

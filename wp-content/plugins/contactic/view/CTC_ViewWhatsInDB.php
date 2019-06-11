@@ -59,8 +59,6 @@ class CTC_ViewWhatsInDB extends CTC_View {
         global $wpdb;
         $tableName = $plugin->getSubmitsTableName();
         
-        $tableHtmlId = 'cf2dbtable';
-
         // Identify which forms have data in the database
         $formsList = $plugin->getForms();
         if (count($formsList) == 0) {
@@ -92,6 +90,8 @@ class CTC_ViewWhatsInDB extends CTC_View {
 
         // Sanitized version of $currSelection for display on the page
         $currSelectionEscaped = htmlspecialchars($currSelection, ENT_QUOTES, 'UTF-8');
+
+        $tableHtmlId = 'table-'.substr(sha1($currSelectionEscaped), 0, 14);
 
         // If there is only one form in the DB, select that by default
         if (!$currSelection && count($formsList) == 1) {
@@ -383,6 +383,8 @@ class CTC_ViewWhatsInDB extends CTC_View {
                                 
                                 $columns = $exporter->export($currSelection, $options, true);
 
+                                $blacklisted_fields = $plugin->getNoSaveFields();
+
                                 ?>
 
                                 <div class="col-12">
@@ -425,6 +427,7 @@ class CTC_ViewWhatsInDB extends CTC_View {
 
                                             oTable = $('#<?php echo $tableHtmlId ?>').dataTable( {
                                                 serverSide: true,
+                                                stateSave: true,
                                                 ajax: {
                                                     url: "<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=load_contacts&form_name=<?php echo urlencode($currSelection); ?>",
                                                     type: "POST",
@@ -510,12 +513,14 @@ class CTC_ViewWhatsInDB extends CTC_View {
                                                     },
                                                     <?php
                                                         foreach ($columns as $aCol) {
-                                                            ?>
-                                                            {
-                                                                data: "<?php echo substr($aCol, 0, 40); ?>",
-                                                                name: '<?php echo substr($aCol, 0, 40); ?>'
-                                                            },
-                                                            <?php
+                                                            if (!in_array($aCol, $blacklisted_fields)){
+                                                                ?>
+                                                                {
+                                                                    data: "<?php echo substr($aCol, 0, 40); ?>",
+                                                                    name: '<?php echo substr($aCol, 0, 40); ?>'
+                                                                },
+                                                                <?php
+                                                            }
                                                         }
                                                     ?>
                                                 ],
@@ -606,9 +611,11 @@ class CTC_ViewWhatsInDB extends CTC_View {
                                     <?php
                                     }
                                     foreach ($columns as $aCol) {
-                                        ?>
-                                        <th><?php echo substr($aCol, 0, 40); ?></th>
-                                        <?php
+                                        if (!in_array($aCol, $blacklisted_fields)){
+                                            ?>
+                                            <th><?php echo substr($aCol, 0, 40); ?></th>
+                                            <?php
+                                        }
                                     }
                                     ?>
                                     </tr>

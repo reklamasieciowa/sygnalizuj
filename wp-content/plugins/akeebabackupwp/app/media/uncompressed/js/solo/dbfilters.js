@@ -168,11 +168,22 @@ akeeba.Dbfilters.render = function (data)
 		}
 
 		var uiTableNameContainer = document.createElement('span');
+		var uiTableSizeContainer = document.createElement('span');
 		var uiTableType          = document.createElement('span');
 		var uiSeparator          = document.createElement('span');
 
 		uiTableNameContainer.className   = 'table-name';
 		uiTableNameContainer.textContent = table;
+
+		uiTableSizeContainer.className   = 'table-rowcount';
+
+		if (dbef.rows)
+		{
+			uiTableSizeContainer.textContent = dbef.rows;
+			uiTableSizeContainer.setAttribute('title', Joomla.JText._('COM_AKEEBA_DBFILTER_TABLE_META_ROWCOUNT'));
+			uiTableSizeContainer.setAttribute('data-akeeba-tooltip-position', 'left');
+			akeeba.Tooltip.simpleTooltip(uiTableSizeContainer);
+		}
 
 		uiTableType.className = 'table-icon-container table-icon-noclick table-icon-small';
 		uiTableType.setAttribute('title', akeeba.Dbfilters.translations[icontip]);
@@ -193,6 +204,7 @@ akeeba.Dbfilters.render = function (data)
 		uielement.appendChild(uiSeparator);
 		uielement.appendChild(uiTableType);
 		uielement.appendChild(uiTableNameContainer);
+		uielement.appendChild(uiTableSizeContainer);
 
 		// Render
 		aktables.appendChild(uielement);

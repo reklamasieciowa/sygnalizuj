@@ -2,9 +2,9 @@
 Contributors: contactic,mouveo,francois86
 Tags: CF7, contact form 7, CFDB, contact form, database, contact form database, save contact form, form database, contactic, form, forms, form builder, contact form, feedback, custom form, contact, web contact form, email, form manager, survey
 Requires at least: 4.0
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5.4.45
-Stable tag: 1.3.4
+Stable tag: 1.3.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -123,6 +123,16 @@ You can always deactivate the plugin without loosing data.
 If you use an old version of CFDB, you will have stats, better UI and tools to track all your contacts form submissions.
 
 == Changelog ==
+
+= 1.3.7 =
+* Add form data to slack bot notifications
+
+= 1.3.6 =
+* Fix security settings roles
+
+= 1.3.5 =
+* Save state of datatables on contacts page
+* Hide blocked fields (NoSaveFields option) on contacts page
 
 = 1.3.4 =
 * Minor bugfix

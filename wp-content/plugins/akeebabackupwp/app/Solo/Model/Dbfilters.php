@@ -11,6 +11,7 @@ namespace Solo\Model;
 use Akeeba\Engine\Factory;
 use Awf\Mvc\Model;
 use Awf\Text\Text;
+use Exception;
 
 class Dbfilters extends Model
 {
@@ -43,6 +44,28 @@ class Dbfilters extends Model
 			$table_data = array();
 		}
 
+		$tableMeta = [];
+
+		try
+		{
+			$db->setQuery('SHOW TABLE STATUS');
+
+			$temp = $db->loadAssocList();
+
+			foreach ($temp as $record)
+			{
+				$tableMeta[$db->getAbstract($record['Name'])] = [
+					'engine'      => $record['Engine'],
+					'rows'        => $record['Rows'],
+					'dataLength'  => $record['Data_length'],
+					'indexLength' => $record['Index_length'],
+				];
+			}
+		}
+		catch (Exception $e)
+		{
+		}
+
 		// Process filters
 		$tables = array();
 
@@ -50,17 +73,27 @@ class Dbfilters extends Model
 		{
 			foreach ($table_data as $table_name => $table_type)
 			{
-				$status = array();
+				$status = [
+					'engine'      => null,
+					'rows'        => null,
+					'dataLength'  => null,
+					'indexLength' => null,
+				];
+
+				if (array_key_exists($table_name, $tableMeta))
+				{
+					$status = $tableMeta[$table_name];
+				}
 
 				// Add table type
 				$status['type'] = $table_type;
 
 				// Check dbobject/all filter (exclude)
-				$result = $filters->isFilteredExtended($table_name, $root, 'dbobject', 'all', $byFilter);
+				$result           = $filters->isFilteredExtended($table_name, $root, 'dbobject', 'all', $byFilter);
 				$status['tables'] = (!$result) ? 0 : (($byFilter == 'tables') ? 1 : 2);
 
 				// Check dbobject/content filter (skip table data)
-				$result = $filters->isFilteredExtended($table_name, $root, 'dbobject', 'content', $byFilter);
+				$result              = $filters->isFilteredExtended($table_name, $root, 'dbobject', 'content', $byFilter);
 				$status['tabledata'] = (!$result) ? 0 : (($byFilter == 'tabledata') ? 1 : 2);
 
 				if ($table_type != 'table')

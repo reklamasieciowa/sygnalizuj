@@ -11,8 +11,8 @@ defined('_AKEEBA') or die();
 
 /** @var   \Solo\View\Restore\Html $this */
 
-$router = $this->container->router;
-$token  = $this->container->session->getCsrfToken()->getValue();
+$router = $this->getContainer()->router;
+$token  = $this->getContainer()->session->getCsrfToken()->getValue();
 
 echo $this->loadAnyTemplate('Common/ftp_browser');
 echo $this->loadAnyTemplate('Common/ftp_test');
@@ -35,7 +35,7 @@ echo $this->loadAnyTemplate('Common/folder_browser');
         </p>
     </div>
 
-	<?php if($this->container->appConfig->get('showDeleteOnRestore', 0) == 1): ?>
+	<?php if($this->getContainer()->appConfig->get('showDeleteOnRestore', 0) == 1): ?>
         <div class="akeeba-form-group">
             <label for="zapbefore">
 				<?php echo Text::_('COM_AKEEBA_RESTORE_LABEL_ZAPBEFORE'); ?>
@@ -118,6 +118,29 @@ echo $this->loadAnyTemplate('Common/folder_browser');
             </div>
         </div>
     </div>
+
+	<h4><?= Text::_('COM_AKEEBA_RESTORE_LABEL_TIME_HEAD') ?></h4>
+
+	<div class="akeeba-form-group">
+		<label for="min_exec">
+			<?php echo Text::_('COM_AKEEBA_RESTORE_LABEL_MIN_EXEC'); ?>
+		</label>
+		<input type="number" min="0" max="180" name="min_exec" value="<?= $this->getModel()->getState('min_exec', 0, 'int') ?>"/>
+		<p class="akeeba-help-text">
+			<?php echo Text::_('COM_AKEEBA_RESTORE_LABEL_MIN_EXEC_TIP'); ?>
+		</p>
+	</div>
+	<div class="akeeba-form-group">
+		<label for="max_exec">
+			<?php echo Text::_('COM_AKEEBA_RESTORE_LABEL_MAX_EXEC'); ?>
+		</label>
+		<input type="number" min="0" max="180" name="max_exec" value="<?= $this->getModel()->getState('max_exec', 5, 'int') ?>"/>
+		<p class="akeeba-help-text">
+			<?php echo Text::_('COM_AKEEBA_RESTORE_LABEL_MAX_EXEC_TIP'); ?>
+		</p>
+	</div>
+
+	<hr/>
 
     <div class="akeeba-form-group--pull-right">
         <div class="akeeba-form-group--actions">

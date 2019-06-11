@@ -5,7 +5,7 @@ Tags: backup, restore, migrate, move
 Requires at least: 3.8.0
 Tested up to: 4.5
 Requires PHP: 5.4
-Stable tag: 3.4.2.2
+Stable tag: 3.5.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -179,6 +179,20 @@ link on our site to request more information for your specific needs.
 7. Want to automate your backups? Akeeba Backup will give you step by step instructions, specific to your site.
 
 == Changelog ==
+
+= 3.5.1 =
+* Missing language files in embedded restoration script made restoring sites impossible
+
+= 3.5.0 =
+* Updated Google Drive integration due to deprecation of the old Team Drives APIs
+* Timing options in the integrated restoration to work around picky servers where the extraction always failed.
+* Upload to Amazon S3 now supports path-style bucket access for third party endpoints
+* ALICE: Added detection for more potential problems
+* Show row count for each table in Database Filters page
+* [HIGH] Optional filters were no longer visible
+* [LOW] PostgreSQL: missing indices (thanks @twister65 for the fix!)
+* [LOW] ALICE: Timeout detection always detected a problem (false positive)
+* [LOW] WordPress multisite transfer, subdirectories child blog style, ended up with broken CSS
 
 = 3.4.2.2 =
 * Backup over CLI does not work if you have encryption enabled under certain conditions

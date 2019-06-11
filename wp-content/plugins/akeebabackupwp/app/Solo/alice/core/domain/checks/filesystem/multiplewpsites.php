@@ -6,9 +6,9 @@
  */
 
 // Protection against direct access
-use Awf\Text\Text;
-
 defined('AKEEBAENGINE') or die();
+
+use Awf\Text\Text;
 
 /**
  * Checks if the user is trying to backup multiple Wordpress installations with a single backup

@@ -12,14 +12,12 @@
 	
 		<div class="col-lg-12">
 			<div class="entry-content">
-			<?php if(!has_post_thumbnail()): ?>
+			<?php if(has_post_thumbnail()): ?>
 			<div class="view overlay rounded z-depth-2 float-lg-left single-thumbnail mr-4 mb-4">
-				<a href="<?php esc_url(get_permalink());?>" title="<?php the_title(); ?>">
-					<!-- <img class="img-fluid" src="<?php //sygnalizuj_post_thumbnail('medium'); ?>" alt=""> -->
-					<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(28).jpg" alt="<?php the_title(); ?>" title="<?php the_title(); ?>">
-					<a>
-						<div class="mask rgba-white-slight"></div>
-					</a>
+				
+					<?php the_post_thumbnail('blogmini', ['class' => 'img-fluid', 'title' => esc_attr( get_the_title( $post_id ) )]); ?>
+					<div class="mask rgba-white-slight"></div>
+				
 			</div>
 			<?php endif; ?>
 

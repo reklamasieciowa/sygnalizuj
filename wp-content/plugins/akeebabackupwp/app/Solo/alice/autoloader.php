@@ -40,44 +40,61 @@ function AliceLoadIfPrefix($class, $prefix, $path)
 {
 	// Find the root path of Akeeba's installation. Static so that we can save some CPU time.
 	static $root;
-	static $platformDirs = array();
-	if(empty($root))
+	static $platformDirs = [];
+
+	if (empty($root))
 	{
-		if(defined('ALICEROOT')) {
+		$root = __DIR__;
+
+		if (defined('ALICEROOT'))
+		{
 			$root = ALICEROOT;
-		} else {
-			$root = dirname(__FILE__);
 		}
 	}
 
-	if(empty($platformDirs)) {
+	if (empty($platformDirs))
+	{
 		$platformDirs = Platform::getInstance()->getPlatformDirectories();
 	}
 
-	if(strpos($class, $prefix) === 0)
+	if (strpos($class, $prefix) === 0)
 	{
 		$filename = strtolower(substr($class, strlen($prefix))) . '.php';
 		// Try the plugins path
-		$filePath = $root.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.$filename;
-		if(file_exists($filePath)) {
+		$filePath = $root . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR . $filename;
+		if (file_exists($filePath))
+		{
 			require_once $filePath;
-			if(class_exists($class, false))	return true;
+			if (class_exists($class, false))
+			{
+				return true;
+			}
 		}
 		// Try the platform overrides
-		foreach($platformDirs as $dir) {
-			$filePath = $dir.'/'.$path.'/'.$filename;
-			if(file_exists($filePath)) {
+		foreach ($platformDirs as $dir)
+		{
+			$filePath = $dir . '/' . $path . '/' . $filename;
+			if (file_exists($filePath))
+			{
 				require_once $filePath;
-				if(class_exists($class, false))	return true;
+				if (class_exists($class, false))
+				{
+					return true;
+				}
 			}
 		}
 		// Try the regular path
-		$filePath = $root.DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.$filename;
-		if(file_exists($filePath)) {
+		$filePath = $root . DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR . $filename;
+		if (file_exists($filePath))
+		{
 			require_once $filePath;
-			if(class_exists($class, false))	return true;
+			if (class_exists($class, false))
+			{
+				return true;
+			}
 		}
 	}
+
 	return false;
 }
 

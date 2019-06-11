@@ -1,4 +1,21 @@
 <?php die();?>
+Akeeba Solo 3.5.1
+================================================================================
+! Missing language files in embedded restoration script made restoring sites impossible
+
+Akeeba Solo 3.5.0
+================================================================================
+~ Updated Google Drive integration due to deprecation of the old Team Drives APIs
++ Timing options in the integrated restoration to work around picky servers where the extraction always failed.
++ Upload to Amazon S3 now supports path-style bucket access for third party endpoints
++ ALICE: Added detection for more potential problems
++ Show row count for each table in Database Filters page
+# [HIGH] Getting the database driver list causes a crash if PDO is not enabled
+# [HIGH] Optional filters were no longer visible
+# [LOW] PostgreSQL: missing indices (thanks @twister65 for the fix!)
+# [LOW] ALICE: Timeout detection always detected a problem (false positive)
+# [LOW] WordPress multisite transfer, subdirectories child blog style, ended up with broken CSS
+
 Akeeba Solo 3.4.2.2
 ================================================================================
 ! Backup over CLI does not work if you have encryption enabled under certain conditions

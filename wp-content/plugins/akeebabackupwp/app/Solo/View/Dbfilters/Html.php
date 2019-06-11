@@ -168,6 +168,7 @@ akeeba.loadScripts.push(function() {
 		akeeba.Dbfilters.translations['COM_AKEEBA_DBFILTER_TABLE_PROCEDURE'] = '{$strings['COM_AKEEBA_DBFILTER_TABLE_PROCEDURE']}';
 		akeeba.Dbfilters.translations['COM_AKEEBA_DBFILTER_TABLE_FUNCTION'] = '{$strings['COM_AKEEBA_DBFILTER_TABLE_FUNCTION']}';
 		akeeba.Dbfilters.translations['COM_AKEEBA_DBFILTER_TABLE_TRIGGER'] = '{$strings['COM_AKEEBA_DBFILTER_TABLE_TRIGGER']}';
+		akeeba.Dbfilters.translations['COM_AKEEBA_DBFILTER_TABLE_META_ROWCOUNT'] = '{$strings['COM_AKEEBA_DBFILTER_TABLE_META_ROWCOUNT']}';
 
 		akeeba.Dbfilters.loadingGif = '$loadingGif';
 		akeeba.System.params.AjaxURL = '$ajaxURL';

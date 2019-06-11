@@ -170,8 +170,9 @@ class Restore extends Model
 		// Get the JPS password
 		$password = Escape::escapeJS($this->getState('jps_key'));
 
-		$max_exec = 5;
-		$min_exec = 0;
+		// Get min / max execution time
+		$min_exec = $this->getState('min_exec', 0, 'int');
+		$max_exec = $this->getState('max_exec', 5, 'int');
 		$bias 	  = 75;
 
 		// Used for tests

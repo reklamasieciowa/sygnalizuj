@@ -537,10 +537,14 @@ span.actionbutton {
 .table-container {
     background-color: white;
     height: 2em;
-    padding: 1px;
+    padding: 2px;
     color: #333333;
     font-weight: normal;
     border-bottom: 1px solid #d0d0ff;
+}
+
+.table-container:hover {
+    background: #e8f7f7;
 }
 
 .akeeba-renderer-fef--dark .table-container {
@@ -552,11 +556,18 @@ span.actionbutton {
 .table-container span.table-icon-container {
     float: left;
     /*cursor: pointer;*/
+    left: 2px;
     margin-right: 4px;
 }
 
 .table-container span.table-name {
     padding-left: 4px;
+}
+
+.table-container span.table-rowcount {
+    float: right;
+    right: 2px;
+    color: #93C34E;
 }
 
 .table-container span.table-icon-noclick {

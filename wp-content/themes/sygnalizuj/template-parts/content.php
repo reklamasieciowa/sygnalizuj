@@ -10,20 +10,19 @@
 ?>
 <article class="row my-5" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php if(!has_post_thumbnail()): ?>
-		<div class="col-lg-4 <?php echo (get_query_var('evenness') == 'odd') ? 'order-lg-1' : 'order-lg-2'; ?>">
+	<?php if(has_post_thumbnail()): ?>
+		<div class="col-lg-5 <?php echo (get_query_var('evenness') == 'odd') ? 'order-lg-1' : 'order-lg-2'; ?>">
 
 			<div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
 				<a href="<?php echo esc_url(get_permalink());?>" title="<?php the_title(); ?>">
-					<!-- <img class="img-fluid" src="<?php the_post_thumbnail('medium'); ?>" alt=""> -->
-					<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(28).jpg" alt="<?php the_title(); ?>" title="<?php the_title(); ?>">
+					<?php the_post_thumbnail('blogmini', ['class' => 'img-fluid', 'title' => esc_attr( get_the_title( $post_id ) )]); ?>
 						<div class="mask rgba-white-slight"></div>
 					</a>
 				</div>
 			</div>
 
 			<!-- start col-lg-8	 -->
-			<div class="col-lg-8 <?php echo (get_query_var('evenness') == 'odd') ? 'order-lg-2' : 'order-lg-1'; ?>">
+			<div class="col-lg-7 <?php echo (get_query_var('evenness') == 'odd') ? 'order-lg-2' : 'order-lg-1'; ?>">
 
 				<?php else: ?>
 					<div class="col-lg-12">

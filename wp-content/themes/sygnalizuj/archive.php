@@ -96,7 +96,7 @@ get_header();
 					<h5 class="h5-responsive font-weight-bold mt-4 mb-2">Artykuły</h5>
 					<?php 
 					// the query
-						$wpb_all_query = new WP_Query(array('post_type'=>'post', 'post_status'=>'publish', 'posts_per_page'=>-1)); ?>
+						$wpb_all_query = new WP_Query(array('post_type'=>'post', 'post_status'=>'publish', 'cat' => get_query_var('cat'), 'posts_per_page'=>-1)); ?>
 						 
 						<?php if ( $wpb_all_query->have_posts() ) : ?>
 						 

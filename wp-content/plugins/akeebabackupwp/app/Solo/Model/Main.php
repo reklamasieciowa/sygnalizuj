@@ -621,9 +621,11 @@ HTML;
 		$last = $this->getLastCheck();
 
 		// Get failed backups
-		$filters[] = array('field' => 'status'     , 'operand' => '=' , 'value'   => 'fail');
-		$filters[] = array('field' => 'origin'     , 'operand' => '<>', 'value'   => 'restorepoint');
-		$filters[] = array('field' => 'backupstart', 'operand' => '>' , 'value'   => $last);
+		$filters = [
+			['field' => 'status', 'operand' => '=', 'value' => 'fail'],
+			['field' => 'origin', 'operand' => '<>', 'value' => 'restorepoint'],
+			['field' => 'backupstart', 'operand' => '>', 'value' => $last],
+		];
 
 		$failed = Platform::getInstance()->get_statistics_list(array('filters' => $filters));
 
