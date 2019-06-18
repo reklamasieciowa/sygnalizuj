@@ -84,13 +84,6 @@
 <script>
   new WOW().init();
 
-
-  document.addEventListener( 'wpcf7mailsent', function( event ) {
-  if ( '700' == event.detail.contactFormId ) {
-      location = '../pdf/sample.pdf';
-  }}, false );
-
-
 // Material Select Initialization
 $(document).ready(function() {
  $('.mdb-select').materialSelect();
